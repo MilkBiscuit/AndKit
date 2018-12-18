@@ -24,7 +24,7 @@ class StringUtil {
             }
             val regex = Regex(REGEX_HEX_COLOUR)
 
-            return regex.matches(value!!)
+            return regex.matches(value)
         }
 
         fun getUrlsFromString(input: String?) : List<String> {
