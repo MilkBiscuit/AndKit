@@ -3,7 +3,7 @@ package com.cheng.httpproject
 import com.cheng.httpproject.constant.BibleConstants
 import com.cheng.httpproject.model.GivingTransaction
 import com.cheng.httpproject.service.BibleService
-import com.cheng.httpproject.service.GivingService
+import com.cheng.httpproject.service.GivingApiService
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -40,7 +40,7 @@ class ExampleUnitTest {
         val body = GivingTransaction("50335", "abc", "193879",
                 "100", "2", "2", "", "2018-12-31",
                 "1");
-        val observable = GivingService.getInstance().fetchTransactionToken(body);
+        val observable = GivingApiService.getInstance().fetchTransactionToken(body);
         val testObserver = observable.test()
 
         testObserver.assertNoErrors()

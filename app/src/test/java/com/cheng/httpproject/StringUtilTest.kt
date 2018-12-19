@@ -4,9 +4,6 @@ import com.cheng.httpproject.util.StringUtil
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.DynamicTest
-import org.junit.jupiter.api.TestFactory
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -41,7 +38,7 @@ class StringUtilTest {
 
     @ParameterizedTest
     @MethodSource("colourValues")
-    fun testSquares(input: String?, expected: Boolean) {
+    fun testIsValidColourHex(input: String?, expected: Boolean) {
         val result = StringUtil.isValidColourHex(input)
         assertEquals(expected, result)
     }
