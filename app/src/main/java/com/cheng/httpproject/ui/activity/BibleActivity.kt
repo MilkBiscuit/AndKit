@@ -7,6 +7,7 @@ import com.cheng.httpproject.R
 import com.cheng.httpproject.applySchedulers
 import com.cheng.httpproject.constant.BibleConstants
 import com.cheng.httpproject.service.BibleService
+import com.cheng.httpproject.ui.activity.base.BaseActivity
 
 class BibleActivity : BaseActivity() {
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.cheng.httpproject.R
+import com.cheng.httpproject.ui.activity.base.BaseActivity
 
 class MainActivity : BaseActivity(), View.OnClickListener {
 

@@ -1,24 +1,50 @@
 package com.cheng.httpproject.service
 
+import android.content.Context
+import com.cheng.httpproject.helper.SharedPrefHelper
+import com.cheng.httpproject.oauth2.OAuth2Constants
+import com.cheng.httpproject.oauth2.OAuth2Interceptor
+import com.cheng.httpproject.oauth2.OAuth2RefreshTokenInterceptor
+import com.cheng.httpproject.util.SingletonHolder
+import okhttp3.Cache
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
 
-object InfoodleApiService {
+const val BASE_URL:String = "https://app-t.infoodle.com/apiv2/";
 
-    const val BASE_URL:String = "https://app-t.infoodle.com/apiv2/";
+class InfoodleApiService private constructor(context: Context) {
 
-    private val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-    private var service = retrofit.create(InfoodleApiInterface::class.java)
+    private val context = context.applicationContext
 
-    private fun InfoodleApiService() {}
+    companion object: SingletonHolder<InfoodleApiService, Context>(::InfoodleApiService)
 
-    fun getInstance(): InfoodleApiInterface {
-        return service
+    fun getService(): InfoodleApiInterface {
+        val retrofit = Retrofit.Builder()
+                .client(getOAuthOkHttpClient())
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+
+        return retrofit.create(InfoodleApiInterface::class.java)
+    }
+
+    private fun getOAuthOkHttpClient(): OkHttpClient {
+        val sharedPrefHelper = SharedPrefHelper.getInstance(context)
+        val oAuth2Detail = sharedPrefHelper.getOAuth2Properties()
+        val myCacheDir = File(context.cacheDir, OAuth2Constants.OAUTH2_CACHE)
+        val cacheSize = 1024 * 1024L
+        val cacheDir = Cache(myCacheDir, cacheSize)
+        val oAuthInterceptor = OAuth2Interceptor(oAuth2Detail.accessToken, oAuth2Detail.tokenType)
+        val refreshInterceptor = OAuth2RefreshTokenInterceptor(oAuth2Detail)
+        return OkHttpClient.Builder()
+                .cache(cacheDir)
+                .addInterceptor(oAuthInterceptor)
+                .addInterceptor(refreshInterceptor)
+                .build()
     }
 
 }

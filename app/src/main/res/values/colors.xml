@@ -3,5 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="transparent_10_black">#19000000</color>
+    <color name="transparent_25_black">#3F000000</color>
     <color name="transparent_50_black">#7F000000</color>
+    <color name="transparent_10_white">#19FFFFFF</color>
+    <color name="transparent_25_white">#3FFFFFFF</color>
+    <color name="transparent_50_white">#7FFFFFFF</color>
 </resources>

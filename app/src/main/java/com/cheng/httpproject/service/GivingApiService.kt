@@ -15,8 +15,6 @@ object GivingApiService {
             .build()
     private var service = retrofit.create(GivingApiInterface::class.java)
 
-    private fun GivingService() {}
-
     fun getInstance(): GivingApiInterface {
         return service
     }

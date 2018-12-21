@@ -20,7 +20,14 @@
         </activity>
 
         <activity android:name=".ui.activity.BibleActivity"/>
-        <activity android:name=".ui.activity.InfoodleActivity"/>
+        <activity android:name=".ui.activity.InfoodleActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="com.cheng.httpproject.oauth" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
