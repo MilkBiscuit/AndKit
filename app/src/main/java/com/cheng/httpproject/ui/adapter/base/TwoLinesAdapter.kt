@@ -6,8 +6,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.cheng.httpproject.R
 
-abstract class TwoLinesAdapter<T>(protected val context: Context, protected val items: List<T> )
+abstract class TwoLinesAdapter<T>(protected val context: Context, listData: List<T>)
     : RecyclerView.Adapter<TwoLinesViewHolder>() {
+
+    var items: List<T> = listData
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun getItemCount(): Int {
         return items.size

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.cheng.httpproject.R
-import com.cheng.httpproject.applySchedulers
+import com.cheng.httpproject.util.*
 import com.cheng.httpproject.helper.SharedPrefHelper
 import com.cheng.httpproject.oauth2.OAuth2Constants
 import com.cheng.httpproject.service.InfoodleApiService
@@ -61,7 +61,7 @@ class InfoodleAuthFragment : BaseFragment(), View.OnClickListener {
                             val webViewFragment = WebViewFragment.newInstance(url);
                             activity.replaceFragment(webViewFragment)
                         }, {error ->
-                            activity.showToast(error.localizedMessage)
+                            showDialog(error.localizedMessage)
                         })
                 activity.addDisposable(disposable)
             }

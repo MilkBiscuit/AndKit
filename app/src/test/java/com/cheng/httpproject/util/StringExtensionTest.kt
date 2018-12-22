@@ -1,5 +1,6 @@
-package com.cheng.httpproject
+package com.cheng.httpproject.util
 
+import com.cheng.httpproject.util.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test

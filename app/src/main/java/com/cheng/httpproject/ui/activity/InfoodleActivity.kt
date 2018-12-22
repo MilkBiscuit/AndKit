@@ -41,7 +41,7 @@ class InfoodleActivity : BaseActivity() {
                     val detail = OAuth2Detail(
                             authProperty.clientId, authProperty.clientSecret, response.accessToken,
                             response.refreshToken, response.tokenType, response.expiresAt)
-                    sharedPrefHelper.saveOAuth2Response(detail)
+                    sharedPrefHelper.saveOAuth2Detail(detail)
                     fragment = InfoodleDirectoryFragment()
                 }
 
@@ -50,7 +50,7 @@ class InfoodleActivity : BaseActivity() {
 
             return
         }
-        if (!authProperty.accessToken.isEmpty()) {
+        if (authProperty.accessToken.isNotEmpty()) {
             fragment = InfoodleDirectoryFragment()
         }
 

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.widget.TextView
 import com.cheng.httpproject.R
-import com.cheng.httpproject.applySchedulers
+import com.cheng.httpproject.util.*
 import com.cheng.httpproject.constant.BibleConstants
 import com.cheng.httpproject.service.BibleService
 import com.cheng.httpproject.ui.activity.base.BaseActivity

@@ -1,10 +1,8 @@
 package com.cheng.httpproject.service
 
 import android.content.Context
-import com.cheng.httpproject.helper.SharedPrefHelper
+import com.cheng.httpproject.oauth2.OAuth2Authenticator
 import com.cheng.httpproject.oauth2.OAuth2Constants
-import com.cheng.httpproject.oauth2.OAuth2Interceptor
-import com.cheng.httpproject.oauth2.OAuth2RefreshTokenInterceptor
 import com.cheng.httpproject.util.SingletonHolder
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -33,17 +31,13 @@ class InfoodleApiService private constructor(context: Context) {
     }
 
     private fun getOAuthOkHttpClient(): OkHttpClient {
-        val sharedPrefHelper = SharedPrefHelper.getInstance(context)
-        val oAuth2Detail = sharedPrefHelper.getOAuth2Properties()
         val myCacheDir = File(context.cacheDir, OAuth2Constants.OAUTH2_CACHE)
         val cacheSize = 1024 * 1024L
         val cacheDir = Cache(myCacheDir, cacheSize)
-        val oAuthInterceptor = OAuth2Interceptor(oAuth2Detail.accessToken, oAuth2Detail.tokenType)
-        val refreshInterceptor = OAuth2RefreshTokenInterceptor(oAuth2Detail)
+        val oAuth2Authenticator = OAuth2Authenticator(context)
         return OkHttpClient.Builder()
                 .cache(cacheDir)
-                .addInterceptor(oAuthInterceptor)
-                .addInterceptor(refreshInterceptor)
+                .authenticator(oAuth2Authenticator)
                 .build()
     }
 

@@ -1,4 +1,4 @@
-package com.cheng.httpproject
+package com.cheng.httpproject.util
 
 import com.cheng.httpproject.util.DateUtil
 import org.junit.Assert.assertEquals

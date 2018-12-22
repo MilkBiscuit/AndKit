@@ -39,8 +39,12 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    protected fun showDialog(title: String, message: String) {
-        // TODO, trpb67
+    protected fun showDialog(message: String, title: String? = null) {
+        val dialog = BaseDialogFragment()
+        dialog.title = title
+        dialog.message = message
+
+        dialog.show(fragmentManager, dialog.TAG)
     }
 
 }

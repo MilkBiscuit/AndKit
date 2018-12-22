@@ -6,24 +6,14 @@ import android.preference.PreferenceManager
 import com.cheng.httpproject.oauth2.OAuth2Constants
 import com.cheng.httpproject.oauth2.OAuth2Detail
 import com.cheng.httpproject.util.JsonUtil
+import com.cheng.httpproject.util.SingletonHolder
 import com.google.gson.reflect.TypeToken
 
 private const val KEY_OAUTH2_DETAIL = "Oauth2Detail"
 
 class SharedPrefHelper private constructor(context: Context) {
 
-    companion object {
-        @Volatile private var instance: SharedPrefHelper? = null
-
-        fun getInstance(context: Context): SharedPrefHelper {
-            instance?.let { return it }
-
-            synchronized(this) {
-                return instance
-                        ?: SharedPrefHelper(context.applicationContext).also { instance = it }
-            }
-        }
-    }
+    companion object: SingletonHolder<SharedPrefHelper, Context>(::SharedPrefHelper)
 
     private val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
@@ -41,8 +31,8 @@ class SharedPrefHelper private constructor(context: Context) {
         saveString(OAuth2Constants.CLIENT_SECRET, clientSecret)
     }
 
-    fun saveOAuth2Response(response: OAuth2Detail) {
-        val responseString = JsonUtil.objectToJson<OAuth2Detail>(response)
+    fun saveOAuth2Detail(detail: OAuth2Detail) {
+        val responseString = JsonUtil.objectToJson<OAuth2Detail>(detail)
 
         saveString(KEY_OAUTH2_DETAIL, responseString)
     }
