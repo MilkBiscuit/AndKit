@@ -27,13 +27,13 @@ abstract class BaseFragment : Fragment() {
         transaction?.commit()
     }
 
-    protected fun showLoading() {
+    fun showLoading() {
         if (isAdded) {
             loadingView?.visibility = View.VISIBLE
         }
     }
 
-    protected fun hideLoading() {
+    fun hideLoading() {
         if (isAdded) {
             loadingView?.visibility = View.GONE
         }

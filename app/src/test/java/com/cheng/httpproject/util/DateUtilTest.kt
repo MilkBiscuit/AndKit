@@ -30,6 +30,7 @@ class DateUtilTest {
 
         assertEquals(expected, result)
         assertEquals(0, expected.compareTo(result))
+        assertEquals(true, DateUtil.isSameDay(expected, result))
     }
 
     @Test

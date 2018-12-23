@@ -51,11 +51,14 @@ class InfoodleDirectoryFragment : BaseFragment(), SearchView.OnQueryTextListener
             return
         }
 
+        listFragment.showLoading()
         val observable = InfoodleApiService.getInstance(activity).getService().searchPerson(keyword)
                 .debounceHalfSecond()
         val disposable = observable.applySchedulers().subscribe({result ->
+            listFragment.hideLoading()
             listFragment.setPeopleData(result.people?: emptyList())
         }, {error ->
+            listFragment.hideLoading()
             Log.w(TAG, "search failed: $error")
         })
 

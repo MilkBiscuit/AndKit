@@ -55,5 +55,17 @@ class DateUtil {
             return  calendar.time
         }
 
+        fun isSameDay(date: Date, compareDate: Date): Boolean {
+            val calendar = Calendar.getInstance()
+            calendar.time = date
+
+            val compareCalendar = Calendar.getInstance()
+            compareCalendar.time = compareDate
+
+            return calendar.get(Calendar.YEAR) == compareCalendar.get(Calendar.YEAR)
+                && calendar.get(Calendar.MONTH) == compareCalendar.get(Calendar.MONTH)
+                && calendar.get(Calendar.DATE) == compareCalendar.get(Calendar.DATE)
+        }
+
     }
 }
