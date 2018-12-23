@@ -2,7 +2,7 @@
 A simple hotplate project for Apps which have various Restful Apis, written in Kotlin
 
 ## Library used:
-Retrofit2, RxJava2 etc.
+Retrofit2, RxJava2, okhttp-oauth2-client, JUnit5 etc.
 
 ## Provide several utility methods/extensions, e.g.
 ### StringUtil
