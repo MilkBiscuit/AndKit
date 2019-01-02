@@ -1,4 +1,4 @@
-package com.cheng.httpproject
+package com.cheng.httpproject.util
 
 import android.util.Log
 
@@ -24,4 +24,22 @@ fun String.parseIntNum(): Int {
     }
 
     return value;
+}
+
+fun String.equalIgnoreCase(compare: String): Boolean {
+    return this.equals(compare, true)
+}
+
+fun String?.toBool(): Boolean {
+    if (this.isNullOrBlank()) {
+        return false;
+    }
+    if (this.equalIgnoreCase("0")
+     || this.equalIgnoreCase("N") || this.equalIgnoreCase("no")
+     || this.equalIgnoreCase("F") || this.equalIgnoreCase("False")) {
+        return false;
+    }
+
+    return true;
+
 }

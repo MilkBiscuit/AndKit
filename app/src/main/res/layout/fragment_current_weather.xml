@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            style="@style/CenterText.CityName"
+            android:id="@+id/detail_city"
+            />
+        <TextView
+            style="@style/CenterText"
+            android:id="@+id/detail_weather_condition"
+            />
+        <TextView
+            style="@style/CenterText.Temperature"
+            android:id="@+id/detail_temperature"
+            />
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true">
+        <TextView
+            style="@style/ForecastListText.Date"
+            android:id="@+id/current_date"
+            />
+        <TextView
+            style="@style/ForecastListText"
+            android:layout_marginStart="20dp"
+            android:text="Today"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/current_date"
+            />
+        <TextView
+            style="@style/ForecastListText.MinTemperature"
+            android:id="@+id/today_min_temperature"
+            app:layout_constraintEnd_toStartOf="@+id/today_max_temperature"
+            />
+        <TextView
+            style="@style/ForecastListText.MaxTemperature"
+            android:id="@+id/today_max_temperature"
+            android:layout_marginEnd="8dp"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

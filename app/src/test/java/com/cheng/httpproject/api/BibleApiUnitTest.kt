@@ -1,23 +1,12 @@
-package com.cheng.httpproject
+package com.cheng.httpproject.api
 
 import com.cheng.httpproject.constant.BibleConstants
 import com.cheng.httpproject.model.GivingTransaction
 import com.cheng.httpproject.service.BibleService
 import com.cheng.httpproject.service.GivingApiService
-import org.junit.Assert.assertEquals
 import org.junit.Test
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
-
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
-    }
+class BibleApiUnitTest {
 
     @Test
     fun testFetchChapter() {

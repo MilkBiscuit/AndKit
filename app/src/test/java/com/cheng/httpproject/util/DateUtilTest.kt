@@ -1,4 +1,4 @@
-package com.cheng.httpproject
+package com.cheng.httpproject.util
 
 import com.cheng.httpproject.util.DateUtil
 import org.junit.Assert.assertEquals
@@ -30,6 +30,7 @@ class DateUtilTest {
 
         assertEquals(expected, result)
         assertEquals(0, expected.compareTo(result))
+        assertEquals(true, DateUtil.isSameDay(expected, result))
     }
 
     @Test

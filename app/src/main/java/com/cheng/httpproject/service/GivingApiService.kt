@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-object GivingService {
+object GivingApiService {
 
     const val BASE_URL:String = "https://vodapi.ezystream.com/v4/";
 
@@ -14,8 +14,6 @@ object GivingService {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     private var service = retrofit.create(GivingApiInterface::class.java)
-
-    private fun GivingService() {}
 
     fun getInstance(): GivingApiInterface {
         return service
