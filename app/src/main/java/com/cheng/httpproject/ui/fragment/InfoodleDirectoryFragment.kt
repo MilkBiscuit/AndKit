@@ -34,37 +34,37 @@ class InfoodleDirectoryFragment : BaseFragment(), SearchView.OnQueryTextListener
 
         listFragment = InfoodleContactListFragment()
         replaceFragment(R.id.layout_infoodle_contact_list, listFragment)
+
+        startObserve()
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         userInputSubject.onNext(query ?: "")
-        search()
 
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
         userInputSubject.onNext(newText ?: "")
-        search()
 
         return true
     }
 
-    fun search() {
+    fun startObserve() {
         val subject = userInputSubject.filter { it.length >= 2 }.debounceOneSecond()
         var disposable = subject.applySchedulers().doOnNext{listFragment.showLoading()}.subscribe()
         activity.addDisposable(disposable)
 
-        val observable = subject.flatMap {
-            InfoodleApiService.getInstance(activity).getService().searchPerson(it)
-        }.applySchedulers()
-        disposable = observable.subscribe({result ->
+        disposable = subject.flatMap {
+            val infoodleService = InfoodleApiService.getInstance(activity).getService()
+            infoodleService.searchPerson(it).applySchedulers().doOnError{error ->
+                listFragment.hideLoading()
+                Log.w(TAG, "search failed: $error")
+            }
+        }.applySchedulers().subscribe{result ->
             listFragment.hideLoading()
             listFragment.setPeopleData(result.people?: emptyList())
-        }, {error ->
-            listFragment.hideLoading()
-            Log.w(TAG, "search failed: $error")
-        })
+        }
         activity.addDisposable(disposable)
     }
 

@@ -9,6 +9,7 @@ import com.cheng.httpproject.ui.activity.base.BaseActivity
 import com.cheng.httpproject.ui.fragment.CurrentWeatherFragment
 import com.cheng.httpproject.util.applySchedulers
 import com.cheng.httpproject.util.debounceOneSecond
+import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_weather.*
 
@@ -24,37 +25,40 @@ class WeatherActivity : BaseActivity(), OnQueryTextListener {
 
         loadingView = findViewById(R.id.layout_loading)
         sv_city_name.setOnQueryTextListener(this)
+
+        startObserve()
     }
 
     override fun onQueryTextSubmit(s: String?): Boolean {
         userInputSubject.onNext(s ?: "")
-        search()
 
         return true
     }
 
     override fun onQueryTextChange(s: String?): Boolean {
         userInputSubject.onNext(s ?: "")
-        search()
 
         return true
     }
 
-    fun search() {
+    fun startObserve() {
         val subject = userInputSubject.filter { it.length >= 2 }.debounceOneSecond()
         var disposable = subject.applySchedulers().doOnNext{showLoading()}.subscribe()
         addDisposable(disposable)
 
-        disposable = subject
-                .flatMap { weatherService.fetchCurrentWeather(it) }
+        disposable = subject.flatMap {
+                    weatherService.fetchCurrentWeather(it).applySchedulers().doOnError { error ->
+                        hideLoading()
+                        showToast(error.localizedMessage ?: "LOL")
+                    }.onErrorResumeNext(Observable.empty())
+                }
                 .applySchedulers()
                 .subscribe({result ->
                     hideLoading()
                     val fragment = CurrentWeatherFragment.newInstance(result)
                     replaceFragment(fragment)
-                }, {error ->
-                    hideLoading()
-                    showToast(error.localizedMessage ?: "hehe")
+                }, {}, {
+                    showToast("It completed! I should never appear!")
                 })
         addDisposable(disposable)
     }
