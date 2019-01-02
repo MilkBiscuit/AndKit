@@ -18,11 +18,17 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         when (id) {
             R.id.btn_bible -> launchBibleActivity()
             R.id.btn_infoodle -> launchInfoodleActivity()
+            R.id.btn_weather -> launchWeatherActivity()
         }
     }
 
     fun launchBibleActivity() {
         val intent = Intent(this, BibleActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun launchWeatherActivity() {
+        val intent = Intent(this, WeatherActivity::class.java)
         startActivity(intent)
     }
 

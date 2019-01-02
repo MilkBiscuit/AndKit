@@ -10,6 +10,6 @@ fun<T> Observable<T>.applySchedulers(): Observable<T> {
                .observeOn(AndroidSchedulers.mainThread())
 }
 
-fun<T> Observable<T>.debounceHalfSecond(): Observable<T> =
-        this.debounce(500L, TimeUnit.MILLISECONDS)
+fun<T> Observable<T>.debounceOneSecond(): Observable<T> =
+        this.debounce(1L, TimeUnit.SECONDS)
 

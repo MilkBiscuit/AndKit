@@ -55,7 +55,7 @@ open class CustomListFragment : BaseFragment() {
 
     private fun showEmptyView(emptyText: String, buttonText: String?) {
         layout_empty_view?.visibility = View.VISIBLE
-        recyclerView.visibility = View.GONE
+        recyclerView.visibility = View.INVISIBLE
 
         tvEmpty?.text = emptyText
         if (buttonText.isNullOrEmpty()) {

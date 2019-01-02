@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">HttpProject</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- DO NOT TRANSLATE -->
+    <string name="temperature">%d\u00B0</string>
+    <!-- DO NOT TRANSLATE, End-->
+
+    <string name="app_name">HttpProject</string>
     <string name="no_result">No results.</string>
 </resources>

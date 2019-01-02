@@ -11,6 +11,7 @@ class DateUtil {
         private const val MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000L
         private const val FORMAT_YEAR_MONTH_DATE = "yyyy-MM-dd";
         private const val FORMAT_Y_M_D_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
+        private const val WEEKDAY = "EEEE"
 
         fun parseYearMonthDate(date: String) : Date {
             return parseDate(date, FORMAT_YEAR_MONTH_DATE)
@@ -34,6 +35,12 @@ class DateUtil {
 
         fun formatDate(date: Date, dateFormat: String = FORMAT_YEAR_MONTH_DATE): String {
             val formatter = SimpleDateFormat(dateFormat, Locale.getDefault());
+
+            return formatter.format(date)
+        }
+
+        fun getWeekday(date: Date): String {
+            val formatter = SimpleDateFormat(WEEKDAY, Locale.getDefault());
 
             return formatter.format(date)
         }

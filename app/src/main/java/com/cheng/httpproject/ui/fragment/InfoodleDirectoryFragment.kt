@@ -11,6 +11,7 @@ import com.cheng.httpproject.util.*
 import com.cheng.httpproject.service.InfoodleApiService
 import com.cheng.httpproject.ui.activity.InfoodleActivity
 import com.cheng.httpproject.ui.fragment.base.BaseFragment
+import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.fragment_infoodle_directory.*
 
 class InfoodleDirectoryFragment : BaseFragment(), SearchView.OnQueryTextListener {
@@ -18,6 +19,7 @@ class InfoodleDirectoryFragment : BaseFragment(), SearchView.OnQueryTextListener
     override val TAG = "InfoodleDirectory"
     private lateinit var activity: InfoodleActivity
     private lateinit var listFragment: InfoodleContactListFragment
+    private val userInputSubject = BehaviorSubject.create<String>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -35,33 +37,34 @@ class InfoodleDirectoryFragment : BaseFragment(), SearchView.OnQueryTextListener
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        search(query)
+        userInputSubject.onNext(query ?: "")
+        search()
 
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        search(newText)
+        userInputSubject.onNext(newText ?: "")
+        search()
 
         return true
     }
 
-    fun search(keyword: String?) {
-        if (keyword == null || keyword.length <= 2) {
-            return
-        }
+    fun search() {
+        val subject = userInputSubject.filter { it.length >= 2 }.debounceOneSecond()
+        var disposable = subject.applySchedulers().doOnNext{listFragment.showLoading()}.subscribe()
+        activity.addDisposable(disposable)
 
-        listFragment.showLoading()
-        val observable = InfoodleApiService.getInstance(activity).getService().searchPerson(keyword)
-                .debounceHalfSecond()
-        val disposable = observable.applySchedulers().subscribe({result ->
+        val observable = subject.flatMap {
+            InfoodleApiService.getInstance(activity).getService().searchPerson(it)
+        }.applySchedulers()
+        disposable = observable.subscribe({result ->
             listFragment.hideLoading()
             listFragment.setPeopleData(result.people?: emptyList())
         }, {error ->
             listFragment.hideLoading()
             Log.w(TAG, "search failed: $error")
         })
-
         activity.addDisposable(disposable)
     }
 

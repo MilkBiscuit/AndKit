@@ -15,7 +15,8 @@ class SharedPrefHelper private constructor(context: Context) {
 
     companion object: SingletonHolder<SharedPrefHelper, Context>(::SharedPrefHelper)
 
-    private val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    private val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(
+            context.applicationContext)
 
     fun saveString(prefKey: String, prefValue: String) {
         val editor = sharedPref.edit()
