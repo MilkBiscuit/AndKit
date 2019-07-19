@@ -7,4 +7,7 @@
     <string name="app_name">HttpProject</string>
     <string name="hint_city_name">Input a city\'s name</string>
     <string name="no_result">No results.</string>
+    <string name="title_activity_store_list">Store List</string>
+    <string name="tab_text_1">Stores</string>
+    <string name="tab_text_2">Favorite</string>
 </resources>

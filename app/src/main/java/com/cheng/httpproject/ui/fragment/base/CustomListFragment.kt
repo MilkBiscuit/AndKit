@@ -42,6 +42,8 @@ open class CustomListFragment : BaseFragment() {
         val dividerItemDecoration = DividerItemDecoration(
                 recyclerView.context, layoutManager.orientation)
         recyclerView.addItemDecoration(dividerItemDecoration)
+
+        refreshEmptyView(true)
     }
 
     fun refreshEmptyView(isEmpty: Boolean, emptyText: String? = null, buttonText: String? = null) {
