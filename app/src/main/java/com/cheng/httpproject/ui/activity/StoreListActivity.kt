@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import com.cheng.httpproject.R
+import com.cheng.httpproject.helper.PlexureStoreDao
 import com.cheng.httpproject.service.PlexureService
 import com.cheng.httpproject.ui.activity.base.BaseActivity
 import com.cheng.httpproject.ui.adapter.PlexurePagerAdapter
 import com.cheng.httpproject.util.applySchedulers
-import io.realm.Realm
 
 class StoreListActivity : BaseActivity() {
 
@@ -46,12 +46,9 @@ class StoreListActivity : BaseActivity() {
         val observable = plexureService.fetchStores(26.333351598841787, 127.79896146273005)
         val disposable = observable.applySchedulers()
                 .subscribe({result ->
-                    val realm = Realm.getDefaultInstance()
-                    realm.use {
-                        it.beginTransaction()
-                        it.copyToRealmOrUpdate(result)
-                        it.commitTransaction()
-                    }
+                    val plexureStoreDao = PlexureStoreDao.getInstance(this)
+                    plexureStoreDao.addOrUpdate(result)
+
                     hideLoading()
                 }, {error ->
                     hideLoading()
