@@ -64,6 +64,10 @@ class PlexureStoreListFragment : CustomListFragment() {
         })
     }
 
+    fun refresh() {
+        adapter.notifyDataSetChanged()
+    }
+
     private fun setStoreData(items: List<PlexureStore>) {
         refreshEmptyView(items.isEmpty())
         adapter.items = items

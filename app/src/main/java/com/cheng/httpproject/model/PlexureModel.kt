@@ -11,5 +11,10 @@ open class PlexureStore(
         var latitude: Double = 0.0,
         var longitude: Double = 0.0,
         var distance: Int = 0,
-        var featureList: RealmList<String>? = null) : RealmObject()
+        var featureList: RealmList<String>? = null
+) : RealmObject()
+
+open class PlexureFavoriteStoreId(
+        @PrimaryKey var id: String = ""
+) : RealmObject()
 

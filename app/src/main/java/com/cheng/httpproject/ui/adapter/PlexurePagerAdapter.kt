@@ -21,7 +21,6 @@ class PlexurePagerAdapter(private val storeListActivity: StoreListActivity, fm: 
     )
 
     override fun getItem(position: Int): Fragment {
-
         val type =
                 if (position == 0) PlexureConstants.StoreType.All
                 else PlexureConstants.StoreType.Favorite
@@ -43,10 +42,6 @@ class PlexurePagerAdapter(private val storeListActivity: StoreListActivity, fm: 
 
     override fun getCount(): Int {
         return PAGE_NUM
-    }
-
-    fun getFragment(position: Int): PlexureStoreListFragment? {
-        return fragments[position]
     }
 
 }

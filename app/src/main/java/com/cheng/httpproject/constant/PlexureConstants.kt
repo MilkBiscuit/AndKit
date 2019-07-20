@@ -2,6 +2,9 @@ package com.cheng.httpproject.constant
 
 object PlexureConstants {
 
+    const val FIELD_ID = "id"
+    const val FIELD_NAME = "name"
+
     enum class StoreType(val value: Int) {
         All(0), Favorite(1);
 

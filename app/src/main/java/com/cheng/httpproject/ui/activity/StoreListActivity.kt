@@ -8,25 +8,35 @@ import com.cheng.httpproject.service.PlexureService
 import com.cheng.httpproject.ui.activity.base.BaseActivity
 import com.cheng.httpproject.ui.adapter.PlexurePagerAdapter
 import com.cheng.httpproject.util.applySchedulers
-import io.realm.ImportFlag
 import io.realm.Realm
 
 class StoreListActivity : BaseActivity() {
 
+    private val plexureService = PlexureService.getInstance()
+    private lateinit var sectionsPagerAdapter: PlexurePagerAdapter
 
-    val plexureService = PlexureService.getInstance()
-    lateinit var sectionsPagerAdapter: PlexurePagerAdapter
+    private val pageChangeListener = object : ViewPager.OnPageChangeListener {
+        override fun onPageScrolled(i: Int, v: Float, i2: Int) {}
+
+        override fun onPageSelected(i: Int) {
+            sectionsPagerAdapter.fragments[i]?.refresh()
+        }
+
+        override fun onPageScrollStateChanged(i: Int) {
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_store_list)
-        sectionsPagerAdapter = PlexurePagerAdapter(this, supportFragmentManager)
         val viewPager: ViewPager = findViewById(R.id.view_pager)
         val tabs: TabLayout = findViewById(R.id.tabs)
         loadingView = findViewById(R.id.layout_loading)
 
+        sectionsPagerAdapter = PlexurePagerAdapter(this, supportFragmentManager)
         viewPager.adapter = sectionsPagerAdapter
+        viewPager.addOnPageChangeListener(pageChangeListener)
         tabs.setupWithViewPager(viewPager)
         fetchStores()
     }
