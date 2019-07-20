@@ -8,6 +8,11 @@
     <string name="hint_city_name">Input a city\'s name</string>
     <string name="no_result">No results.</string>
     <string name="title_activity_store_list">Store List</string>
-    <string name="tab_text_1">Stores</string>
-    <string name="tab_text_2">Favorite</string>
+    <string name="tab_text_1">ALL STORES</string>
+    <string name="tab_text_2">FAVOURITE</string>
+    <string name="action_sort_distance">Sort by distance</string>
+    <string name="action_sort_distance_near">Nearest</string>
+    <string name="action_sort_distance_far">Furthermost</string>
+    <string name="action_filter">Filter</string>
+
 </resources>

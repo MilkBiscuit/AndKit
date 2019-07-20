@@ -68,6 +68,16 @@ class PlexureStoreListFragment : CustomListFragment() {
         adapter.notifyDataSetChanged()
     }
 
+    fun sortByNearest() {
+        val sorted = adapter.items.sortedBy { plexureStore -> plexureStore.distance }
+        setStoreData(sorted)
+    }
+
+    fun sortByFurtherMost() {
+        val sorted = adapter.items.sortedByDescending { plexureStore -> plexureStore.distance }
+        setStoreData(sorted)
+    }
+
     private fun setStoreData(items: List<PlexureStore>) {
         refreshEmptyView(items.isEmpty())
         adapter.items = items
