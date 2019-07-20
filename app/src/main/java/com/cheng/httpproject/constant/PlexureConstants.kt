@@ -4,6 +4,7 @@ object PlexureConstants {
 
     const val FIELD_ID = "id"
     const val FIELD_NAME = "name"
+    const val FIELD_DISTANCE = "distance"
 
     enum class StoreType(val value: Int) {
         All(0), Favorite(1);

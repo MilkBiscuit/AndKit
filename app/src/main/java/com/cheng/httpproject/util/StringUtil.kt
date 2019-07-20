@@ -44,5 +44,15 @@ class StringUtil {
             return urls
         }
 
+        fun formatDistance(distanceInMeter: Int): String {
+            val distanceInKm = distanceInMeter / 1000
+
+            return "$distanceInKm km"
+        }
+
+        fun formatFeatureList(featureList: List<String>): String {
+            return featureList.joinToString(", ").toLowerCase()
+        }
+
     }
 }
