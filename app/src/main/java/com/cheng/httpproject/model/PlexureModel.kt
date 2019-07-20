@@ -1,11 +1,15 @@
 package com.cheng.httpproject.model
 
-data class PlexureStore(val id: String,
-                        val name: String,
-                        val address: String,
-                        val latitude: Double,
-                        val longitude: Double,
-                        val distance: Int,
-                        val featureList: List<String>)
+import io.realm.RealmList
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
 
+open class PlexureStore(
+        @PrimaryKey var id: String? = null,
+        var name: String? = null,
+        var address: String? = null,
+        var latitude: Double = 0.0,
+        var longitude: Double = 0.0,
+        var distance: Int = 0,
+        var featureList: RealmList<String>? = null) : RealmObject()
 

@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.view.ViewGroup
 import com.cheng.httpproject.R
+import com.cheng.httpproject.constant.PlexureConstants
 import com.cheng.httpproject.ui.activity.StoreListActivity
 import com.cheng.httpproject.ui.fragment.PlexureStoreListFragment
 
@@ -20,7 +21,11 @@ class PlexurePagerAdapter(private val storeListActivity: StoreListActivity, fm: 
     )
 
     override fun getItem(position: Int): Fragment {
-        val fragment = PlexureStoreListFragment()
+
+        val type =
+                if (position == 0) PlexureConstants.StoreType.All
+                else PlexureConstants.StoreType.Favorite
+        val fragment = PlexureStoreListFragment.newInstance(type)
         fragments[position] = fragment
 
         return fragment
