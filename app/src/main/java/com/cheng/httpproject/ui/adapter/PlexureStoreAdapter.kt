@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.cheng.httpproject.R
+import com.cheng.httpproject.constant.PlexureConstants
 import com.cheng.httpproject.helper.PlexureFavoriteIdDao
 import com.cheng.httpproject.model.PlexureStore
 import com.cheng.httpproject.ui.viewmodel.PlexureStoreViewModel
@@ -47,6 +48,12 @@ class PlexureStoreAdapter(val activity: FragmentActivity, listData: List<Plexure
             viewHolder.tvFeature.visibility = View.VISIBLE
             viewHolder.tvFeature.text = StringUtil.formatFeatureList(item.featureList!!.toList())
         }
+        val greyOut = PlexureConstants.GREY_DISTANT_STORES
+                && item.distance > PlexureConstants.GREY_DISTANCE_IN_METER
+        viewHolder.tvName.isEnabled = !greyOut
+        viewHolder.tvAddress.isEnabled = !greyOut
+        viewHolder.tvDistance.isEnabled = !greyOut
+        viewHolder.tvFeature.isEnabled = !greyOut
 
         val favoriteStoreIds = viewModel.getFavoriteStoreIds()
         val inFavorite = favoriteStoreIds.any { it == item.id }

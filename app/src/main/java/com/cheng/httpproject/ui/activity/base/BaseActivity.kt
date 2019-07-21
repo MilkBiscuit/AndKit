@@ -58,11 +58,11 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    protected fun showLoading() {
+    protected open fun showLoading() {
         loadingView?.visibility = View.VISIBLE
     }
 
-    protected fun hideLoading() {
+    protected open fun hideLoading() {
         loadingView?.visibility = View.GONE
     }
 

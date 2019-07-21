@@ -4,6 +4,7 @@ package com.cheng.httpproject.ui.fragment
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import com.cheng.httpproject.R
 import com.cheng.httpproject.constant.PlexureConstants
 import com.cheng.httpproject.model.PlexureStore
@@ -13,7 +14,7 @@ import com.cheng.httpproject.ui.fragment.base.CustomListFragment
 import com.cheng.httpproject.ui.viewmodel.PlexureStoreViewModel
 import com.cheng.httpproject.util.UIUtil
 
-class PlexureStoreListFragment : CustomListFragment() {
+class PlexureStoreListFragment : CustomListFragment(), SwipeRefreshLayout.OnRefreshListener {
 
     companion object {
         private val KEY_STORE_TYPE = "StoreType"
@@ -53,6 +54,7 @@ class PlexureStoreListFragment : CustomListFragment() {
         adapter = PlexureStoreAdapter(activity, emptyList())
         UIUtil.applyRoundCorner(activity, rootLayout, R.color.transparent_10_black)
         recyclerView.adapter = adapter
+        swipeLayout.setOnRefreshListener(this)
 
         plexureStoreVM = ViewModelProviders.of(this).get(PlexureStoreViewModel::class.java)
         val storeListLiveData =
@@ -65,8 +67,16 @@ class PlexureStoreListFragment : CustomListFragment() {
         })
     }
 
+    override fun onRefresh() {
+        activity.fetchStores(0.0, 0.0)
+    }
+
     fun refresh() {
         plexureStoreVM.refreshLiveData()
+    }
+
+    fun setIsRefreshing(isRefreshing: Boolean) {
+        swipeLayout.isRefreshing = isRefreshing
     }
 
     private fun setStoreData(items: List<PlexureStore>) {

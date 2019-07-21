@@ -2,6 +2,7 @@ package com.cheng.httpproject.ui.fragment.base
 
 
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -18,9 +19,10 @@ open class CustomListFragment : BaseFragment() {
     override val TAG = "CustomList"
     protected lateinit var rootLayout: View
     protected lateinit var recyclerView: RecyclerView
-    protected var tvEmpty: TextView? = null
-    protected var btnEmpty: Button? = null
-    protected var emptyButtonClick: View.OnClickListener? = null
+    protected lateinit var tvEmpty: TextView
+    protected lateinit var btnEmpty: Button
+    protected lateinit var swipeLayout: SwipeRefreshLayout
+    protected lateinit var emptyButtonClick: View.OnClickListener
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,6 +33,7 @@ open class CustomListFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         rootLayout = custom_list_root
+        swipeLayout = swipe_refresh_layout
         recyclerView = rv_custom
         tvEmpty = tv_empty_view
         btnEmpty = btn_empty_view
