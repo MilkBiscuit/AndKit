@@ -64,6 +64,16 @@ class PlexureStoreViewModel : ViewModel() {
         return favoriteStoreIds
     }
 
+    fun sortByNearest() {
+        stores.value = stores.value?.sortedBy { s -> s.distance }
+        favoriteStores.value = favoriteStores.value?.sortedBy { s -> s.distance }
+    }
+
+    fun sortByFurtherMost() {
+        stores.value = stores.value?.sortedByDescending { s -> s.distance }
+        favoriteStores.value = favoriteStores.value?.sortedByDescending { s -> s.distance }
+    }
+
     private fun updateFavoriteStoreResults() {
         val query = realm.where(PlexureStore::class.java).sort(PlexureConstants.FIELD_DISTANCE)
         val favoriteIdsArray = favoriteStoreIds.toTypedArray()

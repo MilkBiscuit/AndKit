@@ -33,6 +33,7 @@ class PlexureStoreListFragment : CustomListFragment() {
 
     private lateinit var activity: StoreListActivity
     private lateinit var adapter: PlexureStoreAdapter
+    private lateinit var plexureStoreVM: PlexureStoreViewModel
     private var storeType = PlexureConstants.StoreType.All
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,10 +54,10 @@ class PlexureStoreListFragment : CustomListFragment() {
         UIUtil.applyRoundCorner(activity, rootLayout, R.color.transparent_10_black)
         recyclerView.adapter = adapter
 
-        val model = ViewModelProviders.of(this).get(PlexureStoreViewModel::class.java)
+        plexureStoreVM = ViewModelProviders.of(this).get(PlexureStoreViewModel::class.java)
         val storeListLiveData =
-                if (storeType == PlexureConstants.StoreType.All) model.getAllStores()
-                else model.getFavoriteStores()
+                if (storeType == PlexureConstants.StoreType.All) plexureStoreVM.getAllStores()
+                else plexureStoreVM.getFavoriteStores()
         storeListLiveData.observe(this, Observer<List<PlexureStore>>{ stores ->
             if (stores != null) {
                 setStoreData(stores)
@@ -69,13 +70,11 @@ class PlexureStoreListFragment : CustomListFragment() {
     }
 
     fun sortByNearest() {
-        val sorted = adapter.items.sortedBy { plexureStore -> plexureStore.distance }
-        setStoreData(sorted)
+        plexureStoreVM.sortByNearest()
     }
 
     fun sortByFurtherMost() {
-        val sorted = adapter.items.sortedByDescending { plexureStore -> plexureStore.distance }
-        setStoreData(sorted)
+        plexureStoreVM.sortByFurtherMost()
     }
 
     private fun setStoreData(items: List<PlexureStore>) {
