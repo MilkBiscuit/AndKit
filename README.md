@@ -1,14 +1,15 @@
 # Plexure Challenge
-plexure-app-debug.apk is uploaded for your convenience
+[plexure-app-debug.apk](https://github.com/MilkBiscuit/HttpProject/blob/plexure/plexure-app-debug.apk) is uploaded for your convenience
 
 ## Screenshot
 ![screenshot](https://user-images.githubusercontent.com/20746964/61588593-8565fe00-abf2-11e9-9ed2-5a82083a4b67.png)
 
 ## Completed features
-Basic feature set
-Data handling - Filter
-Data handling - Sort
-Data handling - Validation, it is hardcoded as enabled, any store further than 1000km is grey out
+#### Basic feature set
+#### Data handling - Filter
+#### Data handling - Sort
+#### Data handling - Validation
+Hardcoded as enabled, any store further than 1000km is grey out
 
 ## Library used:
 Retrofit2, RxJava2, Realm, JUnit5 etc.
