@@ -30,6 +30,15 @@ class PlexurePagerAdapter(private val storeListActivity: StoreListActivity, fm: 
         return fragment
     }
 
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        val objectItem = super.instantiateItem(container, position)
+        if (objectItem is PlexureStoreListFragment) {
+            fragments[position] = objectItem
+        }
+
+        return objectItem
+    }
+
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         super.destroyItem(container, position, `object`)
 
