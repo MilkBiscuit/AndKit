@@ -5,15 +5,17 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.view.View
+
 
 open class BaseDialogFragment : DialogFragment(), DialogInterface.OnClickListener {
-    val TAG = "BaseDialog"
+    open val TAG = "BaseDialog"
     var title: String? = null
     var message: String? = null
-    var positiveText: String? = null
-    var negativeText: String? = null
-    var positiveAction: (() -> Unit)? = null
-    var negativeAction: (() -> Unit)? = null
+    open var positiveText: String? = null
+    open var negativeText: String? = null
+    open var positiveAction: (() -> Unit)? = null
+    open var negativeAction: (() -> Unit)? = null
 
     protected lateinit var ok: String
     protected lateinit var cancel: String
@@ -36,7 +38,7 @@ open class BaseDialogFragment : DialogFragment(), DialogInterface.OnClickListene
                 .setPositiveButton(positiveText?:ok, this)
                 .setNegativeButton(negativeText?:cancel, this)
         if (getLayoutResId() != 0) {
-            builder.setView(getLayoutResId())
+            builder.setView(setupCustomView())
         }
 
         return builder.create()
@@ -51,6 +53,12 @@ open class BaseDialogFragment : DialogFragment(), DialogInterface.OnClickListene
 
     open fun getLayoutResId(): Int {
         return 0
+    }
+
+    open fun setupCustomView(): View {
+        val view = activity!!.layoutInflater.inflate(getLayoutResId(), null)
+
+        return view
     }
 
 }

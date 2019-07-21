@@ -66,15 +66,7 @@ class PlexureStoreListFragment : CustomListFragment() {
     }
 
     fun refresh() {
-        adapter.notifyDataSetChanged()
-    }
-
-    fun sortByNearest() {
-        plexureStoreVM.sortByNearest()
-    }
-
-    fun sortByFurtherMost() {
-        plexureStoreVM.sortByFurtherMost()
+        plexureStoreVM.refreshLiveData()
     }
 
     private fun setStoreData(items: List<PlexureStore>) {

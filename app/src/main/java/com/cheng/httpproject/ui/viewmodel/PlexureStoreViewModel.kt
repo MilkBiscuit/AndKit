@@ -12,30 +12,35 @@ import io.realm.RealmResults
 
 class PlexureStoreViewModel : ViewModel() {
 
-    private val realm = Realm.getDefaultInstance()
-    private val favoriteIdResults = realm.where(PlexureFavoriteStoreId::class.java).findAll()
+    companion object {
+        val SELECTED_FEATURE_LIST: MutableSet<String> = mutableSetOf()
+        var sortMethod = PlexureConstants.SortMethod.NEAREST
+    }
 
+    private val realm = Realm.getDefaultInstance()
+    private var favoriteIdResults = realm.where(PlexureFavoriteStoreId::class.java).findAll()
+    private var allStoreResults = realm.where(PlexureStore::class.java).findAll()
     private var favoriteStoreResults: RealmResults<PlexureStore>? = null
     private var favoriteStoreIds: List<String> = favoriteIdResults.toList().map { i -> i.id }
 
     init {
+        allStoreResults.addChangeListener(RealmChangeListener {
+            allStoreResults = it
+            refreshLiveData()
+        })
+
         favoriteIdResults.addChangeListener(RealmChangeListener {
+            favoriteIdResults = it
             favoriteStoreIds = it.toList().map { i -> i.id }
 
             updateFavoriteStoreResults()
-            favoriteStores.value = favoriteStoreResults.orEmpty()
+            refreshLiveData()
         })
     }
 
     private val stores: MutableLiveData<List<PlexureStore>> by lazy {
         MutableLiveData<List<PlexureStore>>().also {
-            val storeQuery = realm.where(PlexureStore::class.java).sort(PlexureConstants.FIELD_DISTANCE)
-            val allStoreResults = storeQuery.findAll()
             it.value = allStoreResults.toList()
-
-            allStoreResults.addChangeListener(RealmChangeListener { newResults ->
-                stores.value = newResults.toList()
-            })
         }
     }
 
@@ -64,18 +69,38 @@ class PlexureStoreViewModel : ViewModel() {
         return favoriteStoreIds
     }
 
-    fun sortByNearest() {
-        stores.value = stores.value?.sortedBy { s -> s.distance }
-        favoriteStores.value = favoriteStores.value?.sortedBy { s -> s.distance }
-    }
+    fun refreshLiveData() {
+        stores.value = allStoreResults.toList()
+        favoriteStores.value = favoriteStoreResults.orEmpty()
 
-    fun sortByFurtherMost() {
-        stores.value = stores.value?.sortedByDescending { s -> s.distance }
-        favoriteStores.value = favoriteStores.value?.sortedByDescending { s -> s.distance }
+        if (SELECTED_FEATURE_LIST.isNotEmpty()) {
+            val withFeature: (PlexureStore) -> Boolean = { s ->
+                s.featureList?.containsAll(SELECTED_FEATURE_LIST) ?: false
+            }
+            stores.value = stores.value?.filter(withFeature)
+            favoriteStores.value = favoriteStores.value?.filter(withFeature)
+        }
+
+        val selectDistance: (PlexureStore) -> Int? = { s -> s.distance }
+        when (sortMethod) {
+            PlexureConstants.SortMethod.NEAREST -> {
+                stores.value = stores.value?.sortedBy(selectDistance)
+                favoriteStores.value = favoriteStores.value?.sortedBy(selectDistance)
+            }
+            PlexureConstants.SortMethod.FURTHERMOST -> {
+                stores.value = stores.value?.sortedByDescending(selectDistance)
+                favoriteStores.value = favoriteStores.value?.sortedByDescending(selectDistance)
+            }
+            else -> {
+                val selectName: (PlexureStore) -> String? = { s -> s.name }
+                stores.value = stores.value?.sortedBy(selectName)
+                favoriteStores.value = favoriteStores.value?.sortedBy(selectName)
+            }
+        }
     }
 
     private fun updateFavoriteStoreResults() {
-        val query = realm.where(PlexureStore::class.java).sort(PlexureConstants.FIELD_DISTANCE)
+        val query = realm.where(PlexureStore::class.java)
         val favoriteIdsArray = favoriteStoreIds.toTypedArray()
         favoriteStoreResults = query.`in`(PlexureConstants.FIELD_ID, favoriteIdsArray).findAll()
     }

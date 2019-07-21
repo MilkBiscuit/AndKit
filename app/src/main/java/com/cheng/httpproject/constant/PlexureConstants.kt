@@ -3,8 +3,6 @@ package com.cheng.httpproject.constant
 object PlexureConstants {
 
     const val FIELD_ID = "id"
-    const val FIELD_NAME = "name"
-    const val FIELD_DISTANCE = "distance"
 
     const val FEATURE_WIFI = "FREE_WIFI"
     const val FEATURE_DRIVE_THROUGH = "DRIVETHR"
@@ -20,6 +18,10 @@ object PlexureConstants {
         companion object {
             fun valueOf(value: Int): StoreType? = values().first { it.value == value }
         }
+    }
+
+    enum class SortMethod {
+        NEAREST, FURTHERMOST, NAME
     }
 
 }

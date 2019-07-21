@@ -1,0 +1,21 @@
+package com.cheng.httpproject.ui.fragment.base
+
+import android.view.View
+import android.widget.ListView
+import com.cheng.httpproject.R
+
+open class BaseListDialogFragment: BaseDialogFragment() {
+    override val TAG = "BaseListDialog"
+    protected lateinit var listView: ListView
+
+    override fun getLayoutResId(): Int {
+        return R.layout.dialog_list
+    }
+
+    override fun setupCustomView(): View {
+        val rootView = super.setupCustomView()
+        listView = rootView.findViewById(R.id.list)
+
+        return rootView
+    }
+}

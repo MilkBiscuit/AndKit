@@ -5,11 +5,16 @@ import android.support.v4.view.ViewPager
 import android.view.Menu
 import android.view.MenuItem
 import com.cheng.httpproject.R
+import com.cheng.httpproject.constant.PlexureConstants
 import com.cheng.httpproject.helper.PlexureStoreDao
 import com.cheng.httpproject.service.PlexureService
 import com.cheng.httpproject.ui.activity.base.BaseActivity
 import com.cheng.httpproject.ui.adapter.PlexurePagerAdapter
+import com.cheng.httpproject.ui.fragment.PlexureFeatureListDialogFragment
 import com.cheng.httpproject.ui.fragment.PlexureStoreListFragment
+import com.cheng.httpproject.ui.fragment.base.BaseDialogFragment
+import com.cheng.httpproject.ui.fragment.base.BaseListDialogFragment
+import com.cheng.httpproject.ui.viewmodel.PlexureStoreViewModel
 import com.cheng.httpproject.util.applySchedulers
 
 class StoreListActivity : BaseActivity() {
@@ -56,11 +61,21 @@ class StoreListActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val storeListFragment = currentFragment ?: return false
         when (item.itemId) {
-            R.id.sort_far -> storeListFragment.sortByFurtherMost()
-            R.id.sort_near -> storeListFragment.sortByNearest()
+            R.id.sort_far -> PlexureStoreViewModel.sortMethod = PlexureConstants.SortMethod.FURTHERMOST
+            R.id.sort_near -> PlexureStoreViewModel.sortMethod = PlexureConstants.SortMethod.NEAREST
+            R.id.sort_name -> PlexureStoreViewModel.sortMethod = PlexureConstants.SortMethod.NAME
+            R.id.action_filter -> {
+                val dialog = PlexureFeatureListDialogFragment()
+                dialog.show(supportFragmentManager, dialog.TAG)
+            }
         }
+        storeListFragment.refresh()
 
         return true
+    }
+
+    fun refreshCurrentStoreList() {
+        currentFragment?.refresh()
     }
 
     private fun fetchStores() {
