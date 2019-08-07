@@ -19,6 +19,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             R.id.btn_bible -> launchBibleActivity()
             R.id.btn_infoodle -> launchInfoodleActivity()
             R.id.btn_weather -> launchWeatherActivity()
+            R.id.btn_plexure -> launchPlexureActivity()
         }
     }
 
@@ -34,6 +35,11 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
     fun launchInfoodleActivity() {
         val intent = Intent(this, InfoodleActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun launchPlexureActivity() {
+        val intent = Intent(this, StoreListActivity::class.java)
         startActivity(intent)
     }
 

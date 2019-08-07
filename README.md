@@ -1,18 +1,8 @@
-# Plexure Challenge
-[plexure-app-debug.apk](https://github.com/MilkBiscuit/HttpProject/blob/plexure/plexure-app-debug.apk) is uploaded for your convenience
-
-## Screenshot
-![screenshot](https://user-images.githubusercontent.com/20746964/61588593-8565fe00-abf2-11e9-9ed2-5a82083a4b67.png)
-
-## Completed features
-#### Basic feature set
-#### Data handling - Filter
-#### Data handling - Sort
-#### Data handling - Validation
-Hardcoded as enabled, any store further than 1000km is grey out
+# HttpProject
+A hotplate project for Apps which have various Restful Apis, written in Kotlin
 
 ## Library used:
-Retrofit2, RxJava2, Realm, JUnit5 etc.
+Retrofit2, RxJava2, Realm, okhttp-oauth2-client, JUnit5 etc.
 
 ## Provide several utility methods/extensions, e.g.
 ### StringUtil
@@ -24,12 +14,18 @@ isValidJsonObject, isValidJsonArray
 ### DateUtil
 parseYearMonthDate, parseFullDateTime, parseDate, formatDate, getToday, getTomorrow
 
-### Unit tests for above util methods
+### Unit tests for above util methods.
 app/src/test/java/com/cheng/httpproject/util
 
 ## Api examples used in the project:
+### BibleApi
+https://docs.api.bible/reference
+
+### Infoodle
+https://help.infoodle.com/api
+
 ### Search store API:
 https://mopjapaneastgateway.plexure.io/store/v2/stores?latitude=26.333351598841787&longitude=127.79896146273005&radius=100000000&size=100
 
-### Search store API unit test:
-app/src/test/java/com/cheng/httpproject/api/PlexureApiUnitTest
+### Some unit test about the api too
+app/src/test/java/com/cheng/httpproject/api/
