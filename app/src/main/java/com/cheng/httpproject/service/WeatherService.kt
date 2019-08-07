@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object WeatherService {
 
-    private val WEB_SERVICE_BASE_URL = "http://api.openweathermap.org/data/2.5/"
+    private val WEB_SERVICE_BASE_URL = "https://api.openweathermap.org/data/2.5/"
     private val retrofit = Retrofit.Builder()
             .baseUrl(WEB_SERVICE_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
