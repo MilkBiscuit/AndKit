@@ -68,7 +68,7 @@ class PlexureStoreListFragment : CustomListFragment(), SwipeRefreshLayout.OnRefr
     }
 
     override fun onRefresh() {
-        activity.fetchStores(0.0, 0.0)
+        activity.fetchStores(PlexureConstants.DEFAULT_LATITUDE, PlexureConstants.DEFAULT_LONGITUDE)
     }
 
     fun refresh() {
