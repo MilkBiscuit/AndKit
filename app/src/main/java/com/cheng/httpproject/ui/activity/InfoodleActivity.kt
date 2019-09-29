@@ -1,7 +1,7 @@
 package com.cheng.httpproject.ui.activity
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import ca.mimic.oauth2library.OAuth2Client
 import com.cheng.httpproject.R
 import com.cheng.httpproject.helper.SharedPrefHelper

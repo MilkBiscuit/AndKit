@@ -2,8 +2,8 @@ package com.cheng.httpproject.ui.fragment.base
 
 
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
+import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
 import android.view.View
 import kotlinx.android.synthetic.main.loading.*
 

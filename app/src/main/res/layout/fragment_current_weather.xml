@@ -27,7 +27,7 @@
             />
     </LinearLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true">
@@ -56,6 +56,6 @@
             android:id="@+id/today_max_temperature"
             android:layout_marginEnd="8dp"
             />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

@@ -1,7 +1,7 @@
 package com.cheng.httpproject.ui.activity
 
 import android.os.Bundle
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import android.view.Menu
 import android.view.MenuItem
 import com.cheng.httpproject.R

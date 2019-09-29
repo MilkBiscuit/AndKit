@@ -1,9 +1,9 @@
 package com.cheng.httpproject.ui.activity.base
 
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import io.reactivex.disposables.CompositeDisposable

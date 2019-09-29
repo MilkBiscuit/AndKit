@@ -1,10 +1,10 @@
 package com.cheng.httpproject.ui.fragment
 
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.cheng.httpproject.R
 import com.cheng.httpproject.constant.PlexureConstants
 import com.cheng.httpproject.model.PlexureStore
