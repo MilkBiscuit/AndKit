@@ -44,7 +44,9 @@ abstract class BaseFragment : Fragment() {
         dialog.title = title
         dialog.message = message
 
-        dialog.show(fragmentManager, dialog.TAG)
+        fragmentManager?.let {
+            dialog.show(it, dialog.TAG)
+        }
     }
 
 }
