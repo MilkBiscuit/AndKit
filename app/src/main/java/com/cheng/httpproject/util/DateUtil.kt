@@ -27,7 +27,7 @@ class DateUtil {
                 val formatter = SimpleDateFormat(dateFormat, Locale.getDefault());
                 parsed = formatter.parse(date)
             } catch (e: Exception) {
-                Log.w(TAG, e.message)
+                Log.w(TAG, "parseDate exception: ${e.message}")
             }
 
             return parsed

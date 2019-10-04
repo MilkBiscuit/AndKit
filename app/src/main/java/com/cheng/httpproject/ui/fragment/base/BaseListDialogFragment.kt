@@ -5,7 +5,11 @@ import android.widget.ListView
 import com.cheng.httpproject.R
 
 open class BaseListDialogFragment: BaseDialogFragment() {
-    override val TAG = "BaseListDialog"
+
+    companion object {
+        val TAG = BaseListDialogFragment::class.java.simpleName
+    }
+
     protected lateinit var listView: ListView
 
     override fun getLayoutResId(): Int {
