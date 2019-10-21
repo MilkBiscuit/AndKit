@@ -10,7 +10,7 @@ import com.cheng.httpproject.ui.activity.StoreListActivity
 import com.cheng.httpproject.ui.fragment.PlexureStoreListFragment
 
 class PlexurePagerAdapter(private val storeListActivity: StoreListActivity, fm: FragmentManager)
-    : FragmentPagerAdapter(fm) {
+    : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     val PAGE_NUM = 2
     var fragments: Array<PlexureStoreListFragment?> = arrayOfNulls(PAGE_NUM)

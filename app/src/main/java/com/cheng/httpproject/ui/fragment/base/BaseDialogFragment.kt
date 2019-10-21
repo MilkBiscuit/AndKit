@@ -9,7 +9,11 @@ import android.view.View
 
 
 open class BaseDialogFragment : DialogFragment(), DialogInterface.OnClickListener {
-    open val TAG = "BaseDialog"
+
+    companion object {
+        val TAG = BaseDialogFragment::class.java.simpleName
+    }
+
     var title: String? = null
     var message: String? = null
     open var positiveText: String? = null
@@ -36,7 +40,9 @@ open class BaseDialogFragment : DialogFragment(), DialogInterface.OnClickListene
                 .setTitle(title?:attention)
                 .setMessage(message)
                 .setPositiveButton(positiveText?:ok, this)
-                .setNegativeButton(negativeText?:cancel, this)
+        if (negativeText != null || negativeAction != null) {
+            builder.setNegativeButton(negativeText ?: cancel, this)
+        }
         if (getLayoutResId() != 0) {
             builder.setView(setupCustomView())
         }

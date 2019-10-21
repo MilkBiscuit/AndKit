@@ -66,7 +66,7 @@ class StoreListActivity : BaseActivity() {
             R.id.sort_name -> PlexureStoreViewModel.sortMethod = PlexureConstants.SortMethod.NAME
             R.id.action_filter -> {
                 val dialog = PlexureFeatureListDialogFragment()
-                dialog.show(supportFragmentManager, dialog.TAG)
+                dialog.show(supportFragmentManager, PlexureFeatureListDialogFragment.TAG)
             }
         }
         storeListFragment.refresh()

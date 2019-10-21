@@ -17,6 +17,7 @@ import com.cheng.httpproject.ui.viewmodel.PlexureStoreViewModel
 class PlexureFeatureListDialogFragment: BaseListDialogFragment(), AdapterView.OnItemClickListener {
 
     companion object {
+        val TAG = PlexureFeatureListDialogFragment::class.java.simpleName
         val LIST_OF_FEATURES = listOf(
                 PlexureConstants.FEATURE_BF,
                 PlexureConstants.FEATURE_BP,
@@ -32,8 +33,6 @@ class PlexureFeatureListDialogFragment: BaseListDialogFragment(), AdapterView.On
             PlexureStoreViewModel.SELECTED_FEATURE_LIST.contains(feature)
         }
     }
-
-    override val TAG = "PlexureFeatureListDialog"
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
