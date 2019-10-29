@@ -10,5 +10,6 @@ class SettingsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_settings)
+        setTitle(R.string.settings)
     }
 }

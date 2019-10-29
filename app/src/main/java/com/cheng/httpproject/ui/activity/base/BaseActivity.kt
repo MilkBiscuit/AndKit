@@ -11,6 +11,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.test.espresso.IdlingResource
+import com.cheng.httpproject.R
 import com.cheng.httpproject.SimpleIdlingResource
 import com.cheng.httpproject.helper.SharedPrefHelper
 import com.cheng.httpproject.util.ContextUtil
@@ -34,6 +35,12 @@ abstract class BaseActivity : AppCompatActivity() {
 
         ContextUtil.updateLocale(this)
         active = true
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        loadingView = findViewById(R.id.layout_loading)
     }
 
     override fun onStop() {
@@ -77,13 +84,13 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    protected open fun showLoading() {
+    open fun showLoading() {
         loadingView?.visibility = View.VISIBLE
 
         mIdlingResource?.setIdle(false)
     }
 
-    protected open fun hideLoading() {
+    open fun hideLoading() {
         loadingView?.visibility = View.GONE
 
         mIdlingResource?.setIdle(true)

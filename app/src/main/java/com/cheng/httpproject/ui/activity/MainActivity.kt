@@ -13,6 +13,8 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setTitle(R.string.app_name)
     }
 
     override fun onClick(view: View) {

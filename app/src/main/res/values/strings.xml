@@ -15,7 +15,7 @@
     <string name="app_name">HttpProject</string>
     <string name="main_desc">Each button takes you to an activity which related with a type of API call</string>
     <string name="hint_city_name">Input a city\'s name</string>
-    <string name="loading">I\'m loading, please wait &amp;</string>
+    <string name="loading">I\'m loading, please wait&#8230;</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -28,6 +28,7 @@
     <string name="action_sort_distance_far">Furthermost</string>
     <string name="action_sort_name">Name</string>
     <string name="action_filter">Filter</string>
+    <string name="filter_condition">Filter condition</string>
 
     <string name="settings">Settings</string>
     <string name="general_settings">General Settings</string>
