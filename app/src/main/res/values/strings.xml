@@ -1,11 +1,24 @@
 <resources>
 
     <!-- DO NOT TRANSLATE -->
-    <string name="temperature">%d\u00B0</string>
-    <!-- DO NOT TRANSLATE, End-->
+    <string name="temperature" translatable="false">%d\u00B0</string>
+    <string-array name="support_languages" translatable="false">
+        <item>English</item>
+        <item>中文</item>
+    </string-array>
+    <string-array name="support_languages_values" translatable="false">
+        <item>English</item>
+        <item>Chinese</item>
+    </string-array>
+    <!-- DO NOT TRANSLATE, End -->
 
     <string name="app_name">HttpProject</string>
+    <string name="main_desc">Each button takes you to an activity which related with a type of API call</string>
     <string name="hint_city_name">Input a city\'s name</string>
+    <string name="loading">I\'m loading, please wait &amp;</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
     <string name="no_result">No results.</string>
     <string name="title_activity_store_list">Store List</string>
     <string name="tab_text_1">ALL STORES</string>
@@ -15,5 +28,11 @@
     <string name="action_sort_distance_far">Furthermost</string>
     <string name="action_sort_name">Name</string>
     <string name="action_filter">Filter</string>
+
+    <string name="settings">Settings</string>
+    <string name="general_settings">General Settings</string>
+    <string name="other_settings">Other Settings</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="language">Language</string>
 
 </resources>

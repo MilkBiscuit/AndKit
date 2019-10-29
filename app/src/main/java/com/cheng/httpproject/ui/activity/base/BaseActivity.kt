@@ -1,5 +1,6 @@
 package com.cheng.httpproject.ui.activity.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -11,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.test.espresso.IdlingResource
 import com.cheng.httpproject.SimpleIdlingResource
+import com.cheng.httpproject.helper.SharedPrefHelper
+import com.cheng.httpproject.util.ContextUtil
+import com.cheng.httpproject.util.VersionUtil
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -28,6 +32,7 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        ContextUtil.updateLocale(this)
         active = true
     }
 
@@ -41,6 +46,11 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onDestroy()
 
         compositeDisposable.dispose()
+    }
+
+    override fun attachBaseContext(base: Context) {
+        val newContext = ContextUtil.createConfigurationContext(base)
+        super.attachBaseContext(newContext)
     }
 
     fun addDisposable(disposable: Disposable) {
