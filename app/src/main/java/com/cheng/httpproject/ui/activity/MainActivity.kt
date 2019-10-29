@@ -2,6 +2,8 @@ package com.cheng.httpproject.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.cheng.httpproject.R
 import com.cheng.httpproject.ui.activity.base.BaseActivity
@@ -11,6 +13,8 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setTitle(R.string.app_name)
     }
 
     override fun onClick(view: View) {
@@ -20,6 +24,27 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             R.id.btn_infoodle -> launchInfoodleActivity()
             R.id.btn_weather -> launchWeatherActivity()
             R.id.btn_plexure -> launchPlexureActivity()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

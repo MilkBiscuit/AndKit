@@ -2,16 +2,19 @@ package com.cheng.httpproject.helper
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
+import com.cheng.httpproject.constant.PrefKeyConstants
 import com.cheng.httpproject.oauth2.OAuth2Constants
 import com.cheng.httpproject.oauth2.OAuth2Detail
 import com.cheng.httpproject.util.JsonUtil
 import com.cheng.httpproject.util.SingletonHolder
 import com.google.gson.reflect.TypeToken
+import java.util.*
 
-private const val KEY_OAUTH2_DETAIL = "Oauth2Detail"
 
 class SharedPrefHelper private constructor(context: Context) {
+
+    private val KEY_OAUTH2_DETAIL = "Oauth2Detail"
 
     companion object: SingletonHolder<SharedPrefHelper, Context>(::SharedPrefHelper)
 
@@ -26,6 +29,14 @@ class SharedPrefHelper private constructor(context: Context) {
 
     fun getString(prefKey: String, defaultValue: String = ""): String =
             sharedPref.getString(prefKey, defaultValue)?: defaultValue
+
+    fun getCurrentLocale(): Locale {
+        val languageValue = getString(PrefKeyConstants.PREF_KEY_LANGUAGE)
+
+        return if (languageValue == "Chinese")
+            Locale.SIMPLIFIED_CHINESE
+        else Locale.ENGLISH
+    }
 
     fun saveOAuth2LoginDetail(clientId: String, clientSecret: String) {
         saveString(OAuth2Constants.CLIENT_ID, clientId)

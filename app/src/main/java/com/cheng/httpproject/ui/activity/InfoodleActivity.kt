@@ -22,7 +22,7 @@ class InfoodleActivity : BaseActivity() {
         val data = intent.data
         val sharedPrefHelper = SharedPrefHelper.getInstance(this)
         val authProperty = sharedPrefHelper.getOAuth2Properties()
-        var fragment: BaseFragment = InfoodleAuthFragment();
+        var fragment: BaseFragment = InfoodleAuthFragment()
         if (OAuth2Constants.REDIRECT_URI_ROOT == data?.scheme) {
             val authorizationCode = data.getQueryParameter(OAuth2Constants.CODE)
 

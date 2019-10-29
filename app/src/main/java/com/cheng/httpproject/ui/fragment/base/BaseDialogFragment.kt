@@ -14,8 +14,8 @@ open class BaseDialogFragment : DialogFragment(), DialogInterface.OnClickListene
         val TAG = BaseDialogFragment::class.java.simpleName
     }
 
-    var title: String? = null
-    var message: String? = null
+    open var title: String? = null
+    open var message: String? = null
     open var positiveText: String? = null
     open var negativeText: String? = null
     open var positiveAction: (() -> Unit)? = null

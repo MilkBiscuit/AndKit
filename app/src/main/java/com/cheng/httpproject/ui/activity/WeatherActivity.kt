@@ -23,7 +23,6 @@ class WeatherActivity : BaseActivity(), OnQueryTextListener {
 
         setContentView(R.layout.activity_weather)
 
-        loadingView = findViewById(R.id.layout_loading)
         sv_city_name.setOnQueryTextListener(this)
 
         startObserve()

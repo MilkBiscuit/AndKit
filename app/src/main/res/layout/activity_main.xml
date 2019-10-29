@@ -54,4 +54,15 @@
         app:layout_constraintRight_toRightOf="parent"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="@string/main_desc"
+        app:layout_constraintTop_toBottomOf="@id/btn_plexure"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

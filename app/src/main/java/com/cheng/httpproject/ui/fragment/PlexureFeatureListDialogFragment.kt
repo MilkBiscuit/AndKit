@@ -36,7 +36,7 @@ class PlexureFeatureListDialogFragment: BaseListDialogFragment(), AdapterView.On
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.setTitle("Filter results")
+        dialog.setTitle(R.string.filter_condition)
 
         return dialog
     }

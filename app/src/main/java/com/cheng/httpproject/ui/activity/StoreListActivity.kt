@@ -44,7 +44,6 @@ class StoreListActivity : BaseActivity() {
 
         setContentView(R.layout.activity_store_list)
         val viewPager: ViewPager = findViewById(R.id.view_pager)
-        loadingView = findViewById(R.id.layout_loading)
 
         sectionsPagerAdapter = PlexurePagerAdapter(this, supportFragmentManager)
         viewPager.adapter = sectionsPagerAdapter

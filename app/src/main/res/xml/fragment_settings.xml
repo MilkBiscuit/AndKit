@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/general_settings"
+        >
+        <ListPreference
+            android:key="key_language"
+            android:title="@string/language"
+            android:entries="@array/support_languages"
+            android:entryValues="@array/support_languages_values"
+            android:defaultValue="English"
+            android:summary="%s"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/other_settings"
+        >
+        <CheckBoxPreference
+            android:key="key_placeholder"
+            android:title="@string/placeholder"
+            />
+    </PreferenceCategory>
+</PreferenceScreen>
