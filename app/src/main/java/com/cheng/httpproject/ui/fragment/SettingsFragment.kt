@@ -34,7 +34,10 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
     }
 
     fun restartApp() {
-        val intent = Intent(context, MainActivity::class.java)
+        var intent = Intent(context, MainActivity::class.java)
+        startActivity(intent)
+
+        intent = Intent(context, SettingsActivity::class.java)
         startActivity(intent)
 
         exitProcess(0)
