@@ -35,5 +35,15 @@
     <string name="other_settings">Other Settings</string>
     <string name="placeholder">Placeholder</string>
     <string name="language">Language</string>
+    <string name="theme">Theme</string>
+
+    <string-array name="theme_names">
+        <item>Usual</item>
+        <item>Black and White</item>
+    </string-array>
+    <string-array name="theme_values" translatable="false">
+        <item>Usual</item>
+        <item>BlackAndWhite</item>
+    </string-array>
 
 </resources>

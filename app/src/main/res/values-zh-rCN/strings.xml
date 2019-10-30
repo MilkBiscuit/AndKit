@@ -22,4 +22,10 @@
     <string name="other_settings">其他设置</string>
     <string name="placeholder">占位符</string>
     <string name="language">语言</string>
+    <string name="theme">主题</string>
+
+    <string-array name="theme_names">
+        <item>普通</item>
+        <item>黑白</item>
+    </string-array>
 </resources>

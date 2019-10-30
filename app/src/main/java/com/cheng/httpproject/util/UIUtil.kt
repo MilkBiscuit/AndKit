@@ -2,17 +2,18 @@ package com.cheng.httpproject.util
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.util.TypedValue
+import android.view.View
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
-import android.util.DisplayMetrics
-import android.view.View
 
 object UIUtil {
 
-    fun dpToPx(context: Context, dp: Int): Int {
+    fun dpToPx(context: Context, valueInDp: Int): Int {
         val displayMetrics = context.resources.displayMetrics
 
-        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                valueInDp.toFloat(), displayMetrics).toInt()
     }
 
     fun applyRoundCorner(context: Context, view: View, @ColorRes colorId: Int) {

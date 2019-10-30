@@ -3,7 +3,7 @@ package com.cheng.httpproject.helper
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
-import com.cheng.httpproject.constant.PrefKeyConstants
+import com.cheng.httpproject.constant.PrefConstants
 import com.cheng.httpproject.oauth2.OAuth2Constants
 import com.cheng.httpproject.oauth2.OAuth2Detail
 import com.cheng.httpproject.util.JsonUtil
@@ -18,24 +18,29 @@ class SharedPrefHelper private constructor(context: Context) {
 
     companion object: SingletonHolder<SharedPrefHelper, Context>(::SharedPrefHelper)
 
-    private val sharedPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(
-            context.applicationContext)
+    val sharedPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
 
     fun saveString(prefKey: String, prefValue: String) {
-        val editor = sharedPref.edit()
+        val editor = sharedPrefs.edit()
         editor.putString(prefKey, prefValue)
         editor.apply()
     }
 
     fun getString(prefKey: String, defaultValue: String = ""): String =
-            sharedPref.getString(prefKey, defaultValue)?: defaultValue
+            sharedPrefs.getString(prefKey, defaultValue)?: defaultValue
+
+    fun getCurrentLanguage(): String {
+        return getString(PrefConstants.PREF_KEY_LANGUAGE)
+    }
 
     fun getCurrentLocale(): Locale {
-        val languageValue = getString(PrefKeyConstants.PREF_KEY_LANGUAGE)
+        return if (getCurrentLanguage().isEmpty() || getCurrentLanguage() == PrefConstants.DEF_VALUE_LANGUGAGE)
+            Locale.ENGLISH
+        else Locale.SIMPLIFIED_CHINESE
+    }
 
-        return if (languageValue == "Chinese")
-            Locale.SIMPLIFIED_CHINESE
-        else Locale.ENGLISH
+    fun getCurrentTheme(): String {
+        return getString(PrefConstants.PREF_KEY_THEME)
     }
 
     fun saveOAuth2LoginDetail(clientId: String, clientSecret: String) {

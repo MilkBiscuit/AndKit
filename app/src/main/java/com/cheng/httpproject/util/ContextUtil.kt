@@ -1,7 +1,10 @@
 package com.cheng.httpproject.util
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
+import com.cheng.httpproject.R
+import com.cheng.httpproject.constant.PrefConstants
 import com.cheng.httpproject.helper.SharedPrefHelper
 
 /**
@@ -19,10 +22,20 @@ object ContextUtil {
     }
 
     fun updateLocale(context: Context) {
-        if (!VersionUtil.isAndAboveNougat()) {
+        // createConfigurationContext is not working on Samsung S6 (Android 7.0), use below method for all versions
+//        if (!VersionUtil.isAndAboveNougat()) {
             val resources = context.resources
             val configuration = createConfiguration(context)
             resources.updateConfiguration(configuration, resources.displayMetrics);
+//        }
+    }
+
+    fun updateTheme(activity: Activity) {
+        val currentTheme = SharedPrefHelper.getInstance(activity).getCurrentTheme()
+        if (currentTheme.isEmpty() || currentTheme == PrefConstants.DEF_VALUE_THEME) {
+            activity.setTheme(R.style.AppTheme)
+        } else {
+            activity.setTheme(R.style.AppThemeBlackWhite)
         }
     }
 

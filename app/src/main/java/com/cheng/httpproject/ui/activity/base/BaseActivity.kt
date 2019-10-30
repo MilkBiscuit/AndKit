@@ -1,6 +1,7 @@
 package com.cheng.httpproject.ui.activity.base
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -13,13 +14,13 @@ import androidx.fragment.app.Fragment
 import androidx.test.espresso.IdlingResource
 import com.cheng.httpproject.R
 import com.cheng.httpproject.SimpleIdlingResource
+import com.cheng.httpproject.constant.PrefConstants
 import com.cheng.httpproject.helper.SharedPrefHelper
 import com.cheng.httpproject.util.ContextUtil
-import com.cheng.httpproject.util.VersionUtil
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     // The Idling Resource which will be null in production.
     @Nullable
@@ -29,10 +30,14 @@ abstract class BaseActivity : AppCompatActivity() {
     protected var loadingView: View? = null;
     protected var compositeDisposable = CompositeDisposable()
     protected var toast: Toast? = null
+    protected lateinit var sharedPrefs: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        sharedPrefs = SharedPrefHelper.getInstance(this).sharedPrefs
+        sharedPrefs.registerOnSharedPreferenceChangeListener(this)
+        ContextUtil.updateTheme(this)
         ContextUtil.updateLocale(this)
         active = true
     }
@@ -52,12 +57,19 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
 
+        sharedPrefs.unregisterOnSharedPreferenceChangeListener(this)
         compositeDisposable.dispose()
     }
 
-    override fun attachBaseContext(base: Context) {
-        val newContext = ContextUtil.createConfigurationContext(base)
-        super.attachBaseContext(newContext)
+//    override fun attachBaseContext(base: Context) {
+//        val newContext = ContextUtil.createConfigurationContext(base)
+//        super.attachBaseContext(newContext)
+//    }
+
+    override fun onSharedPreferenceChanged(sharedPref: SharedPreferences, key: String) {
+        if (key == PrefConstants.PREF_KEY_LANGUAGE || key == PrefConstants.PREF_KEY_THEME) {
+            recreate()
+        }
     }
 
     fun addDisposable(disposable: Disposable) {

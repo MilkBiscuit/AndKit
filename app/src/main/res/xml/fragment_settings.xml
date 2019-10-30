@@ -11,6 +11,14 @@
             android:defaultValue="English"
             android:summary="%s"
             />
+        <ListPreference
+            android:key="key_theme"
+            android:title="@string/theme"
+            android:entries="@array/theme_names"
+            android:entryValues="@array/theme_values"
+            android:defaultValue="Usual"
+            android:summary="%s"
+            />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/other_settings"
