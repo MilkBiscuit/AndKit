@@ -2,6 +2,9 @@
 
     <!-- DO NOT TRANSLATE -->
     <string name="temperature" translatable="false">%d\u00B0</string>
+    <string name="infoodle_api_demo" translatable="false">Infoodle API demo</string>
+    <string name="plexure_api_demo" translatable="false">Plexure demo</string>
+
     <string-array name="support_languages" translatable="false">
         <item>English</item>
         <item>中文</item>
@@ -36,6 +39,8 @@
     <string name="placeholder">Placeholder</string>
     <string name="language">Language</string>
     <string name="theme">Theme</string>
+    <string name="bible_api_demo">Bible API demo</string>
+    <string name="weather_api_demo">Weather API demo</string>
 
     <string-array name="theme_names">
         <item>Usual</item>

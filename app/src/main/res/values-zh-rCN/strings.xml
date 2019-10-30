@@ -23,6 +23,8 @@
     <string name="placeholder">占位符</string>
     <string name="language">语言</string>
     <string name="theme">主题</string>
+    <string name="bible_api_demo">圣经 API</string>
+    <string name="weather_api_demo">天气 API</string>
 
     <string-array name="theme_names">
         <item>普通</item>
