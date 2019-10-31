@@ -34,9 +34,11 @@ class SharedPrefHelper private constructor(context: Context) {
     }
 
     fun getCurrentLocale(): Locale {
-        return if (getCurrentLanguage().isEmpty() || getCurrentLanguage() == PrefConstants.DEF_VALUE_LANGUGAGE)
-            Locale.ENGLISH
-        else Locale.SIMPLIFIED_CHINESE
+        return when(getCurrentLanguage()) {
+            PrefConstants.VALUE_LANGUAGE_SIMPLIFIED_CHINESE -> Locale.SIMPLIFIED_CHINESE
+            PrefConstants.VALUE_LANGUAGE_TRADITIONAL_CHINESE -> Locale.TRADITIONAL_CHINESE
+            else -> Locale.ENGLISH
+        }
     }
 
     fun getCurrentTheme(): String {

@@ -1,6 +1,5 @@
 package com.cheng.httpproject.ui.activity.base
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
@@ -26,11 +25,12 @@ abstract class BaseActivity : AppCompatActivity(), SharedPreferences.OnSharedPre
     @Nullable
     private var mIdlingResource: SimpleIdlingResource? = null
 
-    protected var active = false
     protected var loadingView: View? = null;
     protected var compositeDisposable = CompositeDisposable()
     protected var toast: Toast? = null
     protected lateinit var sharedPrefs: SharedPreferences
+    private var isVisibleToUser = false
+    private var isResumed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,19 +39,31 @@ abstract class BaseActivity : AppCompatActivity(), SharedPreferences.OnSharedPre
         sharedPrefs.registerOnSharedPreferenceChangeListener(this)
         ContextUtil.updateTheme(this)
         ContextUtil.updateLocale(this)
-        active = true
     }
 
     override fun onStart() {
         super.onStart()
 
         loadingView = findViewById(R.id.layout_loading)
+        isVisibleToUser = true
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        isResumed = true
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        isResumed = false
     }
 
     override fun onStop() {
         super.onStop()
 
-        active = false
+        isVisibleToUser = false
     }
 
     override fun onDestroy() {
@@ -68,7 +80,15 @@ abstract class BaseActivity : AppCompatActivity(), SharedPreferences.OnSharedPre
 
     override fun onSharedPreferenceChanged(sharedPref: SharedPreferences, key: String) {
         if (key == PrefConstants.PREF_KEY_LANGUAGE || key == PrefConstants.PREF_KEY_THEME) {
-            recreate()
+            if (isResumed) {
+                // Avoid the black screen during recreate
+                overridePendingTransition(0, 0);
+                finish()
+                overridePendingTransition(0, 0);
+                startActivity(intent)
+            } else {
+                recreate()
+            }
         }
     }
 
@@ -77,7 +97,7 @@ abstract class BaseActivity : AppCompatActivity(), SharedPreferences.OnSharedPre
     }
 
     fun replaceFragment(@IdRes id: Int, fragment: Fragment) {
-        if (!active) {
+        if (!isVisibleToUser) {
             return
         }
         val transaction = supportFragmentManager.beginTransaction()

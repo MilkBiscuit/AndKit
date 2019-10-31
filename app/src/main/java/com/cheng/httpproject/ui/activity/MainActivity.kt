@@ -1,6 +1,7 @@
 package com.cheng.httpproject.ui.activity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -49,7 +50,8 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun launchBibleActivity() {
-        val intent = Intent(this, BibleActivity::class.java)
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse("valeera://gizmos")
         startActivity(intent)
     }
 
