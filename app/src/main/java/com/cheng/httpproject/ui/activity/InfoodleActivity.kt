@@ -18,6 +18,10 @@ class InfoodleActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_infoodle)
+    }
+
+    override fun onStart() {
+        super.onStart()
 
         val data = intent.data
         val sharedPrefHelper = SharedPrefHelper.getInstance(this)

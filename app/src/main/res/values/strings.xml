@@ -2,13 +2,18 @@
 
     <!-- DO NOT TRANSLATE -->
     <string name="temperature" translatable="false">%d\u00B0</string>
+    <string name="infoodle_api_demo" translatable="false">Infoodle API demo</string>
+    <string name="plexure_api_demo" translatable="false">Plexure demo</string>
+
     <string-array name="support_languages" translatable="false">
         <item>English</item>
-        <item>中文</item>
+        <item>简体中文</item>
+        <item>繁體中文</item>
     </string-array>
     <string-array name="support_languages_values" translatable="false">
         <item>English</item>
-        <item>Chinese</item>
+        <item>Simplified Chinese</item>
+        <item>Traditional Chinese</item>
     </string-array>
     <!-- DO NOT TRANSLATE, End -->
 
@@ -35,5 +40,18 @@
     <string name="other_settings">Other Settings</string>
     <string name="placeholder">Placeholder</string>
     <string name="language">Language</string>
+    <string name="theme">Theme</string>
+    <string name="bible_api_demo">Bible API demo</string>
+    <string name="weather_api_demo">Weather API demo</string>
+    <string name="intent_filter_valeera_gizmo">Bible</string>
+
+    <string-array name="theme_names">
+        <item>Usual</item>
+        <item>Black and White</item>
+    </string-array>
+    <string-array name="theme_values" translatable="false">
+        <item>Usual</item>
+        <item>BlackAndWhite</item>
+    </string-array>
 
 </resources>

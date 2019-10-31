@@ -21,7 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.BibleActivity" />
+        <activity android:name=".ui.activity.BibleActivity" >
+            <intent-filter android:label="@string/intent_filter_valeera_gizmo">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "valeera://gizmos” -->
+                <data android:scheme="valeera" android:host="gizmos" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.activity.InfoodleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -33,7 +41,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.WeatherActivity" />
-        <activity android:name=".ui.activity.StoreListActivity" />
+        <activity android:name=".ui.activity.StoreListActivity" >
+        </activity>
         <activity android:name=".ui.activity.SettingsActivity" />
     </application>
 

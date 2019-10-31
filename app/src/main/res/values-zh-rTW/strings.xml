@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">演示程序</string>
+    <string name="main_desc">每個按鈕對應某個 endpoint 的 API call</string>
+    <string name="hint_city_name">輸入壹個城市名</string>
+    <string name="loading">加載中，請稍後&#8230;</string>
+    <string name="username">用戶名</string>
+    <string name="password">密碼</string>
+    <string name="login">登錄</string>
+    <string name="no_result">無結果</string>
+    <string name="title_activity_store_list">商店清單</string>
+    <string name="tab_text_1">所有商店</string>
+    <string name="tab_text_2">收藏</string>
+    <string name="action_sort">排序</string>
+    <string name="action_sort_distance_near">最近優先</string>
+    <string name="action_sort_distance_far">最遠優先</string>
+    <string name="action_sort_name">名稱</string>
+    <string name="action_filter">篩選</string>
+    <string name="filter_condition">篩選條件</string>
+    <string name="settings">設置</string>
+
+    <string name="general_settings">常規設置</string>
+    <string name="other_settings">其他設置</string>
+    <string name="placeholder">占位符</string>
+    <string name="language">語言</string>
+    <string name="theme">主題</string>
+	<string name="bible_api_demo">聖經 API</string>
+	<string name="weather_api_demo">天氣 API</string>
+
+    <string-array name="theme_names">
+        <item>普通</item>
+        <item>黑白</item>
+    </string-array>
+</resources>

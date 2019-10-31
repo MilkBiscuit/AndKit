@@ -55,15 +55,11 @@ class WeatherActivity : BaseActivity(), OnQueryTextListener {
                 .subscribe({result ->
                     hideLoading()
                     val fragment = CurrentWeatherFragment.newInstance(result)
-                    replaceFragment(fragment)
+                    replaceFragment(R.id.layout_current_weather, fragment)
                 }, {}, {
                     showToast("It completed! I should never appear!")
                 })
         addDisposable(disposable)
-    }
-
-    fun replaceFragment(fragment: Fragment) {
-        replaceFragment(R.id.layout_current_weather, fragment)
     }
 
 }
