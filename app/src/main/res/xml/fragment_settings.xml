@@ -20,12 +20,4 @@
             android:summary="%s"
             />
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="@string/other_settings"
-        >
-        <CheckBoxPreference
-            android:key="key_placeholder"
-            android:title="@string/placeholder"
-            />
-    </PreferenceCategory>
 </PreferenceScreen>
