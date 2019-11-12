@@ -10,13 +10,13 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.cheng.httpproject.R
 import com.cheng.httpproject.oauth2.OAuth2Constants
-import kotlinx.android.synthetic.main.web_view_fragment.*
-
-private const val ARG_URL = "url"
+import kotlinx.android.synthetic.main.fragment_web_view.*
 
 class WebViewFragment : BaseFragment() {
 
     companion object {
+        private const val ARG_URL = "url"
+
         fun newInstance(url: String) = WebViewFragment().apply {
             arguments = Bundle().apply {
                 putString(ARG_URL, url)
@@ -54,7 +54,7 @@ class WebViewFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.web_view_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_web_view, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
