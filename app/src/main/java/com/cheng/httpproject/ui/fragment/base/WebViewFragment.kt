@@ -61,8 +61,10 @@ class WebViewFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         showLoading()
-        web_view.loadUrl(url)
         web_view.webViewClient = CustomWebViewClient()
+        web_view.settings.javaScriptEnabled = true
+        web_view.loadUrl(url)
+
     }
 
 }

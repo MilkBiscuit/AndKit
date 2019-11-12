@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <script src="PlexureModuleAdapter.js"></script> -->
+        <script>
+                const offerExample = {
+                    "active": true,
+                    "burtCount": 0,
+                    "description": "qqq",
+                    "endDate": "2029 Nov 06 00:00:00",
+                    "id": 220,
+                    "startDate": "2019 Oct 01 00:00:00",
+                    "title": "aaa",
+                    "tags": [],
+                    "venueIds": [2417],
+                    "weight": 0
+                }
+                
+                function convertOffer(offer) {
+                    return {
+                        "title": offer.title,
+                        "subTitle": offer.description
+                    }
+                }
+                
+                function convertExample() {
+                    const translatedOffer = convertOffer(offerExample);
+                
+                    document.getElementById("uiExample").innerHTML = JSON.stringify(translatedOffer);
+                }
+        </script>
+    </head>
+    <body>
+        <h2>Before Translation:</h2>
+        <p id="offerExample"></p>
+
+        <button onclick="convertExample()">Convert</button>
+        <h2>After Translation:</h2>
+        <p id="uiExample"></p>
+
+        <script>
+            document.getElementById("offerExample").innerHTML = JSON.stringify(offerExample);
+        </script>
+
+
+    </body>
+</html>
