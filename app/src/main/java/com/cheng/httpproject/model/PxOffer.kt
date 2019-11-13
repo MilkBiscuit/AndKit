@@ -119,12 +119,12 @@ data class PxOffer(
 ) : Parcelable {
 
     constructor(): this(
-            id = 220,
-            description = "qqq",
-            title = "aaa",
+            id = 123,
+            description = "all work and no play makes jack a dull boy",
+            title = "all work",
             startDate = Date(2019, 11, 1),
             endDate = Date(2020, 11, 1),
-            venueIds = listOf(2417)
+            venueIds = listOf(9527)
     )
 
 }

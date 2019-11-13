@@ -1,16 +1,21 @@
 package com.cheng.httpproject.ui.activity
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import com.cheng.httpproject.R
+import com.cheng.httpproject.model.PxOffer
 import com.cheng.httpproject.ui.activity.base.BaseActivity
+import com.cheng.httpproject.ui.fragment.SimpleTextFragment
+import com.cheng.httpproject.util.JsonUtil
 import com.squareup.duktape.Duktape
 import okio.Okio
 import java.io.IOException
 
 
 class SingleFragmentActivity : BaseActivity() {
+
+    internal interface PlexureConverter {
+        fun convertOffer(offerString: String): String?
+    }
 
     lateinit var duktape: Duktape
 
@@ -25,19 +30,20 @@ class SingleFragmentActivity : BaseActivity() {
 
         duktape = Duktape.create()
         try {
+            val offer = PxOffer()
+            val jsonObject = JsonUtil.objectToJson(offer)
             evaluateAsset("PlexureModuleConvert.js")
-            val result = duktape.evaluate("convertExample();", "?")
+
+            // Connect our interface to a JavaScript object called Utf8.
+            val utf8 = duktape.get("PlexureConverter", PlexureConverter::class.java)
+            val result = utf8.convertOffer(jsonObject)
             if (result != null) {
-                Log.e("Greeting", result.toString())
-                showToast(result.toString())
+                val fragment = SimpleTextFragment.newInstance(result.toString())
+                replaceFragment(R.id.single_fragment, fragment)
             }
         } finally {
             duktape.close()
         }
-    }
-
-    fun replaceFragment(fragment: Fragment) {
-        replaceFragment(R.id.single_fragment, fragment)
     }
 
     @Throws(IOException::class)
