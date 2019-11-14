@@ -3,7 +3,7 @@ package com.cheng.httpproject.util
 class StringUtil {
     companion object {
 
-        const val REGEX_HEX_COLOUR = "^#(?:[0-9a-fA-F]{3}){1,2}\$"
+        const val REGEX_HEX_COLOUR = "^#[0-9a-fA-F]{8}\$|#[0-9a-fA-F]{6}\$|#[0-9a-fA-F]{3}\$"
         const val REGEX_DETECT_URL = "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)"
 
         fun capitaliseFirstLetter(value: String?) : String? {
