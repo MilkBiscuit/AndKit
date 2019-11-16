@@ -51,7 +51,7 @@ class SharedPrefHelper private constructor(context: Context) {
     }
 
     fun saveOAuth2Detail(detail: OAuth2Detail) {
-        val responseString = JsonUtil.objectToJson<OAuth2Detail>(detail)
+        val responseString = JsonUtil.objectToJson(detail)
 
         saveString(KEY_OAUTH2_DETAIL, responseString)
     }

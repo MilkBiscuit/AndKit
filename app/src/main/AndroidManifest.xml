@@ -40,6 +40,7 @@
                 <data android:scheme="com.cheng.httpproject.oauth" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.SingleFragmentActivity" />
         <activity android:name=".ui.activity.WeatherActivity" />
         <activity android:name=".ui.activity.StoreListActivity" >
         </activity>
