@@ -62,13 +62,13 @@ open class CustomListFragment : BaseFragment() {
         layout_empty_view?.visibility = View.VISIBLE
         recyclerView.visibility = View.INVISIBLE
 
-        tvEmpty?.text = emptyText
+        tvEmpty.text = emptyText
         if (buttonText.isNullOrEmpty()) {
-            btnEmpty?.visibility = View.GONE
+            btnEmpty.visibility = View.GONE
         } else {
-            btnEmpty?.visibility = View.VISIBLE
-            btnEmpty?.text = buttonText
-            btnEmpty?.setOnClickListener(emptyButtonClick)
+            btnEmpty.visibility = View.VISIBLE
+            btnEmpty.text = buttonText
+            btnEmpty.setOnClickListener(emptyButtonClick)
         }
     }
 

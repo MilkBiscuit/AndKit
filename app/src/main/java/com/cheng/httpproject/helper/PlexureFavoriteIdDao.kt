@@ -3,7 +3,6 @@ package com.cheng.httpproject.helper
 import android.content.Context
 import com.cheng.httpproject.constant.PlexureConstants
 import com.cheng.httpproject.model.PlexureFavoriteStoreId
-import com.cheng.httpproject.util.SingletonHolder
 import io.realm.Realm
 
 class PlexureFavoriteIdDao private constructor(context: Context) {
