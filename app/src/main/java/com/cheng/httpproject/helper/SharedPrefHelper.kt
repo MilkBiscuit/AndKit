@@ -7,7 +7,6 @@ import com.cheng.httpproject.constant.PrefConstants
 import com.cheng.httpproject.oauth2.OAuth2Constants
 import com.cheng.httpproject.oauth2.OAuth2Detail
 import com.cheng.httpproject.util.JsonUtil
-import com.cheng.httpproject.util.SingletonHolder
 import com.google.gson.reflect.TypeToken
 import java.util.*
 

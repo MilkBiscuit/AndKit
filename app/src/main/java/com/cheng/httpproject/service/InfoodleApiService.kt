@@ -3,7 +3,7 @@ package com.cheng.httpproject.service
 import android.content.Context
 import com.cheng.httpproject.oauth2.OAuth2Authenticator
 import com.cheng.httpproject.oauth2.OAuth2Constants
-import com.cheng.httpproject.util.SingletonHolder
+import com.cheng.httpproject.helper.SingletonHolder
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
