@@ -1,7 +1,6 @@
 package com.cheng.httpproject.ui.activity
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import com.cheng.httpproject.R
 import com.cheng.httpproject.service.WeatherService
