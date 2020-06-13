@@ -25,7 +25,8 @@ class BibleActivity : BaseActivity() {
 
     private fun getChapter() {
         showLoading()
-        val observable = webService.fetchChapter(BibleConstants.BIBLE_AUTH_HEADER, BibleConstants.BIBLE_ID, "MAT.12")
+        val observable = webService.fetchChapter(BibleConstants.BIBLE_AUTH_HEADER, BibleConstants.BIBLE_ID,
+                "ISA.42")
         val disposable = observable.applySchedulers()
                 .subscribe({result ->
                     tvMain.text = result?.data?.content
