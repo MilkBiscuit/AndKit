@@ -2,7 +2,6 @@ package com.cheng.httpproject.constant
 
 object BibleConstants {
 
-    const val SUCCESS_CODE = 200
     const val BIBLE_ID = "06125adad2d5898a-01"
     const val BASE_URL:String = "https://api.scripture.api.bible/v1/";
 
