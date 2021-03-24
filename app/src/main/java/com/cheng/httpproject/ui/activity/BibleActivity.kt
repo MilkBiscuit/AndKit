@@ -6,12 +6,12 @@ import com.cheng.httpproject.R
 import com.cheng.httpproject.constant.BibleConstants
 import com.cheng.httpproject.service.BibleService
 import com.cheng.httpproject.ui.activity.base.BaseActivity
-import com.cheng.httpproject.util.applySchedulers
+import kotlinx.coroutines.*
 
 class BibleActivity : BaseActivity() {
 
-    lateinit var tvMain: TextView
-    val webService = BibleService.getInstance()
+    private lateinit var tvMain: TextView
+    private val bibleService = BibleService.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,17 +25,21 @@ class BibleActivity : BaseActivity() {
 
     private fun getChapter() {
         showLoading()
-        val observable = webService.fetchChapter(BibleConstants.BIBLE_AUTH_HEADER, BibleConstants.BIBLE_ID,
-                "ISA.42")
-        val disposable = observable.applySchedulers()
-                .subscribe({result ->
-                    tvMain.text = result?.data?.content
-                    hideLoading()
-                }, {error ->
-                    tvMain.text = error.message
-                    hideLoading()
-                })
-        addDisposable(disposable)
+        val exceptionHandler = CoroutineExceptionHandler { _, exception ->
+            if (exception is Exception) {
+                hideLoading()
+                tvMain.text = exception.localizedMessage
+            }
+        }
+        CoroutineScope(Dispatchers.IO).launch(exceptionHandler) {
+            val response = bibleService.getChapter(BibleConstants.BIBLE_AUTH_HEADER, BibleConstants.BIBLE_ID, "ISA.42")
+            withContext(Dispatchers.Main) {
+                tvMain.text = response.body()?.data?.content
+                hideLoading()
+            }
+        }
+
+
     }
 
 }

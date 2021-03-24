@@ -13,7 +13,7 @@ import java.io.IOException
 class OAuth2Authenticator(val context: Context) : Authenticator {
 
     @Throws(IOException::class)
-    override fun authenticate(route: Route, response: Response): Request? {
+    override fun authenticate(route: Route?, response: Response): Request? {
         val infoodleApiService = InfoodleApiService.getInstance(context).getService()
         val sharedPrefHelper = SharedPrefHelper.getInstance(context)
         val oauth2Prop = sharedPrefHelper.getOAuth2Properties()
