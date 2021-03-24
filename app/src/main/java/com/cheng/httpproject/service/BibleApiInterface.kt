@@ -15,6 +15,6 @@ interface BibleApiInterface {
 
     @GET("bibles/{bibleId}/chapters/{chapterId}?content-type=text")
     suspend fun getChapter(@HeaderMap headers: Map<String, String>, @Path("bibleId") bibleId: String,
-                           @Path("chapterId") chapterId: String): Response<BibleModelResult>
+                           @Path("chapterId") chapterId: String): BibleModelResult?
 
 }

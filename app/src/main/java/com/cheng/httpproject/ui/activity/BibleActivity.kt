@@ -34,7 +34,7 @@ class BibleActivity : BaseActivity() {
         CoroutineScope(Dispatchers.IO).launch(exceptionHandler) {
             val response = bibleService.getChapter(BibleConstants.BIBLE_AUTH_HEADER, BibleConstants.BIBLE_ID, "ISA.42")
             withContext(Dispatchers.Main) {
-                tvMain.text = response.body()?.data?.content
+                tvMain.text = response?.data?.content
                 hideLoading()
             }
         }
