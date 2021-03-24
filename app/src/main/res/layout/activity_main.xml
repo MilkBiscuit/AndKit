@@ -37,18 +37,6 @@
         android:onClick="onClick"
         android:text="@string/infoodle_api_demo"
         app:layout_constraintTop_toBottomOf="@id/btn_weather"
-        app:layout_constraintBottom_toTopOf="@id/btn_single_fragment"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
-
-    <Button
-        android:id="@+id/btn_single_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClick"
-        android:text="Single Fragment"
-        app:layout_constraintTop_toBottomOf="@id/btn_infoodle"
         app:layout_constraintBottom_toTopOf="@id/btn_plexure"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -60,7 +48,7 @@
         android:layout_height="wrap_content"
         android:onClick="onClick"
         android:text="@string/plexure_api_demo"
-        app:layout_constraintTop_toBottomOf="@id/btn_single_fragment"
+        app:layout_constraintTop_toBottomOf="@id/btn_infoodle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

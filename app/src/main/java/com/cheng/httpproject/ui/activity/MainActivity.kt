@@ -25,7 +25,6 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             R.id.btn_infoodle -> launchInfoodleActivity()
             R.id.btn_weather -> launchWeatherActivity()
             R.id.btn_plexure -> launchPlexureActivity()
-            R.id.btn_single_fragment -> launchSingleFragmentActivity()
         }
     }
 
@@ -63,11 +62,6 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
     fun launchInfoodleActivity() {
         val intent = Intent(this, InfoodleActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun launchSingleFragmentActivity() {
-        val intent = Intent(this, SingleFragmentActivity::class.java)
         startActivity(intent)
     }
 
