@@ -32,14 +32,12 @@ class BibleActivity : BaseActivity() {
             }
         }
         CoroutineScope(Dispatchers.IO).launch(exceptionHandler) {
-            val response = bibleService.getChapter(BibleConstants.BIBLE_AUTH_HEADER, BibleConstants.BIBLE_ID, "ISA.42")
+            val response = bibleService.getChapter(BibleConstants.BIBLE_AUTH_HEADER, BibleConstants.BIBLE_ID, "Mat.7")
             withContext(Dispatchers.Main) {
                 tvMain.text = response?.data?.content
                 hideLoading()
             }
         }
-
-
     }
 
 }
