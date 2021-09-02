@@ -27,8 +27,10 @@ class BibleActivity : BaseActivity() {
         showLoading()
         val exceptionHandler = CoroutineExceptionHandler { _, exception ->
             if (exception is Exception) {
-                hideLoading()
-                tvMain.text = exception.localizedMessage
+                CoroutineScope(Dispatchers.Main).launch {
+                    hideLoading()
+                    tvMain.text = exception.localizedMessage
+                }
             }
         }
         CoroutineScope(Dispatchers.IO).launch(exceptionHandler) {
