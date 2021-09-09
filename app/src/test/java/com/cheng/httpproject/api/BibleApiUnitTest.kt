@@ -4,6 +4,8 @@ import com.cheng.httpproject.constant.BibleConstants
 import com.cheng.httpproject.model.GivingTransaction
 import com.cheng.httpproject.service.BibleService
 import com.cheng.httpproject.service.GivingApiService
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class BibleApiUnitTest {
@@ -21,6 +23,19 @@ class BibleApiUnitTest {
                 .assertValue{result ->
                     val model = result.data
                     "Matthew 12" == model.reference && model.content.contains(MAT_1_1)
+        }
+    }
+
+    @Test
+    fun testGetChapter() {
+        val BIBLE_ID_WEB = "9879dbb7cfe39e4d-04";
+        val MAT_1_1 = "At that time, Jesus went on the Sabbath day through the grain fields. His disciples were hungry and began to pluck heads of grain and to eat.";
+        val bibleService = BibleService.getInstance()
+        runBlocking {
+            val result = bibleService.getChapter(BibleConstants.BIBLE_AUTH_HEADER, BIBLE_ID_WEB, "MAT.12")
+            val bibleModel = result?.data
+            assertTrue("Matthew 12" == bibleModel!!.reference)
+            assertTrue(bibleModel.content.contains(MAT_1_1))
         }
     }
 
