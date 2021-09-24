@@ -60,7 +60,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
     // Testing-only dependencies
-    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     androidTestImplementation "androidx.test:core:" + rootProject.coreVersion
     androidTestImplementation "androidx.test:core-ktx:" + rootProject.coreVersion
     androidTestImplementation "androidx.test.ext:junit:" + rootProject.extJUnitVersion
@@ -72,9 +71,4 @@ dependencies {
     testImplementation "androidx.test:core:" + rootProject.coreVersion
     testImplementation "androidx.test.ext:junit:" + rootProject.extJUnitVersion
     testImplementation "junit:junit:4.13.2"
-    testImplementation "org.robolectric:robolectric:" + rootProject.robolectricVersion
-    testImplementation "org.junit.jupiter:junit-jupiter-params:5.0.0"
-    testImplementation "androidx.test.espresso:espresso-core:" + rootProject.espressoVersion
-    testImplementation "androidx.test.espresso:espresso-intents:" + rootProject.espressoVersion
-    testImplementation "androidx.test.ext:truth:" + rootProject.extTruthVersion
 }

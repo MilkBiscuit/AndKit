@@ -10,7 +10,7 @@ import com.cheng.httpproject.helper.SharedPrefHelper
 /**
  * @author Chandler Cheng (chandler.cheng@plexure.com)
  */
-object ContextUtil {
+object ResourceUtil {
 
     fun updateLocale(context: Context) {
         // createConfigurationContext is not working on Samsung S6 (Android 7.0), use below method for all versions

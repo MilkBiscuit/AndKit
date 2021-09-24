@@ -65,4 +65,14 @@ class DateUtilTest {
         assertEquals(expectedString, newYearString)
     }
 
+    @Test
+    fun testTodayOrTomorrow() {
+        val now = Date().time
+        val today = DateUtil.getToday()
+        val tomorrow = DateUtil.getTomorrow()
+
+        assertTrue(now >= today.time && now < tomorrow.time)
+        assertTrue(today.before(tomorrow))
+    }
+
 }

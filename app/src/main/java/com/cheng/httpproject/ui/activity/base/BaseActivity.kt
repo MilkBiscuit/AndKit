@@ -15,7 +15,7 @@ import com.cheng.httpproject.R
 import com.cheng.httpproject.SimpleIdlingResource
 import com.cheng.httpproject.constant.PrefConstants
 import com.cheng.httpproject.helper.SharedPrefHelper
-import com.cheng.httpproject.util.ContextUtil
+import com.cheng.httpproject.util.ResourceUtil
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -37,8 +37,8 @@ abstract class BaseActivity : AppCompatActivity(), SharedPreferences.OnSharedPre
 
         sharedPrefs = SharedPrefHelper.getInstance(this).sharedPrefs
         sharedPrefs.registerOnSharedPreferenceChangeListener(this)
-        ContextUtil.updateTheme(this)
-        ContextUtil.updateLocale(this)
+        ResourceUtil.updateTheme(this)
+        ResourceUtil.updateLocale(this)
     }
 
     override fun onStart() {
