@@ -7,11 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.cheng.apikit.util.DateUtil
 import com.cheng.httpproject.R
 import com.cheng.httpproject.constant.PrimitiveConstants
 import com.cheng.httpproject.helper.ResStringHelper
 import com.cheng.httpproject.model.CurrentWeatherResponse
-import com.cheng.httpproject.util.DateUtil
 import java.util.*
 
 class CurrentWeatherFragment : Fragment() {

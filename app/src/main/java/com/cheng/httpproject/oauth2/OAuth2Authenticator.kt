@@ -1,8 +1,8 @@
 package com.cheng.httpproject.oauth2
 
 import android.content.Context
+import com.cheng.apikit.extension.parseIntNum
 import com.cheng.httpproject.helper.SharedPrefHelper
-import com.cheng.httpproject.util.parseIntNum
 import com.cheng.httpproject.service.InfoodleApiService
 import okhttp3.Authenticator
 import okhttp3.Request

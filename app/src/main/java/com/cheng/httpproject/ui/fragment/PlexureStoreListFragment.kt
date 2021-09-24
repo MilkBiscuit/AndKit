@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.cheng.apikit.util.UIUtil
 import com.cheng.httpproject.R
 import com.cheng.httpproject.constant.PlexureConstants
 import com.cheng.httpproject.model.PlexureStore
@@ -12,7 +13,6 @@ import com.cheng.httpproject.ui.activity.StoreListActivity
 import com.cheng.httpproject.ui.adapter.PlexureStoreAdapter
 import com.cheng.httpproject.ui.fragment.base.CustomListFragment
 import com.cheng.httpproject.ui.viewmodel.PlexureStoreViewModel
-import com.cheng.httpproject.util.UIUtil
 
 class PlexureStoreListFragment : CustomListFragment(), SwipeRefreshLayout.OnRefreshListener {
 

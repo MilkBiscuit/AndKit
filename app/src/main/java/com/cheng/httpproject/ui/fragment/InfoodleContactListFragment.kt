@@ -2,12 +2,12 @@ package com.cheng.httpproject.ui.fragment
 
 
 import android.os.Bundle
+import com.cheng.apikit.util.UIUtil
 import com.cheng.httpproject.R
 import com.cheng.httpproject.model.InfoodleSearchPersonItem
 import com.cheng.httpproject.ui.activity.InfoodleActivity
 import com.cheng.httpproject.ui.adapter.InfoodleContactAdapter
 import com.cheng.httpproject.ui.fragment.base.CustomListFragment
-import com.cheng.httpproject.util.UIUtil
 
 class InfoodleContactListFragment : CustomListFragment() {
 

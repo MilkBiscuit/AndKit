@@ -1,4 +1,4 @@
-package com.cheng.httpproject.util
+package com.cheng.apikit.util
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable

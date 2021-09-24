@@ -12,7 +12,6 @@ import com.cheng.httpproject.constant.PlexureConstants
 import com.cheng.httpproject.helper.PlexureFavoriteIdDao
 import com.cheng.httpproject.model.PlexureStore
 import com.cheng.httpproject.ui.viewmodel.PlexureStoreViewModel
-import com.cheng.httpproject.util.StringUtil
 
 class PlexureStoreAdapter(val activity: FragmentActivity, listData: List<PlexureStore>)
     : RecyclerView.Adapter<PlexureStoreViewHolder>() {
@@ -41,12 +40,12 @@ class PlexureStoreAdapter(val activity: FragmentActivity, listData: List<Plexure
 
         viewHolder.tvName.text = item.name
         viewHolder.tvAddress.text = item.address
-        viewHolder.tvDistance.text = StringUtil.formatDistance(item.distance)
+        viewHolder.tvDistance.text = formatDistance(item.distance)
         if (item.featureList.isNullOrEmpty()) {
             viewHolder.tvFeature.visibility = View.GONE
         } else {
             viewHolder.tvFeature.visibility = View.VISIBLE
-            viewHolder.tvFeature.text = StringUtil.formatFeatureList(item.featureList!!.toList())
+            viewHolder.tvFeature.text = formatFeatureList(item.featureList!!.toList())
         }
         val greyOut = PlexureConstants.GREY_DISTANT_STORES
                 && item.distance > PlexureConstants.GREY_DISTANCE_IN_METER
@@ -67,6 +66,16 @@ class PlexureStoreAdapter(val activity: FragmentActivity, listData: List<Plexure
 
             notifyItemChanged(i)
         }
+    }
+
+    private fun formatFeatureList(featureList: List<String>): String {
+        return featureList.joinToString(", ").toLowerCase()
+    }
+
+    private fun formatDistance(distanceInMeter: Int): String {
+        val distanceInKm = distanceInMeter / 1000
+
+        return "$distanceInKm km"
     }
 
 }

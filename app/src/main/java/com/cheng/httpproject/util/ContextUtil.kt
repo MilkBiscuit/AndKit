@@ -12,15 +12,6 @@ import com.cheng.httpproject.helper.SharedPrefHelper
  */
 object ContextUtil {
 
-    fun createConfigurationContext(context: Context): Context {
-        return if (VersionUtil.isAndAboveNougat()) {
-            val configuration = createConfiguration(context)
-            context.createConfigurationContext(configuration)
-        } else {
-            context
-        }
-    }
-
     fun updateLocale(context: Context) {
         // createConfigurationContext is not working on Samsung S6 (Android 7.0), use below method for all versions
 //        if (!VersionUtil.isAndAboveNougat()) {

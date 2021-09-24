@@ -2,33 +2,24 @@ package com.cheng.apikit.util
 
 import android.app.Application
 import android.content.Context
-import com.cheng.apikit.ToolkitException
+import com.cheng.apikit.ApikitException
 
 object ContextUtil {
     private const val TAG = "ContextUtil"
 
-    private var sApp: Application? = null
     private var sAppContext: Context? = null
 
     /**
-     * Sets the [Application] that will be used throughout the Toolkit
-     */
-    fun setApplication(app: Application) {
-        sApp = app
-        sAppContext = app.applicationContext
-    }
-
-    /**
-     * Sets the [Application] that will be used throughout the Toolkit
+     * Sets the [Application] that will be used throughout the Apikit
      */
     fun setAppContext(context: Context) {
         sAppContext = context
     }
 
     /**
-     * @return The application [Context] that is used throughout the Toolkit.
+     * @return The application [Context] that is used throughout the Apikit.
      */
     fun getAppContext(): Context {
-        return sAppContext ?: throw ToolkitException("Application context has not been set.")
+        return sAppContext ?: throw ApikitException("Application context has not been set.")
     }
 }
