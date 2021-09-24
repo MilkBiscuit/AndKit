@@ -1,10 +1,9 @@
-package com.plexure.toolkit
+package com.cheng.apikit
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
-import com.cheng.apikit.ApikitException
 import com.cheng.apikit.util.ContextUtil
 import java.io.IOException
 
