@@ -1,7 +1,6 @@
 package com.cheng.httpproject.oauth2
 
 import android.content.Context
-import com.cheng.apikit.extension.parseIntNum
 import com.cheng.httpproject.helper.SharedPrefHelper
 import com.cheng.httpproject.service.InfoodleApiService
 import okhttp3.Authenticator
@@ -27,7 +26,8 @@ class OAuth2Authenticator(val context: Context) : Authenticator {
 
             oauth2Prop.accessToken = result.access_token
             oauth2Prop.refreshToken = result.refresh_token
-            oauth2Prop.expireAt = result.expires_in.parseIntNum() * 1000L + now
+
+            oauth2Prop.expireAt = (result.expires_in.toIntOrNull() ?: 0) * 1000L + now
             sharedPrefHelper.saveOAuth2Detail(oauth2Prop)
         }
 

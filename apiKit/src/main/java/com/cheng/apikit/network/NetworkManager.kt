@@ -1,14 +1,13 @@
 package com.cheng.apikit.network
 
 import android.util.Log
-import com.cheng.apikit.network.model.Failure
-import com.cheng.apikit.network.model.NetworkResult
-import com.cheng.apikit.network.model.Success
+import com.cheng.apikit.network.model.*
 import com.cheng.apikit.network.nonpublic.RetrofitBuilder
 import com.cheng.apikit.util.JsonUtil
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import retrofit2.HttpException
+import java.lang.IllegalStateException
 
 /**
  * @author Chandler Cheng (chandler.cheng@plexure.com)
@@ -71,12 +70,35 @@ object NetworkManager : INetworkManager {
         }
     }
 
+    override suspend fun sendNetworkRequest(request: NetworkRequest): NetworkResult<String> {
+        // Pre-check internet connection
+        return sendRequest(request, request.headers)
+    }
+
     private fun handleException(methodName: String, url: String, e: Exception) {
         if (e is HttpException) {
             val errorBody = e.response()?.errorBody()
             Log.e(TAG, "$methodName, error code: ${e.code()}, response: $errorBody")
         }
         Log.e(TAG, "$methodName, url: $url, exception ${e.localizedMessage}")
+    }
+
+    private suspend fun sendRequest(
+        request: NetworkRequest, headerMap: Map<String, String?>
+    ) = when {
+        HttpMethods.POST.equals(request.httpMethod, true) -> {
+            postApi(request.url, headerMap, request.body ?: request.bodyMap)
+        }
+        HttpMethods.PUT.equals(request.httpMethod, true) -> {
+            putApi(request.url, headerMap, request.body ?: request.bodyMap)
+        }
+        HttpMethods.DELETE.equals(request.httpMethod, true) -> {
+            deleteApi(request.url, headerMap)
+        }
+        HttpMethods.GET.equals(request.httpMethod, true) -> {
+            getApi(request.url, headerMap)
+        }
+        else -> throw IllegalStateException("${request.httpMethod} http method not implemented yet!")
     }
 
 }
