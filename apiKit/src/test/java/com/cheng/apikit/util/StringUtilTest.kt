@@ -44,6 +44,23 @@ class StringUtilTest {
                 Arguments.of("", false),
                 Arguments.of(null, false)
         )
+
+        @JvmStatic
+        fun base64ToBoolean() = listOf(
+                Arguments.of("bGlnaHQgdw==", true),
+                Arguments.of("#000", false),
+                Arguments.of("\t", false),
+                Arguments.of(" ", false),
+                Arguments.of("", true),
+                Arguments.of(null, false)
+        )
+
+        @JvmStatic
+        fun base64ToText() = listOf(
+                Arguments.of("bGlnaHQgdw==", "light w"),
+                Arguments.of("bGlnaHQgd28=", "light wo"),
+                Arguments.of("bGlnaHQgd29y", "light wor")
+        )
     }
 
     @Test
@@ -57,7 +74,7 @@ class StringUtilTest {
 
 
         val url2 = "http://www.baidu.com"
-        testString = "#$url2 sucks!, please use $url instead $$## "
+        testString = "#$url2 is not recommended, please use $url instead $$## "
 
         resultList = StringUtil.getUrlsFromString(testString)
         Assert.assertTrue(!resultList.isEmpty())
@@ -67,7 +84,7 @@ class StringUtilTest {
 
     @ParameterizedTest
     @MethodSource("capitaliseValues")
-    fun testCaptalise(input: String?, expected: String?) {
+    fun testCapitalise(input: String?, expected: String?) {
         val result = StringUtil.capitaliseFirstLetter(input)
         assertEquals(expected, result)
     }
@@ -76,6 +93,56 @@ class StringUtilTest {
     @MethodSource("colourValues")
     fun testIsValidColourHex(input: String?, expected: Boolean) {
         val result = StringUtil.isValidColourHex(input)
+        assertEquals(expected, result)
+    }
+
+    @ParameterizedTest
+    @MethodSource("base64ToBoolean")
+    fun testIsBase64Format(input: String?, expected: Boolean) {
+        val result = StringUtil.isBase64Format(input)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun testDecodeBase64() {
+        var result = StringUtil.decodeBase64("bGlnaHQgdw==")
+        var expected = "light w"
+        assertEquals(expected, result)
+        result = StringUtil.decodeBase64("bGlnaHQgd28")
+        expected = "light wo"
+        assertEquals(expected, result)
+        result = StringUtil.decodeBase64("bGlnaHQgd29y")
+        expected = "light wor"
+        assertEquals(expected, result)
+
+        result = StringUtil.decodeBase64("!!!")
+        expected = ""
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun testEncodeBase64() {
+        var result = StringUtil.encodeBase64("light")
+        var expected = "bGlnaHQ="
+        assertEquals(expected, result)
+        result = StringUtil.encodeBase64("light w")
+        expected = "bGlnaHQgdw=="
+        assertEquals(expected, result)
+        result = StringUtil.encodeBase64("light wo")
+        expected = "bGlnaHQgd28="
+        assertEquals(expected, result)
+        result = StringUtil.encodeBase64("light wor")
+        expected = "bGlnaHQgd29y"
+        assertEquals(expected, result)
+
+        result = StringUtil.encodeBase64("")
+        expected = ""
+        assertEquals(expected, result)
+        result = StringUtil.encodeBase64("123456")
+        expected = "MTIzNDU2"
+        assertEquals(expected, result)
+        result = StringUtil.encodeBase64("@#!%^*()[]")
+        expected = "QCMhJV4qKClbXQ=="
         assertEquals(expected, result)
     }
 

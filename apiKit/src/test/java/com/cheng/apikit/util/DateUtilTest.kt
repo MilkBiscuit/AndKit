@@ -1,7 +1,6 @@
 package com.cheng.apikit.util
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -38,7 +37,9 @@ class DateUtilTest {
         assertEquals(0, expected.compareTo(result))
 
         // Exception was handled without crash
-        val invalidDate = ""
+        var invalidDate = ""
+        DateUtil.parseYearMonthDate(invalidDate)
+        invalidDate = "aabb-cc-dd"
         DateUtil.parseYearMonthDate(invalidDate)
     }
 
@@ -47,32 +48,89 @@ class DateUtilTest {
         // 2020-Feb-14 02:14:00
         calendar.set(2020, Calendar.FEBRUARY, 14, 2, 14, 0)
         calendar.set(Calendar.MILLISECOND, 0)
-        val expected = calendar.time
-        val feb14 = "2020-02-14 02:14:00"
-        val result = DateUtil.parseFullDateTime(feb14)
-
+        var expected = calendar.time
+        var feb14 = "2020-02-14 02:14:00"
+        var result = DateUtil.parseFullDateTime(feb14)
         assertEquals(expected, result)
         assertEquals(0, expected.compareTo(result))
+
+        // 1969-Feb-14 00:00:00
+        feb14 = "1969-02-14 00:00:00"
+        result = DateUtil.parseFullDateTime(feb14)
+        calendar.set(1969, Calendar.FEBRUARY, 14, 0, 0, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        expected = calendar.time
+        assertEquals(expected, result)
+        assertEquals(0, expected.compareTo(result))
+
+        // Exception was handled without crash
+        var invalidDate = ""
+        DateUtil.parseFullDateTime(invalidDate)
+        invalidDate = "aabb-cc-dd"
+        DateUtil.parseFullDateTime(invalidDate)
     }
 
     @Test
     fun testFormatDate() {
+        // 2018-1-1
         calendar.set(2018, Calendar.JANUARY, 1)
-        val newYear2018 = calendar.time
-        val newYearString = DateUtil.formatDate(newYear2018)
-        val expectedString = "2018-01-01"
+        var input = calendar.time
+        var result = DateUtil.formatDate(input)
+        var expectedString = "2018-01-01"
 
-        assertEquals(expectedString, newYearString)
+        // 1970-1-1
+        calendar.set(1970, Calendar.JANUARY, 1)
+        input = calendar.time
+        result = DateUtil.formatDate(input)
+        expectedString = "1970-01-01"
+
+        assertEquals(expectedString, result)
     }
 
     @Test
-    fun testTodayOrTomorrow() {
+    fun testToday() {
         val now = Date().time
         val today = DateUtil.getToday()
         val tomorrow = DateUtil.getTomorrow()
 
+        calendar.time = today
         assertTrue(now >= today.time && now < tomorrow.time)
-        assertTrue(today.before(tomorrow))
+        assertEquals(0, calendar.get(Calendar.HOUR_OF_DAY))
+        assertEquals(0, calendar.get(Calendar.MINUTE))
+        assertEquals(0, calendar.get(Calendar.SECOND))
+        assertEquals(0, calendar.get(Calendar.MILLISECOND))
+    }
+
+    @Test
+    fun testIsSameDay() {
+        val today = DateUtil.getToday()
+        val tomorrow = DateUtil.getTomorrow()
+        var result = DateUtil.isSameDay(today, tomorrow)
+        assertFalse(result)
+
+        // 2018-1-1, 00:00:00 and 00:00:01
+        calendar.set(2018, Calendar.JANUARY, 1, 0, 0, 0)
+        var input1 = calendar.time
+        calendar.set(2018, Calendar.JANUARY, 1, 0, 0, 1)
+        var input2 = calendar.time
+        result = DateUtil.isSameDay(input1, input2)
+        assertTrue(result)
+
+        // 2018-1-1, 00:00:00 and 23:59:59
+        calendar.set(2018, Calendar.JANUARY, 1, 0, 0, 0)
+        input1 = calendar.time
+        calendar.set(2018, Calendar.JANUARY, 1, 23, 59, 59)
+        input2 = calendar.time
+        result = DateUtil.isSameDay(input1, input2)
+        assertTrue(result)
+
+        // 2018-1-1 23:59:59 and 2018-1-2 00:00:00
+        calendar.set(2018, Calendar.JANUARY, 2, 0, 0, 0)
+        input1 = calendar.time
+        calendar.set(2018, Calendar.JANUARY, 1, 23, 59, 59)
+        input2 = calendar.time
+        result = DateUtil.isSameDay(input1, input2)
+        assertFalse(result)
     }
 
 }

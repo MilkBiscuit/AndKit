@@ -67,7 +67,7 @@ object StringUtil {
     }
 
     fun encodeBase64(source: String): String {
-        val bytes = Base64.encode(source.toByteArray(), Base64.URL_SAFE or Base64.NO_WRAP or Base64.NO_PADDING)
+        val bytes = Base64.encode(source.toByteArray(), Base64.NO_WRAP)
         var res = ""
         try {
             res = String(bytes, Charsets.UTF_8)

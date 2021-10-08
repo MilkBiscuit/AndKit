@@ -62,7 +62,7 @@ object DateUtil {
 
     fun getToday(): Date {
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR, 0)
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 0)
         calendar.set(Calendar.MILLISECOND, 0)
@@ -74,7 +74,7 @@ object DateUtil {
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = getToday().time + DateUtils.DAY_IN_MILLIS
 
-        return  calendar.time
+        return calendar.time
     }
 
     fun isSameDay(date: Date, compareDate: Date): Boolean {
