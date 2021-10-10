@@ -53,10 +53,10 @@ object StringUtil {
             return value == ""
         }
 
-        return matchesRegx(value, REGEX_BASE_64)
+        return matchesRegex(value, REGEX_BASE_64)
     }
 
-    fun matchesRegx(input: String, regString: String): Boolean {
+    fun matchesRegex(input: String, regString: String): Boolean {
         val regex = Regex(regString)
         return regex.matches(input)
     }

@@ -75,13 +75,13 @@ class DateUtilTest {
         // 2018-1-1
         calendar.set(2018, Calendar.JANUARY, 1)
         var input = calendar.time
-        var result = DateUtil.formatDate(input)
+        var result = DateUtil.formatDate(input, "yyyy-MM-dd")
         var expectedString = "2018-01-01"
 
         // 1970-1-1
         calendar.set(1970, Calendar.JANUARY, 1)
         input = calendar.time
-        result = DateUtil.formatDate(input)
+        result = DateUtil.formatDate(input, "yyyy-MM-dd")
         expectedString = "1970-01-01"
 
         assertEquals(expectedString, result)
