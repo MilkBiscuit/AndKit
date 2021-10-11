@@ -22,7 +22,6 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         val id = view.id
         when (id) {
             R.id.btn_bible -> launchBibleActivity()
-            R.id.btn_infoodle -> launchInfoodleActivity()
             R.id.btn_weather -> launchWeatherActivity()
             R.id.btn_plexure -> launchPlexureActivity()
         }
@@ -57,11 +56,6 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
     fun launchWeatherActivity() {
         val intent = Intent(this, WeatherActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun launchInfoodleActivity() {
-        val intent = Intent(this, InfoodleActivity::class.java)
         startActivity(intent)
     }
 

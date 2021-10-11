@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.cheng.httpproject.R
-import com.cheng.httpproject.oauth2.OAuth2Constants
 import kotlinx.android.synthetic.main.fragment_web_view.*
 
 class WebViewFragment : BaseFragment() {
@@ -21,24 +20,6 @@ class WebViewFragment : BaseFragment() {
             arguments = Bundle().apply {
                 putString(ARG_URL, url)
             }
-        }
-    }
-
-    inner class CustomWebViewClient: WebViewClient() {
-        override fun onPageFinished(view: WebView, url: String) {
-            hideLoading()
-        }
-
-        override fun shouldOverrideUrlLoading(view: WebView?, url: String): Boolean {
-            if (url.contains(OAuth2Constants.REDIRECT_URI_ROOT)) {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                activity?.startActivity(intent)
-                activity?.finish()
-
-                return true
-            }
-
-            return super.shouldOverrideUrlLoading(view, url)
         }
     }
 
@@ -61,7 +42,6 @@ class WebViewFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         showLoading()
-        web_view.webViewClient = CustomWebViewClient()
         web_view.settings.javaScriptEnabled = true
         web_view.loadUrl(url)
 
