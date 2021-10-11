@@ -14,7 +14,6 @@ object DeviceUtil {
     /**
      * Obtains the device ID from the Android OS
      */
-    // TODO: encrypt device ID
     @SuppressLint("HardwareIds")
     fun getDeviceId(): String? {
         val haveCachedValue = sDeviceId != null
