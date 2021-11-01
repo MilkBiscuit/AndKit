@@ -48,18 +48,18 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    fun launchBibleActivity() {
+    private fun launchBibleActivity() {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse("valeera://gizmos")
         startActivity(intent)
     }
 
-    fun launchWeatherActivity() {
+    private fun launchWeatherActivity() {
         val intent = Intent(this, WeatherActivity::class.java)
         startActivity(intent)
     }
 
-    fun launchPlexureActivity() {
+    private fun launchPlexureActivity() {
         val intent = Intent(this, StoreListActivity::class.java)
         startActivity(intent)
     }
