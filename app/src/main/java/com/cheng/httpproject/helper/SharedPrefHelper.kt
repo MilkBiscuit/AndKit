@@ -3,17 +3,11 @@ package com.cheng.httpproject.helper
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
-import com.cheng.apikit.util.JsonUtil
 import com.cheng.httpproject.constant.PrefConstants
-import com.cheng.httpproject.oauth2.OAuth2Constants
-import com.cheng.httpproject.oauth2.OAuth2Detail
-import com.google.gson.reflect.TypeToken
 import java.util.*
 
 
 class SharedPrefHelper private constructor(context: Context) {
-
-    private val KEY_OAUTH2_DETAIL = "Oauth2Detail"
 
     companion object: SingletonHolder<SharedPrefHelper, Context>(::SharedPrefHelper)
 
@@ -42,32 +36,6 @@ class SharedPrefHelper private constructor(context: Context) {
 
     fun getCurrentTheme(): String {
         return getString(PrefConstants.PREF_KEY_THEME)
-    }
-
-    fun saveOAuth2LoginDetail(clientId: String, clientSecret: String) {
-        saveString(OAuth2Constants.CLIENT_ID, clientId)
-        saveString(OAuth2Constants.CLIENT_SECRET, clientSecret)
-    }
-
-    fun saveOAuth2Detail(detail: OAuth2Detail) {
-        val responseString = JsonUtil.objectToJson(detail)
-
-        saveString(KEY_OAUTH2_DETAIL, responseString)
-    }
-
-    fun getOAuth2Properties(): OAuth2Detail {
-        val responseStr = getString(KEY_OAUTH2_DETAIL)
-        val type = object : TypeToken<OAuth2Detail>() {}.type
-        val response = JsonUtil.jsonToObject<OAuth2Detail>(responseStr, type)
-        if (response == null) {
-            val clientId = getString(OAuth2Constants.CLIENT_ID)
-            val clientSecret = getString(OAuth2Constants.CLIENT_SECRET)
-
-            return OAuth2Detail(clientId, clientSecret, "", "",
-                    "", 0L)
-        }
-
-        return response
     }
 
 }

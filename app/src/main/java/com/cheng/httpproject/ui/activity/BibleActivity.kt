@@ -2,16 +2,19 @@ package com.cheng.httpproject.ui.activity
 
 import android.os.Bundle
 import android.widget.TextView
+import com.cheng.apikit.network.NetworkManager
+import com.cheng.apikit.network.model.Failure
+import com.cheng.apikit.network.model.Success
+import com.cheng.apikit.util.JsonUtil
 import com.cheng.httpproject.R
 import com.cheng.httpproject.constant.BibleConstants
-import com.cheng.httpproject.service.BibleService
+import com.cheng.httpproject.model.BibleModelResult
 import com.cheng.httpproject.ui.activity.base.BaseActivity
 import kotlinx.coroutines.*
 
 class BibleActivity : BaseActivity() {
 
     private lateinit var tvMain: TextView
-    private val bibleService = BibleService.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +37,21 @@ class BibleActivity : BaseActivity() {
             }
         }
         CoroutineScope(Dispatchers.IO).launch(exceptionHandler) {
-            val response = bibleService.getChapter(BibleConstants.BIBLE_AUTH_HEADER, BibleConstants.BIBLE_ID, "Mat.7")
+            val url = "https://api.scripture.api.bible/v1/bibles/${BibleConstants.BIBLE_ID}/chapters/Mat.7?content-type=text"
+            val response = NetworkManager.getApi(url,
+                BibleConstants.BIBLE_AUTH_HEADER
+            )
             withContext(Dispatchers.Main) {
-                tvMain.text = response?.data?.content
                 hideLoading()
+                when (response) {
+                    is Success -> {
+                        val bibleModelResult = JsonUtil.jsonToObject<BibleModelResult>(response.value)
+                        tvMain.text = bibleModelResult?.data?.content
+                    }
+                    is Failure -> {
+
+                    }
+                }
             }
         }
     }

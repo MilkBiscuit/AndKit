@@ -2,19 +2,23 @@ package com.cheng.httpproject.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
+import com.cheng.apikit.network.NetworkManager
+import com.cheng.apikit.network.model.Failure
+import com.cheng.apikit.network.model.Success
+import com.cheng.apikit.util.JsonUtil
+import com.cheng.httpproject.BuildConfig
 import com.cheng.httpproject.R
-import com.cheng.httpproject.service.WeatherService
+import com.cheng.httpproject.model.CurrentWeatherResponse
 import com.cheng.httpproject.ui.activity.base.BaseActivity
 import com.cheng.httpproject.ui.fragment.CurrentWeatherFragment
 import com.cheng.httpproject.util.applySchedulers
 import com.cheng.httpproject.util.debounceOneSecond
-import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_weather.*
+import kotlinx.coroutines.*
 
 class WeatherActivity : BaseActivity(), OnQueryTextListener {
 
-    val weatherService = WeatherService.getInstance()
     var userInputSubject = BehaviorSubject.create<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,25 +43,33 @@ class WeatherActivity : BaseActivity(), OnQueryTextListener {
         return true
     }
 
-    fun startObserve() {
+    private fun startObserve() {
         val subject = userInputSubject.filter { it.length >= 2 }.debounceOneSecond()
-        var disposable = subject.applySchedulers().doOnNext{showLoading()}.subscribe()
+        var disposable = subject.applySchedulers().doOnNext{
+            showLoading()
+        }.subscribe()
         addDisposable(disposable)
 
-        disposable = subject.flatMap {
-                    weatherService.fetchCurrentWeather(it).applySchedulers().doOnError { error ->
-                        hideLoading()
-                        showToast(error.localizedMessage ?: "LOL")
-                    }.onErrorResumeNext(Observable.empty())
-                }
-                .applySchedulers()
-                .subscribe({result ->
+        disposable = subject.subscribe { cityName ->
+            CoroutineScope(Dispatchers.Default).launch {
+                val url = "https://api.openweathermap.org/data/2.5/weather?units=metric&apikey=${BuildConfig.WEATHER_API_KEY}&q=$cityName"
+                val result = NetworkManager.getApi(url, emptyMap())
+
+                withContext(Dispatchers.Main) {
                     hideLoading()
-                    val fragment = CurrentWeatherFragment.newInstance(result)
-                    replaceFragment(R.id.layout_current_weather, fragment)
-                }, {}, {
-                    showToast("It completed! I should never appear!")
-                })
+                    when (result) {
+                        is Success -> {
+                            val weatherResponse = JsonUtil.jsonToObject<CurrentWeatherResponse>(result.value)!!
+                            val fragment = CurrentWeatherFragment.newInstance(weatherResponse)
+                            replaceFragment(R.id.layout_current_weather, fragment)
+                        }
+                        is Failure -> {
+                            showToast(result.exception.localizedMessage ?: "Something is wrong.")
+                        }
+                    }
+                }
+            }
+        }
         addDisposable(disposable)
     }
 
