@@ -3,10 +3,12 @@ package com.cheng.currencyalert
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.graphics.drawable.IconCompat
 import com.cheng.apikit.R
 
 // Show simple local notifications
@@ -16,7 +18,7 @@ object NotificationUtil {
     private const val NOTIFICATION_CHANNEL_ID = "ApiKit"
     private const val NOTIFICATION_CHANNEL_NAME = "Notification"
 
-    fun showNotification(context: Context, notificationTitle: String, notificationText: String) {
+    fun showNotification(context: Context, notificationTitle: String, notificationText: String, smallIcon: IconCompat? = null) {
         createNotificationChannelIfNecessary(context)
         if (!isNotificationEnabled(context)) {
             Log.e(TAG, "Notification is not enabled, please double check the permission.")
@@ -27,11 +29,16 @@ object NotificationUtil {
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationBuilder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
         notificationBuilder
-            .setSmallIcon(R.drawable.ic_info_24dp)
             .setAutoCancel(true)
             .setContentTitle(notificationTitle)
             .setContentText(notificationText)
             .setStyle(NotificationCompat.BigTextStyle().bigText(notificationText))
+        if (smallIcon == null) {
+            notificationBuilder.setSmallIcon(R.drawable.ic_info_24dp)
+        } else {
+            notificationBuilder.setSmallIcon(smallIcon)
+        }
+
         manager.notify(notificationId, notificationBuilder.build())
     }
 
