@@ -28,14 +28,22 @@ class DeviceUtilAndroidTest {
     @Test
     fun test_GetScreenResolutionInPxString_HasValue() {
         val screenResolutionString = DeviceUtil.getScreenResolutionInPxString()
+        val message = "Screen size in px is $screenResolutionString"
+        println(message)
         Assert.assertTrue(screenResolutionString.length > 1)
         Assert.assertTrue(screenResolutionString.contains('x'))
     }
 
     @Test
+    fun test_HasNavigationBar() {
+        val hasNavigationBar = DeviceUtil.hasNavigationBar()
+        Assert.assertTrue(hasNavigationBar)
+    }
+
+    @Test
     fun print_DeviceScreenSize() {
         val message = "Screen size in dp is ${DeviceUtil.screenWidthInDp}" +
-                " by ${DeviceUtil.screenHeightInDp}"
+                " x ${DeviceUtil.screenHeightInDp}"
         println(message)
         Assert.assertTrue(message, true)
     }

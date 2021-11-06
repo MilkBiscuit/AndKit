@@ -17,14 +17,18 @@ object DeviceUtil {
         Resources.getSystem()
     }
 
-    val screenWidthInDp: Int by lazy {
+    val screenWidthInDp: Int
+    get() {
         val widthFloat: Float = resources.displayMetrics.widthPixels / resources.displayMetrics.density
-        widthFloat.toInt()
+        return widthFloat.toInt()
     }
 
-    val screenHeightInDp: Int by lazy {
+    // This height does NOT include the navigation bar so it is slightly smaller than the actual value
+    // See also: hasNavigationBar()
+    val screenHeightInDp: Int
+    get() {
         val heightFloat: Float = resources.displayMetrics.heightPixels / resources.displayMetrics.density
-        heightFloat.toInt()
+        return heightFloat.toInt()
     }
 
     /**
@@ -82,7 +86,14 @@ object DeviceUtil {
         val isTablet = resources.configuration.smallestScreenWidthDp >= smallestWidthInDp
 
         return isTablet &&
-                (Configuration.ORIENTATION_LANDSCAPE == resources.configuration.layoutDirection)
+                (Configuration.ORIENTATION_LANDSCAPE == resources.configuration.orientation)
+    }
+
+    fun hasNavigationBar(): Boolean {
+        // For Build.VERSION_CODES.JELLY_BEAN_MR1 and above, this is normally true
+        val id = resources.getIdentifier("config_showNavigationBar", "bool", "android")
+
+        return id > 0 && resources.getBoolean(id)
     }
 
     fun isRunningPureUnitTest(): Boolean {
