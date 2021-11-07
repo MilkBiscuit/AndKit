@@ -89,6 +89,13 @@ object DeviceUtil {
                 (Configuration.ORIENTATION_LANDSCAPE == resources.configuration.orientation)
     }
 
+    fun isSmallScreenInPortrait(smallestWidthInDp: Int = 320): Boolean {
+        val isSmallScreen = resources.configuration.smallestScreenWidthDp <= smallestWidthInDp
+
+        return isSmallScreen &&
+                (Configuration.ORIENTATION_PORTRAIT == resources.configuration.orientation)
+    }
+
     fun hasNavigationBar(): Boolean {
         // For Build.VERSION_CODES.JELLY_BEAN_MR1 and above, this is normally true
         val id = resources.getIdentifier("config_showNavigationBar", "bool", "android")
