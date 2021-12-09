@@ -24,9 +24,6 @@ https://docs.api.bible/reference
 ### Open Weather Map
 https://openweathermap.org/api
 
-### Infoodle
-https://help.infoodle.com/api
-
 ### Plexure, search store Api:
 GET https://mopjapaneastgateway.plexure.io/store/v2/stores?latitude=26.333351598841787&longitude=127.79896146273005&radius=100000000&size=100
 
