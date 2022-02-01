@@ -1,13 +1,15 @@
 package com.cheng.apikit.util
 
 import com.cheng.apikit.testmodel.User
+import com.google.gson.JsonSyntaxException
+import com.google.gson.stream.MalformedJsonException
 import org.junit.Assert
 import org.junit.Test
 
 class JsonUtilTest {
 
     @Test
-    fun `Given a user Then objectToJson works`() {
+    fun `Given a user object Then objectToJson works`() {
         val user = User(
             id = 0,
             name = "First Last",
@@ -22,7 +24,7 @@ class JsonUtilTest {
     }
 
     @Test
-    fun `Given a JSON string Then jsonToObject works`() {
+    fun `Given a valid JSON string Then jsonToObject works`() {
         var jsonString = ""
         var result = JsonUtil.jsonToObject<User>(jsonString)
         Assert.assertNull(result)
@@ -42,8 +44,34 @@ class JsonUtilTest {
     }
 
     @Test
+    fun `Given an invalid JSON object Then jsonToObject throws exception`() {
+        var jsonString = """
+{
+    "id": 1,
+}
+        """.trimIndent()
+        var throwable = Assert.assertThrows(JsonSyntaxException::class.java) {
+            JsonUtil.jsonToObject<User>(jsonString)
+        }
+        Assert.assertTrue(throwable.cause is MalformedJsonException)
+
+        jsonString = """
+ {
+    "id": 1,
+    "name": ["First Name", "Last Name"]
+}           
+        """.trimIndent()
+        throwable = Assert.assertThrows(JsonSyntaxException::class.java) {
+            JsonUtil.jsonToObject<User>(jsonString)
+        }
+        Assert.assertTrue(throwable.message!!.contains("Expected a string but was BEGIN_ARRAY"))
+    }
+
+    @Test
     fun `Given a JSON array of strings Then jsonToList works`() {
-        var jsonString = "[\"apple\", \"banana\", \"orange\"]"
+        var jsonString = """
+["apple", "banana", "orange"]
+        """.trimIndent()
         var list: List<String?> = JsonUtil.jsonToList<String>(jsonString)
         Assert.assertTrue(list.size == 3)
         Assert.assertTrue(list.contains("apple"))
