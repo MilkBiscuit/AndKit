@@ -146,4 +146,27 @@ class StringUtilTest {
         assertEquals(expected, result)
     }
 
+    @Test
+    fun `Given a double num Then formatDecimal works`() {
+        var input = 3.14
+        var result = StringUtil.formatDecimal(input)
+        assertEquals("3.14", result)
+
+        input = 0.0
+        result = StringUtil.formatDecimal(input)
+        assertEquals("0.00", result)
+
+        input = 0.108982
+        result = StringUtil.formatDecimal(input)
+        assertEquals("0.108982", result)
+
+        input = 0.1234567
+        result = StringUtil.formatDecimal(input)
+        assertEquals("0.123457", result)
+
+        input = 2.0e-6
+        result = StringUtil.formatDecimal(input)
+        assertEquals("0.000002", result)
+    }
+
 }

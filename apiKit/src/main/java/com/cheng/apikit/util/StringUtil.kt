@@ -2,6 +2,8 @@ package com.cheng.apikit.util
 
 import android.util.Base64
 import java.io.UnsupportedEncodingException
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 
 object StringUtil {
@@ -16,10 +18,10 @@ object StringUtil {
         }
 
         if (value.length > 1) {
-            return value[0].toUpperCase() + value.substring(1)
+            return value[0].uppercase() + value.substring(1)
         }
 
-        return value.toUpperCase()
+        return value.uppercase()
     }
 
     fun isValidColourHex(value: String?) : Boolean {
@@ -75,5 +77,14 @@ object StringUtil {
         }
         return res
     }
+
+    private val decimalFormat = DecimalFormat().apply {
+        roundingMode = RoundingMode.HALF_UP
+        maximumFractionDigits = 6
+        minimumFractionDigits = 2
+        isGroupingUsed = true
+    }
+    /** Format double [value] to string, without the scientific notation */
+    fun formatDecimal(value: Double): String? = decimalFormat.format(value)
 
 }
