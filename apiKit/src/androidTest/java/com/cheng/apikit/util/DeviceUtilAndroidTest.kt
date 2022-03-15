@@ -21,12 +21,12 @@ class DeviceUtilAndroidTest {
     }
 
     @Test
-    fun test_PureUnitTest_WhenRunningAndroidTest() {
+    fun whenRunning_ThenIsRunningPureUnitTestReturnsFalse() {
         Assert.assertFalse(DeviceUtil.isRunningPureUnitTest())
     }
 
     @Test
-    fun test_GetScreenResolutionInPxString_HasValue() {
+    fun givenOneVirtualDevice_ThenGetScreenResolutionInPxStringReturnsValue() {
         val screenResolutionString = DeviceUtil.getScreenResolutionInPxString()
         val message = "Screen size in px is $screenResolutionString"
         println(message)
@@ -35,13 +35,13 @@ class DeviceUtilAndroidTest {
     }
 
     @Test
-    fun test_HasNavigationBar() {
+    fun givenOneVirtualDevice_ThenHasNavigationBarReturnsTrue() {
         val hasNavigationBar = DeviceUtil.hasNavigationBar()
         Assert.assertTrue(hasNavigationBar)
     }
 
     @Test
-    fun print_DeviceScreenSize() {
+    fun printDeviceScreenSizeToConsole() {
         val message = "Screen size in dp is ${DeviceUtil.screenWidthInDp}" +
                 " x ${DeviceUtil.screenHeightInDp}"
         println(message)

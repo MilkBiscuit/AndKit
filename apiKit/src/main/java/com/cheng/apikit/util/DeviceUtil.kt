@@ -82,19 +82,12 @@ object DeviceUtil {
         return "${width}x${height}"
     }
 
-    fun isTabletInLandscape(smallestWidthInDp: Int = 600): Boolean {
-        val isTablet = resources.configuration.smallestScreenWidthDp >= smallestWidthInDp
+    fun isTablet(threshold: Int = 600) = resources.configuration.smallestScreenWidthDp >= threshold
 
-        return isTablet &&
-                (Configuration.ORIENTATION_LANDSCAPE == resources.configuration.orientation)
-    }
+    fun isSmallScreen(threshold: Int = 320) = resources.configuration.smallestScreenWidthDp <= threshold
 
-    fun isSmallScreenInPortrait(smallestWidthInDp: Int = 320): Boolean {
-        val isSmallScreen = resources.configuration.smallestScreenWidthDp <= smallestWidthInDp
-
-        return isSmallScreen &&
-                (Configuration.ORIENTATION_PORTRAIT == resources.configuration.orientation)
-    }
+    fun isTabletInLandscape(threshold: Int = 600) =
+        isTablet(threshold) && (Configuration.ORIENTATION_LANDSCAPE == resources.configuration.orientation)
 
     fun hasNavigationBar(): Boolean {
         // For Build.VERSION_CODES.JELLY_BEAN_MR1 and above, this is normally true
