@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cheng.httpproject.R
 import com.cheng.httpproject.databinding.FragmentWebViewBinding
 
 class WebViewFragment : BaseFragment() {
@@ -31,8 +30,10 @@ class WebViewFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_web_view, container, false)
+                              savedInstanceState: Bundle?): View {
+        binding = FragmentWebViewBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

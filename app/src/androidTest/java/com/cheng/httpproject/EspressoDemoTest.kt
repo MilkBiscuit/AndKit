@@ -51,7 +51,6 @@ class EspressoDemoTest {
 
         onView(withId(R.id.btn_bible)).check(matches(isDisplayed()))
         onView(withId(R.id.btn_weather)).check(matches(isDisplayed()))
-//        onView(withId(R.id.btn_infoodle)).check(matches(isDisplayed()))
         onView(withId(R.id.btn_plexure)).check(matches(isDisplayed()))
 
         // click bible button

@@ -1,6 +1,5 @@
 package com.cheng.httpproject.ui.activity
 
-//import kotlinx.android.synthetic.main.activity_weather.*
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import com.cheng.apikit.network.NetworkManager
@@ -30,9 +29,9 @@ class WeatherActivity : BaseActivity(), OnQueryTextListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_weather)
-
+        binding = ActivityWeatherBinding.inflate(layoutInflater)
         binding.svCityName.setOnQueryTextListener(this)
+        setContentView(binding.root)
 
         startObserve()
     }

@@ -5,18 +5,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
-import com.cheng.httpproject.databinding.LoadingBinding
+import com.cheng.httpproject.R
 
 abstract class BaseFragment : Fragment() {
 
     abstract val TAG: String
     protected var loadingView: View? = null
-    private lateinit var binding: LoadingBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadingView = binding.layoutLoading
+        loadingView = view.findViewById(R.id.layout_loading)
     }
 
     fun replaceFragment(@IdRes id: Int, fragment: Fragment) {
