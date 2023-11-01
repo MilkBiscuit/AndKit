@@ -2,17 +2,17 @@ package com.cheng.httpproject.ui.fragment.base
 
 
 import android.os.Bundle
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import com.cheng.httpproject.R
-import kotlinx.android.synthetic.main.fragment_custom_list.*
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.cheng.httpproject.R
+import com.cheng.httpproject.databinding.FragmentCustomListBinding
 
 open class CustomListFragment : BaseFragment() {
 
@@ -23,6 +23,7 @@ open class CustomListFragment : BaseFragment() {
     protected lateinit var btnEmpty: Button
     protected lateinit var swipeLayout: SwipeRefreshLayout
     protected lateinit var emptyButtonClick: View.OnClickListener
+    private lateinit var binding: FragmentCustomListBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -32,11 +33,11 @@ open class CustomListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        rootLayout = custom_list_root
-        swipeLayout = swipe_refresh_layout
-        recyclerView = rv_custom
-        tvEmpty = tv_empty_view
-        btnEmpty = btn_empty_view
+        rootLayout = binding.customListRoot
+        swipeLayout = binding.swipeRefreshLayout
+        recyclerView = binding.rvCustom
+        tvEmpty = binding.tvEmptyView
+        btnEmpty = binding.btnEmptyView
 
         val layoutManager = LinearLayoutManager(activity)
         recyclerView.setLayoutManager(layoutManager)
@@ -59,7 +60,7 @@ open class CustomListFragment : BaseFragment() {
     }
 
     private fun showEmptyView(emptyText: String, buttonText: String?) {
-        layout_empty_view?.visibility = View.VISIBLE
+        binding.layoutEmptyView.visibility = View.VISIBLE
         recyclerView.visibility = View.INVISIBLE
 
         tvEmpty.text = emptyText
@@ -73,7 +74,7 @@ open class CustomListFragment : BaseFragment() {
     }
 
     private fun hideEmptyView() {
-        layout_empty_view?.visibility = View.GONE
+        binding.layoutEmptyView.visibility = View.GONE
         recyclerView.visibility = View.VISIBLE
     }
 

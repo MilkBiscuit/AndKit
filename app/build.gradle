@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 
@@ -31,10 +31,9 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
-}
-
-androidExtensions {
-    experimental = true
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {

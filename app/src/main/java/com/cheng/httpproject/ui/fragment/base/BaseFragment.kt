@@ -2,20 +2,21 @@ package com.cheng.httpproject.ui.fragment.base
 
 
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
-import android.view.View
-import kotlinx.android.synthetic.main.loading.*
+import com.cheng.httpproject.databinding.LoadingBinding
 
 abstract class BaseFragment : Fragment() {
 
     abstract val TAG: String
     protected var loadingView: View? = null
+    private lateinit var binding: LoadingBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadingView = layout_loading
+        loadingView = binding.layoutLoading
     }
 
     fun replaceFragment(@IdRes id: Int, fragment: Fragment) {

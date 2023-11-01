@@ -1,5 +1,6 @@
 package com.cheng.httpproject.ui.activity
 
+//import kotlinx.android.synthetic.main.activity_weather.*
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import com.cheng.apikit.network.NetworkManager
@@ -8,16 +9,21 @@ import com.cheng.apikit.network.model.Success
 import com.cheng.apikit.util.JsonUtil
 import com.cheng.httpproject.BuildConfig
 import com.cheng.httpproject.R
+import com.cheng.httpproject.databinding.ActivityWeatherBinding
 import com.cheng.httpproject.model.CurrentWeatherResponse
 import com.cheng.httpproject.ui.activity.base.BaseActivity
 import com.cheng.httpproject.ui.fragment.CurrentWeatherFragment
 import com.cheng.httpproject.util.applySchedulers
 import com.cheng.httpproject.util.debounceOneSecond
 import io.reactivex.subjects.BehaviorSubject
-import kotlinx.android.synthetic.main.activity_weather.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class WeatherActivity : BaseActivity(), OnQueryTextListener {
+
+    private lateinit var binding: ActivityWeatherBinding
 
     var userInputSubject = BehaviorSubject.create<String>()
 
@@ -26,7 +32,7 @@ class WeatherActivity : BaseActivity(), OnQueryTextListener {
 
         setContentView(R.layout.activity_weather)
 
-        sv_city_name.setOnQueryTextListener(this)
+        binding.svCityName.setOnQueryTextListener(this)
 
         startObserve()
     }

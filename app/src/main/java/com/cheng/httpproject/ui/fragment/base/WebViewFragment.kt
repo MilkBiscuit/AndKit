@@ -1,15 +1,11 @@
 package com.cheng.httpproject.ui.fragment.base
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import com.cheng.httpproject.R
-import kotlinx.android.synthetic.main.fragment_web_view.*
+import com.cheng.httpproject.databinding.FragmentWebViewBinding
 
 class WebViewFragment : BaseFragment() {
 
@@ -25,6 +21,7 @@ class WebViewFragment : BaseFragment() {
 
     override val TAG = "WebView"
     private lateinit var url: String
+    private lateinit var binding: FragmentWebViewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +39,8 @@ class WebViewFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         showLoading()
-        web_view.settings.javaScriptEnabled = true
-        web_view.loadUrl(url)
-
+        binding.webView.settings.javaScriptEnabled = true
+        binding.webView.loadUrl(url)
     }
 
 }

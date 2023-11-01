@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.cheng.httpproject.R
-import kotlinx.android.synthetic.main.fragment_simple_text.*
+import com.cheng.httpproject.databinding.FragmentSimpleTextBinding
 
 class SimpleTextFragment : Fragment() {
 
@@ -20,6 +20,7 @@ class SimpleTextFragment : Fragment() {
         }
     }
 
+    private lateinit var binding: FragmentSimpleTextBinding
     private var text: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +39,7 @@ class SimpleTextFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tv_text.text = text
+        binding.tvText.text = text
     }
 
 }
