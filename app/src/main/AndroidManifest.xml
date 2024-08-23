@@ -14,30 +14,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.activity.MainActivity">
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.BibleActivity" >
+        <activity
+            android:name=".ui.activity.BibleActivity"
+            android:exported="true"
+            >
             <intent-filter android:label="@string/intent_filter_valeera_gizmo">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Accepts URIs that begin with "valeera://gizmos” -->
                 <data android:scheme="valeera" android:host="gizmos" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ui.activity.InfoodleActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:scheme="com.cheng.httpproject.oauth" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.SingleFragmentActivity" />

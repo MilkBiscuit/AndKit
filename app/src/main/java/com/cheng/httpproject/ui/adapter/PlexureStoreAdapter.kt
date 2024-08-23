@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.cheng.httpproject.R
 import com.cheng.httpproject.constant.PlexureConstants
-import com.cheng.httpproject.helper.PlexureFavoriteIdDao
 import com.cheng.httpproject.model.PlexureStore
 import com.cheng.httpproject.ui.viewmodel.PlexureStoreViewModel
 

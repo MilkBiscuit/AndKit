@@ -8,7 +8,6 @@ import com.cheng.httpproject.R
 import com.cheng.httpproject.constant.PlexureConstants
 import com.cheng.httpproject.constant.PlexureConstants.DEFAULT_LATITUDE
 import com.cheng.httpproject.constant.PlexureConstants.DEFAULT_LONGITUDE
-import com.cheng.httpproject.helper.PlexureStoreDao
 import com.cheng.httpproject.service.PlexureService
 import com.cheng.httpproject.ui.activity.base.BaseActivity
 import com.cheng.httpproject.ui.adapter.PlexurePagerAdapter
