@@ -20,4 +20,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "HttpProject"
-include(":apiKit")
+include(":andKit")
