@@ -1,4 +1,4 @@
-package com.cheng.apikit.util
+package com.cheng.apikit.util.android
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -11,7 +11,7 @@ object PermissionUtil {
     }
 
     fun hasPermission(permission: String): Boolean {
-        val appContext = ContextUtil.getAppContext()
+        val appContext = ContextHolder.getAppContext()
         return PackageManager.PERMISSION_GRANTED == appContext.checkSelfPermission(permission)
     }
 }

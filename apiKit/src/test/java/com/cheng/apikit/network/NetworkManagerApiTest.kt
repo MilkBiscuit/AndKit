@@ -5,6 +5,7 @@ import com.cheng.apikit.util.JsonUtil
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -35,6 +36,7 @@ class NetworkManagerApiTest {
         "Authorization" to "Bearer c67a8fdabfa51452882bd5f6be7e50780a7d8a15416538116088d40cf165966d"
     )
 
+    @Ignore("This is integration test")
     @Test
     fun testGetApiRequest() {
         runBlocking {
@@ -47,6 +49,7 @@ class NetworkManagerApiTest {
         }
     }
 
+    @Ignore("This is integration test")
     @Test
     fun testPostAndDelete() {
         runBlocking {

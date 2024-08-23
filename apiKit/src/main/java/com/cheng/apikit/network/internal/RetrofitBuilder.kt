@@ -1,4 +1,4 @@
-package com.cheng.apikit.network.nonpublic
+package com.cheng.apikit.network.internal
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

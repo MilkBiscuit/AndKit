@@ -9,7 +9,7 @@ import java.text.DecimalFormat
 object StringUtil {
 
     const val REGEX_HEX_COLOUR = "^#[0-9a-fA-F]{8}\$|#[0-9a-fA-F]{6}\$|#[0-9a-fA-F]{3}\$"
-    const val REGEX_DETECT_URL = "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)"
+    const val REGEX_URL = "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)"
     private const val REGEX_BASE_64 = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?\$"
 
     fun capitaliseFirstLetter(value: String?) : String? {
@@ -39,7 +39,7 @@ object StringUtil {
         }
 
         val urls = mutableListOf<String>()
-        val regex = Regex(REGEX_DETECT_URL)
+        val regex = Regex(REGEX_URL)
         var matchResult = regex.find(input)
         while (matchResult != null) {
             val url = matchResult.groupValues[0]
@@ -64,18 +64,16 @@ object StringUtil {
     }
 
     fun decodeBase64(value: String): String {
-        val decoded = Base64.decode(value, Base64.DEFAULT)
+        val decoded = try {
+            java.util.Base64.getDecoder().decode(value)
+        } catch (e: IllegalArgumentException) {
+            byteArrayOf()
+        }
         return String(decoded, Charsets.UTF_8)
     }
 
     fun encodeBase64(source: String): String {
-        val bytes = Base64.encode(source.toByteArray(), Base64.NO_WRAP)
-        var res = ""
-        try {
-            res = String(bytes, Charsets.UTF_8)
-        } catch (ignored: UnsupportedEncodingException) {
-        }
-        return res
+        return java.util.Base64.getEncoder().encodeToString(source.toByteArray())
     }
 
     private val decimalFormat = DecimalFormat().apply {

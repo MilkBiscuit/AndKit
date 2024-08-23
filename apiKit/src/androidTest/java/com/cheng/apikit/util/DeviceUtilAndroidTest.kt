@@ -3,6 +3,8 @@ package com.cheng.apikit.util
 import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.cheng.apikit.util.android.ContextHolder
+import com.cheng.apikit.util.android.DeviceUtil
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -17,12 +19,12 @@ class DeviceUtilAndroidTest {
 
     @Before
     fun setup() {
-        ContextUtil.setAppContext(context)
+        ContextHolder.setAppContext(context)
     }
 
     @Test
-    fun whenRunning_ThenIsRunningPureUnitTestReturnsFalse() {
-        Assert.assertFalse(DeviceUtil.isRunningPureUnitTest())
+    fun whenRunning_ThenIsRunningUnitTestReturnsFalse() {
+        Assert.assertFalse(DeviceUtil.isRunningUnitTest())
     }
 
     @Test

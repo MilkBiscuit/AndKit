@@ -1,4 +1,4 @@
-package com.cheng.apikit
+package com.cheng.apikit.model
 
 open class ApikitException(message: String, cause: Throwable?): RuntimeException(message, cause) {
     constructor(message: String) : this(message, null)

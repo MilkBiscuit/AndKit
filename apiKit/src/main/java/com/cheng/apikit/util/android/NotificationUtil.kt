@@ -1,4 +1,4 @@
-package com.cheng.currencyalert
+package com.cheng.apikit.util.android
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,7 +8,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.graphics.drawable.IconCompat
-//import com.cheng.apikit.R
+import com.cheng.apikit.R
 
 // Show simple local notifications
 object NotificationUtil {
@@ -34,11 +34,11 @@ object NotificationUtil {
             .setContentTitle(notificationTitle)
             .setContentText(notificationText)
             .setStyle(NotificationCompat.BigTextStyle().bigText(notificationText))
-//        if (smallIcon == null) {
-//            notificationBuilder.setSmallIcon(R.drawable.ic_info_24dp)
-//        } else {
-//            notificationBuilder.setSmallIcon(smallIcon)
-//        }
+        if (smallIcon == null) {
+            notificationBuilder.setSmallIcon(R.drawable.ic_info_24dp)
+        } else {
+            notificationBuilder.setSmallIcon(smallIcon)
+        }
 
         manager.notify(notificationId, notificationBuilder.build())
     }

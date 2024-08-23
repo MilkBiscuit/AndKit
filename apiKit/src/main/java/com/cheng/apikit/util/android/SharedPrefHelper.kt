@@ -1,29 +1,21 @@
-package com.cheng.apikit
+package com.cheng.apikit.util.android
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
-import com.cheng.apikit.util.ContextUtil
 import java.io.IOException
 
 
 object SharedPrefHelper {
 
-    private const val PREFERENCES_NAME_TOOLKIT = "ApiKit"
     private val encryptedPreferences: HashMap<String, SharedPreferences?> = HashMap()
-    val defaultSharedPref: SharedPreferences by lazy {
-        val encryptedSharedPref = getEncryptedSharedPref(PREFERENCES_NAME_TOOLKIT)
-            ?: throw ApikitException("Can not create encrypted shared preferences!")
-
-        encryptedSharedPref
-    }
 
     fun getEncryptedSharedPref(sharedPreferencesName: String): SharedPreferences? {
         if (encryptedPreferences.containsKey(sharedPreferencesName)) {
             return encryptedPreferences[sharedPreferencesName]
         }
-        val context: Context = ContextUtil.getAppContext()
+        val context: Context = ContextHolder.getAppContext()
         var sharedPreferences: SharedPreferences? = null
         val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
         try {
@@ -46,7 +38,7 @@ object SharedPrefHelper {
             context.getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
                 .edit()
                 .clear()
-                .commit()
+                .apply()
             sharedPreferences = EncryptedSharedPreferences.create(
                 sharedPreferencesName,
                 masterKeyAlias,
@@ -56,10 +48,6 @@ object SharedPrefHelper {
             )
         }
 
-        // Fall back to standard shared preferences
-        if (sharedPreferences == null) {
-            sharedPreferences = context.getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
-        }
         encryptedPreferences[sharedPreferencesName] = sharedPreferences
 
         return sharedPreferences

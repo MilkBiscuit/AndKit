@@ -1,6 +1,5 @@
 package com.cheng.apikit.util
 
-import com.cheng.apikit.testmodel.User
 import com.google.gson.JsonSyntaxException
 import com.google.gson.stream.MalformedJsonException
 import org.junit.Assert
@@ -84,3 +83,12 @@ class JsonUtilTest {
     }
 
 }
+
+private class User(
+    val id: Int,
+    val name: String,
+    val email: String,
+    val gender: String,
+    val status: String,
+)
+

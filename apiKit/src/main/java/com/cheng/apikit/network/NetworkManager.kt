@@ -2,16 +2,13 @@ package com.cheng.apikit.network
 
 import android.util.Log
 import com.cheng.apikit.network.model.*
-import com.cheng.apikit.network.nonpublic.RetrofitBuilder
+import com.cheng.apikit.network.internal.RetrofitBuilder
 import com.cheng.apikit.util.JsonUtil
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import retrofit2.HttpException
 import java.lang.IllegalStateException
 
-/**
- * @author Chandler Cheng (chandler.cheng@plexure.com)
- */
 object NetworkManager : INetworkManager {
 
     private const val TAG = "NetworkManager"

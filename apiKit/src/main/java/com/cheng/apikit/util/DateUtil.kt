@@ -1,15 +1,21 @@
 package com.cheng.apikit.util
 
-import android.text.format.DateUtils
-import android.text.format.DateUtils.HOUR_IN_MILLIS
-import android.text.format.DateUtils.MINUTE_IN_MILLIS
 import android.util.Log
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 import kotlin.math.abs
 
 
 object DateUtil {
+
+    const val SECOND_IN_MILLIS: Long = 1000
+    const val MINUTE_IN_MILLIS: Long = SECOND_IN_MILLIS * 60
+    const val HOUR_IN_MILLIS: Long = MINUTE_IN_MILLIS * 60
+    const val DAY_IN_MILLIS: Long = HOUR_IN_MILLIS * 24
+    const val WEEK_IN_MILLIS: Long = DAY_IN_MILLIS * 7
 
     private const val TAG = "DateUtil";
     private const val FORMAT_YEAR_MONTH_DATE = "yyyy-MM-dd";
@@ -72,7 +78,7 @@ object DateUtil {
 
     fun getTomorrow(): Date {
         val calendar = Calendar.getInstance()
-        calendar.timeInMillis = getToday().time + DateUtils.DAY_IN_MILLIS
+        calendar.timeInMillis = getToday().time + DAY_IN_MILLIS
 
         return calendar.time
     }

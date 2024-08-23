@@ -1,8 +1,7 @@
-package com.cheng.apikit.util
+package com.cheng.apikit.util.security
 
-import android.util.Base64
-import java.lang.StringBuilder
 import java.security.Key
+import java.util.Base64
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
@@ -20,8 +19,7 @@ object SymmetricEncryptUtil {
         cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivspec)
 
         val bytes = cipher.doFinal(input.toByteArray())
-        val afterBase64 = Base64.encode(bytes, Base64.NO_WRAP)
-        return String(afterBase64)
+        return Base64.getEncoder().encodeToString(bytes)
     }
 
     fun decrypt(input: String, password: String): String {
@@ -30,8 +28,8 @@ object SymmetricEncryptUtil {
         val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
         cipher.init(Cipher.DECRYPT_MODE, secretKey, ivspec)
 
-        val decode: ByteArray = Base64.decode(input, Base64.NO_WRAP)
-        val bytes = cipher.doFinal(decode)
+        val decoded: ByteArray = Base64.getDecoder().decode(input)
+        val bytes = cipher.doFinal(decoded)
         return String(bytes)
     }
 

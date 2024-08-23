@@ -1,10 +1,7 @@
-package com.cheng.apikit.util
+package com.cheng.apikit.util.android
 
 import android.os.Build
 
-/**
- * @author Chandler Cheng (chandler.cheng@plexure.com)
- */
 object VersionUtil {
 
     val isAndAboveNougat = { Build.VERSION.SDK_INT >= Build.VERSION_CODES.N }

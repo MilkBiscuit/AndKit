@@ -5,7 +5,8 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.cheng.apikit.util.ContextUtil
+import com.cheng.apikit.util.android.ContextHolder
+import com.cheng.apikit.util.android.SharedPrefHelper
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -22,7 +23,7 @@ class SharedPrefHelperAndroidTest {
         InstrumentationRegistry.getInstrumentation().targetContext
     }
     private val sharedPreferences: SharedPreferences by lazy {
-        ContextUtil.setAppContext(context)
+        ContextHolder.setAppContext(context)
         SharedPrefHelper.getEncryptedSharedPref("ApiKitTest")!!
     }
 

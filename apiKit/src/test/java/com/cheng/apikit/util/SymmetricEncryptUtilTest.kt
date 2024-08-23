@@ -1,12 +1,10 @@
 package com.cheng.apikit.util
 
+import com.cheng.apikit.util.security.SymmetricEncryptUtil
 import org.junit.Assert
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class)
 @Config(manifest= Config.NONE)
 class SymmetricEncryptUtilTest {
 
