@@ -3,8 +3,8 @@ package com.cheng.apikit.util
 import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.cheng.apikit.util.android.ContextHolder
-import com.cheng.apikit.util.android.DeviceUtil
+import com.cheng.andkit.util.android.ContextHolder
+import com.cheng.andkit.util.android.DeviceUtil
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

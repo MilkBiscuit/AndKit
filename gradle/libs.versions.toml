@@ -5,7 +5,6 @@ kotlin = "1.9.24"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 androidxJunitVersion = "1.2.1"
-junitJupiterVersion = "5.0.0"
 kotlinxCoroutinesAndroid = "1.7.3"
 retrofit = "2.9.0"
 roboletricVersion = "4.12"
@@ -34,7 +33,6 @@ retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", ve
 android-test-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 android-test-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunitVersion" }
 test-junit = { group = "junit", name = "junit", version.ref = "junit" }
-test-junit-jupiter-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junitJupiterVersion" }
 test-roboletric = { group = "org.robolectric", name = "robolectric", version.ref = "roboletricVersion" }
 
 [plugins]

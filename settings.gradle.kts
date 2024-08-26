@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "HttpProject"
+rootProject.name = "AndKit"
 include(":andKit")

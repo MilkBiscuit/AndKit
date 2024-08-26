@@ -5,8 +5,8 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.cheng.apikit.util.android.ContextHolder
-import com.cheng.apikit.util.android.SharedPrefHelper
+import com.cheng.andkit.util.android.ContextHolder
+import com.cheng.andkit.util.android.SharedPrefHelper
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

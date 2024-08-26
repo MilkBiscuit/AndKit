@@ -2,10 +2,10 @@ package com.cheng.httpproject.ui.activity
 
 import android.os.Bundle
 import android.widget.TextView
-import com.cheng.apikit.network.NetworkManager
-import com.cheng.apikit.network.model.Failure
-import com.cheng.apikit.network.model.Success
-import com.cheng.apikit.util.JsonUtil
+import com.cheng.andkit.network.NetworkManager
+import com.cheng.andkit.network.model.Failure
+import com.cheng.andkit.network.model.Success
+import com.cheng.andkit.util.JsonUtil
 import com.cheng.httpproject.R
 import com.cheng.httpproject.constant.BibleConstants
 import com.cheng.httpproject.model.BibleModelResult

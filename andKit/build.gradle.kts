@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.cheng.apikit"
+    namespace = "com.cheng.andkit"
     compileSdk = 34
 
     defaultConfig {
@@ -42,7 +42,7 @@ dependencies {
     implementation(libs.retrofit.converter.gson)
 
     testImplementation(libs.test.junit)
-    testImplementation(libs.test.junit.jupiter.params)
+//    testImplementation(libs.test.junit.jupiter.params)
     testImplementation(libs.test.roboletric)
     androidTestImplementation(libs.android.test.androidx.junit)
     androidTestImplementation(libs.android.test.androidx.espresso.core)
