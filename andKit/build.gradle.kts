@@ -22,8 +22,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-
-//        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -31,21 +29,21 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.6.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("com.google.android.material:material:1.4.0")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
 
     // Kotlin Coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.0")
+    implementation(libs.kotlinx.coroutines.android)
     // Security cryptography
-    implementation("androidx.security:security-crypto:1.0.0")
+    implementation(libs.androidx.security.crypto)
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.5.0")
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
 
-    testImplementation(libs.junit)
-    testImplementation(libs.junit.jupiter.params)
-    testImplementation(libs.roboletric)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(libs.test.junit)
+    testImplementation(libs.test.junit.jupiter.params)
+    testImplementation(libs.test.roboletric)
+    androidTestImplementation(libs.android.test.androidx.junit)
+    androidTestImplementation(libs.android.test.androidx.espresso.core)
 }

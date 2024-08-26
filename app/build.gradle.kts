@@ -49,7 +49,7 @@ dependencies {
 
     implementation(libs.androidx.preference.ktx)
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(libs.test.junit)
+    androidTestImplementation(libs.android.test.androidx.junit)
+    androidTestImplementation(libs.android.test.androidx.espresso.core)
 }
