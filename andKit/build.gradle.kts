@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("org.jetbrains.kotlin.kapt")
+    kotlin("plugin.serialization") version "2.0.20"
 }
 
 android {
@@ -35,14 +36,14 @@ dependencies {
 
     // Kotlin Coroutine
     implementation(libs.kotlinx.coroutines.android)
+    // Kotlin serialization
+    implementation(libs.kotlinx.serialization.json)
     // Security cryptography
     implementation(libs.androidx.security.crypto)
     // Retrofit
     implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.gson)
 
     testImplementation(libs.test.junit)
-//    testImplementation(libs.test.junit.jupiter.params)
     testImplementation(libs.test.roboletric)
     androidTestImplementation(libs.android.test.androidx.junit)
     androidTestImplementation(libs.android.test.androidx.espresso.core)

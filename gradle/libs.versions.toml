@@ -1,11 +1,11 @@
 [versions]
 agp = "8.5.2"
-converterGson = "2.5.0"
-kotlin = "1.9.24"
+kotlin = "2.0.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 androidxJunitVersion = "1.2.1"
 kotlinxCoroutinesAndroid = "1.7.3"
+kotlinxSerializationJson = "1.7.1"
 retrofit = "2.9.0"
 roboletricVersion = "4.12"
 espressoCore = "3.6.1"
@@ -26,9 +26,9 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "preferenceKtx" }
 androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "securityCrypto" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 
 android-test-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 android-test-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunitVersion" }

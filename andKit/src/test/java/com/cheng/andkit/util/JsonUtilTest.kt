@@ -1,11 +1,9 @@
 package com.cheng.andkit.util
 
-import com.google.gson.JsonSyntaxException
-import com.google.gson.stream.MalformedJsonException
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNull
 import junit.framework.TestCase.assertTrue
-import org.junit.Assert.assertThrows
+import kotlinx.serialization.Serializable
 import org.junit.Test
 
 class JsonUtilTest {
@@ -23,17 +21,17 @@ class JsonUtilTest {
 
         assertEquals("""
 {
-  "id": 0,
-  "name": "First Last",
-  "email": "abc@gmail.com",
-  "gender": "M",
-  "status": "inactive"
+    "id": 0,
+    "name": "First Last",
+    "email": "abc@gmail.com",
+    "gender": "M",
+    "status": "inactive"
 }
         """.trimIndent(), result)
     }
 
     @Test
-    fun `jsonToObject - Given an invalid JSON string, Then throws exception and returns null`() {
+    fun `jsonToObject - Given an invalid JSON string, Then returns null`() {
         var result = JsonUtil.jsonToObject<User>("")
         assertNull(result)
 
@@ -42,10 +40,7 @@ class JsonUtilTest {
     "id": 1,
 }
         """.trimIndent()
-        var throwable = assertThrows(JsonSyntaxException::class.java) {
-            result = JsonUtil.jsonToObject<User>(jsonString)
-        }
-        assertTrue(throwable.cause is MalformedJsonException)
+        result = JsonUtil.jsonToObject<User>(jsonString)
         assertNull(result)
 
         jsonString = """
@@ -54,10 +49,7 @@ class JsonUtilTest {
     "name": ["First Name", "Last Name"]
 }           
         """.trimIndent()
-        throwable = assertThrows(JsonSyntaxException::class.java) {
-            result = JsonUtil.jsonToObject<User>(jsonString)
-        }
-        assertTrue(throwable.message!!.contains("Expected a string but was BEGIN_ARRAY"))
+        result = JsonUtil.jsonToObject<User>(jsonString)
         assertNull(result)
     }
 
@@ -145,6 +137,7 @@ class JsonUtilTest {
 
 }
 
+@Serializable
 private data class User(
     val id: Int,
     val name: String,

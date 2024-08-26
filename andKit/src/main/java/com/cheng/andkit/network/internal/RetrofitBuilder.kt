@@ -1,7 +1,7 @@
 package com.cheng.andkit.network.internal
 
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+//import retrofit2.converter.gson.GsonConverterFactory
 
 internal object RetrofitBuilder {
 
@@ -10,7 +10,7 @@ internal object RetrofitBuilder {
     private val retrofit = Retrofit.Builder()
         .baseUrl(FAKE_BASE_URL)
         .addConverterFactory(StringConverterFactory())
-        .addConverterFactory(GsonConverterFactory.create())
+//        .addConverterFactory(GsonConverterFactory.create())
         .build()
     private val service = retrofit.create(ApiInterface::class.java)
 
