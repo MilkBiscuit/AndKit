@@ -4,6 +4,8 @@ import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNull
 import junit.framework.TestCase.assertTrue
 import kotlinx.serialization.Serializable
+import log.LumberjackRule
+import org.junit.ClassRule
 import org.junit.Test
 
 class JsonUtilTest {
@@ -133,6 +135,12 @@ class JsonUtilTest {
             ),
             list[1]
         )
+    }
+
+    companion object {
+        @get:ClassRule
+        @JvmStatic
+        var lumberjackRule = LumberjackRule()
     }
 
 }

@@ -1,12 +1,10 @@
 package com.cheng.andkit.util
 
-import android.util.Log
+import com.cheng.andkit.log.Lumberjack
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import java.util.TimeZone
-import kotlin.math.abs
 
 
 object DateUtil {
@@ -37,7 +35,7 @@ object DateUtil {
 
             formatter.parse(date)
         } catch (e: Exception) {
-            Log.w(TAG, "parseDate exception: ${e.message}")
+            Lumberjack.w("parseDate exception: ${e.message}")
 
             null
         }

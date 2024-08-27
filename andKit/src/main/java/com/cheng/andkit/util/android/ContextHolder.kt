@@ -1,11 +1,9 @@
 package com.cheng.andkit.util.android
 
 import android.content.Context
-import com.cheng.andkit.model.ApikitException
+import com.cheng.andkit.model.AndKitException
 
 object ContextHolder {
-    private const val TAG = "ContextHolder"
-
     private var appContext: Context? = null
 
     fun setAppContext(context: Context) {
@@ -13,6 +11,6 @@ object ContextHolder {
     }
 
     fun getAppContext(): Context {
-        return appContext ?: throw ApikitException("Application context has not been set.")
+        return appContext ?: throw AndKitException("Application context has not been set.")
     }
 }

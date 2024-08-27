@@ -1,7 +1,5 @@
 package com.cheng.andkit.extension
 
-private const val TAG = "StringExtension"
-
 fun String?.toBool(): Boolean {
     if (this.isNullOrBlank()) {
         return false;

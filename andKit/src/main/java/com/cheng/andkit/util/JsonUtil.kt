@@ -1,5 +1,6 @@
 package com.cheng.andkit.util
 
+import com.cheng.andkit.log.Lumberjack
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -21,8 +22,10 @@ object JsonUtil {
         return try {
             json.decodeFromString(jsonString)
         } catch (e: SerializationException) {
+            Lumberjack.w("jsonToObject serialization exception: $e")
             null
         } catch (e: IllegalArgumentException) {
+            Lumberjack.w("jsonToObject illegal argument: $e")
             null
         }
     }

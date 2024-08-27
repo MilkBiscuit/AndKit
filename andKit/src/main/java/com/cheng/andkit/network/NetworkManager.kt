@@ -1,13 +1,16 @@
 package com.cheng.andkit.network
 
-import android.util.Log
-import com.cheng.andkit.network.model.*
+import com.cheng.andkit.log.Lumberjack
 import com.cheng.andkit.network.internal.RetrofitBuilder
+import com.cheng.andkit.network.model.Failure
+import com.cheng.andkit.network.model.HttpMethods
+import com.cheng.andkit.network.model.NetworkRequest
+import com.cheng.andkit.network.model.NetworkResult
+import com.cheng.andkit.network.model.Success
 import com.cheng.andkit.util.JsonUtil
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import retrofit2.HttpException
-import java.lang.IllegalStateException
 
 object NetworkManager : INetworkManager {
 
@@ -75,9 +78,9 @@ object NetworkManager : INetworkManager {
     private fun handleException(methodName: String, url: String, e: Exception) {
         if (e is HttpException) {
             val errorBody = e.response()?.errorBody()
-            Log.e(TAG, "$methodName, error code: ${e.code()}, response: $errorBody")
+            Lumberjack.e(TAG, "$methodName, error code: ${e.code()}, response: $errorBody")
         }
-        Log.e(TAG, "$methodName, url: $url, exception ${e.localizedMessage}")
+        Lumberjack.e(TAG, "$methodName, url: $url, exception ${e.localizedMessage}")
     }
 
     private suspend fun sendRequest(

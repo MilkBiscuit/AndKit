@@ -1,9 +1,11 @@
 package com.cheng.andkit.util
 
+import log.LumberjackRule
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
+import org.junit.ClassRule
 import org.junit.Test
 import java.util.Calendar
 import java.util.Date
@@ -141,6 +143,12 @@ class DateUtilTest {
         val input2 = calendar.time
         result = DateUtil.isSameDay(input1, input2)
         assertFalse(result)
+    }
+
+    companion object {
+        @get:ClassRule
+        @JvmStatic
+        var lumberjackRule = LumberjackRule()
     }
 
 }

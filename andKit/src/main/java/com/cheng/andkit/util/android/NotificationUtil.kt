@@ -3,11 +3,11 @@ package com.cheng.andkit.util.android
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import com.cheng.andkit.R
+import com.cheng.andkit.log.Lumberjack
 
 // Show simple local notifications
 object NotificationUtil {
@@ -21,7 +21,7 @@ object NotificationUtil {
     ) {
         createNotificationChannelIfNotExist(context, NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME)
         if (!isNotificationEnabled(context, NOTIFICATION_CHANNEL_ID)) {
-            Log.e(TAG, "Notification is not enabled, please double check the permission.")
+            Lumberjack.e(TAG, "Notification is not enabled, please double check the permission.")
 
             return
         }
