@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AndKit"
 include(":andKit")
+include(":andkit-sample")

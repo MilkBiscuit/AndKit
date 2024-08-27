@@ -34,6 +34,7 @@ android-test-androidx-espresso-core = { group = "androidx.test.espresso", name =
 android-test-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunitVersion" }
 test-junit = { group = "junit", name = "junit", version.ref = "junit" }
 test-roboletric = { group = "org.robolectric", name = "robolectric", version.ref = "roboletricVersion" }
+test-kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
