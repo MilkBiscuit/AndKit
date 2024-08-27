@@ -37,7 +37,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":andKit"))
+    implementation(project(":andkit"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
