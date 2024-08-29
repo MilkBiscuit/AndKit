@@ -1,9 +1,8 @@
 Features/Functions to add, or bugs to fix
 
 ## High Priority
-- Separate integration test
-- Warning in settings.gradle.kts
+- Add back features into andkit-sample
 
 ## Medium Priority
-- Remove NetworkResult, use Kotlin Result
+- Warning in settings.gradle.kts
 

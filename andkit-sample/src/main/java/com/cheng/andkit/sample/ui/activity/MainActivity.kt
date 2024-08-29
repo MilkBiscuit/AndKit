@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun launchBibleActivity() {
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse("valeera://gizmos")
+        intent.data = Uri.parse("valeera://bible_verses")
         startActivity(intent)
     }
 
