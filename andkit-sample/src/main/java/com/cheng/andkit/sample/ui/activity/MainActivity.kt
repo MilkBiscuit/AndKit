@@ -56,8 +56,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun launchWeatherActivity() {
-//        val intent = Intent(this, WeatherActivity::class.java)
-//        startActivity(intent)
+        val intent = Intent(this, WeatherActivity::class.java)
+        startActivity(intent)
     }
 
     private fun launchPlexureActivity() {
