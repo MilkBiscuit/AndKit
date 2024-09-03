@@ -40,22 +40,14 @@
 
     <style name="ForecastListText.Date">
         <item name="android:layout_marginStart">8dp</item>
-        <item name="layout_constraintTop_toTopOf">parent</item>
-        <item name="layout_constraintBottom_toBottomOf">parent</item>
-        <item name="layout_constraintStart_toStartOf">parent</item>
     </style>
 
     <style name="ForecastListText.MinTemperature">
         <item name="android:layout_marginEnd">12dp</item>
-        <item name="layout_constraintTop_toTopOf">parent</item>
-        <item name="layout_constraintBottom_toBottomOf">parent</item>
     </style>
 
     <style name="ForecastListText.MaxTemperature">
         <item name="android:layout_marginEnd">8dp</item>
-        <item name="layout_constraintTop_toTopOf">parent</item>
-        <item name="layout_constraintBottom_toBottomOf">parent</item>
-        <item name="layout_constraintEnd_toEndOf">parent</item>
     </style>
 
 </resources>

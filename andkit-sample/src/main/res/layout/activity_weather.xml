@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.WeatherActivity">
+    tools:context=".ui.activity.weather.WeatherActivity">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/sv_city_name"

@@ -4,6 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -33,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.SingleFragmentActivity" />
-        <activity android:name=".ui.activity.WeatherActivity" />
+        <activity android:name=".ui.activity.weather.WeatherActivity" />
         <activity android:name=".ui.activity.StoreListActivity" >
         </activity>
         <activity android:name=".ui.activity.SettingsActivity" />

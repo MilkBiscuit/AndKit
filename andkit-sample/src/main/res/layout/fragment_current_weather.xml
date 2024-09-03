@@ -35,6 +35,9 @@
         <TextView
             style="@style/ForecastListText.Date"
             android:id="@+id/current_date"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             />
         <TextView
             style="@style/ForecastListText"
@@ -50,12 +53,17 @@
         <TextView
             style="@style/ForecastListText.MinTemperature"
             android:id="@+id/today_min_temperature"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/today_max_temperature"
             />
         <TextView
             style="@style/ForecastListText.MaxTemperature"
             android:id="@+id/today_max_temperature"
             android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.cheng.andkit.sample.R
+import com.cheng.andkit.sample.ui.activity.weather.WeatherActivity
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
