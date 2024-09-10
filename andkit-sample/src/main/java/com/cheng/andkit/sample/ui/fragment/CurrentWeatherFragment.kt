@@ -15,6 +15,7 @@ import java.util.*
 class CurrentWeatherFragment : Fragment() {
 
     private var cityName: TextView? = null
+    private var countryName: TextView? = null
     private var temperatureView: TextView? = null
     private var weatherConditionView: TextView? = null
     private var dateView: TextView? = null
@@ -34,6 +35,7 @@ class CurrentWeatherFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_current_weather, container, false)
+        countryName = view.findViewById(R.id.detail_country)
         cityName = view.findViewById(R.id.detail_city)
         temperatureView = view.findViewById(R.id.detail_temperature)
         weatherConditionView = view.findViewById(R.id.detail_weather_condition)
@@ -48,6 +50,7 @@ class CurrentWeatherFragment : Fragment() {
 
     private fun updateUI() {
         currentWeather?.let {
+            countryName?.text = it.sysData.country
             cityName?.text = it.cityName
 
             val weatherCondition = it.weather!![0]

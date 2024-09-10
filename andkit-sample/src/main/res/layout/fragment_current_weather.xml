@@ -16,6 +16,10 @@
         >
         <TextView
             style="@style/CenterText.CityName"
+            android:id="@+id/detail_country"
+            />
+        <TextView
+            style="@style/CenterText.CityName"
             android:id="@+id/detail_city"
             />
         <TextView

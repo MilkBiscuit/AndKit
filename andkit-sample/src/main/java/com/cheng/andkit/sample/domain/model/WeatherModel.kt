@@ -9,6 +9,8 @@ data class CurrentWeatherResponse(
         val id: Long,
         val weather: List<WeatherCondition>?,
         val main: MainData?,
+        @SerialName("sys")
+        val sysData: SysData,
         @SerialName("name")
         val cityName: String?,
         @SerialName("dt")
@@ -22,7 +24,7 @@ data class WeatherCondition(
         val icon: String?,
         @SerialName("main")
         val shortDescription: String?
-) : Serializable
+)
 
 @kotlinx.serialization.Serializable
 data class MainData(
@@ -33,4 +35,10 @@ data class MainData(
         val minTemp: Double?,
         @SerialName("temp_max")
         val maxTemp: Double?
-) : Serializable
+)
+
+@kotlinx.serialization.Serializable
+data class SysData(
+        val id: Long?,
+        val country: String?,
+)
