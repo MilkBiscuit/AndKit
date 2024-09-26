@@ -35,7 +35,7 @@
         </activity>
         <activity android:name=".ui.activity.SingleFragmentActivity" />
         <activity android:name=".ui.activity.weather.WeatherActivity" />
-        <activity android:name=".ui.activity.StoreListActivity" >
+        <activity android:name=".ui.store.StoreListActivity" >
         </activity>
         <activity android:name=".ui.activity.SettingsActivity" />
 

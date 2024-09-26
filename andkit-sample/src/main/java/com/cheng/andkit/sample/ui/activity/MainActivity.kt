@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.cheng.andkit.sample.R
+import com.cheng.andkit.sample.ui.store.StoreListActivity
 import com.cheng.andkit.sample.ui.activity.weather.WeatherActivity
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        menuInflater.inflate(R.menu.main, menu)
+        menuInflater.inflate(R.menu.main, menu)
 
         return true
     }
@@ -38,16 +39,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-//        return when (item.itemId) {
-//            R.id.action_settings -> {
+        return when (item.itemId) {
+            R.id.action_settings -> {
 //                val intent = Intent(this, SettingsActivity::class.java)
 //                startActivity(intent)
-//
-//                true
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
-        return true
+
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun launchBibleActivity() {
@@ -62,8 +62,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun launchPlexureActivity() {
-//        val intent = Intent(this, StoreListActivity::class.java)
-//        startActivity(intent)
+        val intent = Intent(this, StoreListActivity::class.java)
+        startActivity(intent)
     }
 
 }
