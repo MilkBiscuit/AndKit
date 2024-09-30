@@ -1,6 +1,5 @@
 package com.cheng.andkit.sample.ui.activity
 
-import android.content.SharedPreferences
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.IdRes

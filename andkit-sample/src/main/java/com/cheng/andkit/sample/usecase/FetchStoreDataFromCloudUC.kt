@@ -7,7 +7,7 @@ import com.cheng.andkit.util.JsonUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class FetchStoreDataUC {
+class FetchStoreDataFromCloudUC {
 
     suspend operator fun invoke(): List<PlexureStore> {
         return withContext(Dispatchers.IO) {

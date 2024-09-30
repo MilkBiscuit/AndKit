@@ -6,12 +6,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.cheng.andkit.sample.R
 
-class PlexureStoreViewHolder(val rootView: View) : RecyclerView.ViewHolder(rootView) {
+class PlexureStoreViewHolder(private val rootView: View) : RecyclerView.ViewHolder(rootView) {
 
-    val tvName = rootView.findViewById<TextView>(R.id.tv_name)
-    val tvAddress = rootView.findViewById<TextView>(R.id.tv_address)
-    val tvDistance = rootView.findViewById<TextView>(R.id.tv_distance)
-    val tvFeature = rootView.findViewById<TextView>(R.id.tv_feature)
-    val ivFavorite = rootView.findViewById<ImageView>(R.id.iv_favorite)
+    val tvName: TextView = rootView.findViewById<TextView>(R.id.tv_name)
+    val tvAddress: TextView = rootView.findViewById<TextView>(R.id.tv_address)
+    val tvDistance: TextView = rootView.findViewById<TextView>(R.id.tv_distance)
+    val tvFeature: TextView = rootView.findViewById<TextView>(R.id.tv_feature)
+    val ivFavorite: ImageView = rootView.findViewById<ImageView>(R.id.iv_favorite)
 
 }

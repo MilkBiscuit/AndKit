@@ -1,14 +1,13 @@
 package com.cheng.andkit.sample.ui.store
 
 import android.os.Bundle
-import androidx.viewpager.widget.ViewPager
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.viewpager.widget.ViewPager
 import com.cheng.andkit.sample.R
 import com.cheng.andkit.sample.ui.activity.BaseActivity
-import com.cheng.andkit.sample.ui.store.PlexureConstants.DEFAULT_LATITUDE
-import com.cheng.andkit.sample.ui.store.PlexureConstants.DEFAULT_LONGITUDE
+import com.cheng.andkit.sample.usecase.PlexureStoreSortMethod
 
 class StoreListActivity : BaseActivity() {
 
@@ -25,11 +24,9 @@ class StoreListActivity : BaseActivity() {
 
         override fun onPageSelected(i: Int) {
             currentPageIndex = i
-            currentFragment?.refresh()
         }
 
-        override fun onPageScrollStateChanged(i: Int) {
-        }
+        override fun onPageScrollStateChanged(i: Int) {}
     }
 
 
@@ -42,7 +39,7 @@ class StoreListActivity : BaseActivity() {
         sectionsPagerAdapter = StoreListPagerAdapter(this, supportFragmentManager)
         viewPager.adapter = sectionsPagerAdapter
         viewPager.addOnPageChangeListener(pageChangeListener)
-        fetchStores(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)
+//        fetchStores(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -54,9 +51,9 @@ class StoreListActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val storeListFragment = currentFragment ?: return false
         when (item.itemId) {
-            R.id.sort_far -> storeListViewModel.sortMethod = PlexureConstants.SortMethod.FURTHERMOST
-            R.id.sort_near -> storeListViewModel.sortMethod = PlexureConstants.SortMethod.NEAREST
-            R.id.sort_name -> storeListViewModel.sortMethod = PlexureConstants.SortMethod.NAME
+            R.id.sort_far -> storeListViewModel.sortMethod = PlexureStoreSortMethod.FURTHERMOST
+            R.id.sort_near -> storeListViewModel.sortMethod = PlexureStoreSortMethod.NEAREST
+            R.id.sort_name -> storeListViewModel.sortMethod = PlexureStoreSortMethod.NAME
             R.id.action_filter -> {
                 val dialog = PlexureFeatureListDialogFragment(storeListViewModel)
                 dialog.show(supportFragmentManager, PlexureFeatureListDialogFragment.TAG)
@@ -67,29 +64,11 @@ class StoreListActivity : BaseActivity() {
         return true
     }
 
-    override fun hideLoading() {
-        super.hideLoading()
+    override fun showLoading() {
+        currentFragment?.setIsRefreshing(true)
+    }
 
+    override fun hideLoading() {
         currentFragment?.setIsRefreshing(false)
     }
-
-    fun refreshCurrentStoreList() {
-        currentFragment?.refresh()
-    }
-
-    fun fetchStores(latitude: Double, longitude: Double) {
-        showLoading()
-//        val observable = plexureService.fetchStores(latitude, longitude)
-//        val disposable = observable.applySchedulers()
-//                .subscribe({result ->
-//                    val plexureStoreDao = PlexureStoreDao.getInstance(this)
-//                    plexureStoreDao.addOrUpdate(result)
-//
-//                    hideLoading()
-//                }, {error ->
-//                    hideLoading()
-//                })
-//        addDisposable(disposable)
-    }
-
 }

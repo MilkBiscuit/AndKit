@@ -1,5 +1,6 @@
 package com.cheng.andkit.sample.ui.store
 
+import android.content.Context
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -7,15 +8,15 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.cheng.andkit.sample.R
 
 
-class StoreListPagerAdapter(private val storeListActivity: StoreListActivity, fm: FragmentManager)
+class StoreListPagerAdapter(private val context: Context, fm: FragmentManager)
     : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    var fragments: Array<PlexureStoreListFragment?> = arrayOfNulls(PAGE_NUM)
+    val fragments: Array<PlexureStoreListFragment?> = arrayOfNulls(PAGE_NUM)
 
     override fun getItem(position: Int): Fragment {
         val type =
-                if (position == 0) PlexureConstants.StoreType.All
-                else PlexureConstants.StoreType.Favorite
+                if (position == 0) StoreType.All
+                else StoreType.Favorite
         val fragment = PlexureStoreListFragment.newInstance(type)
         fragments[position] = fragment
 
@@ -37,8 +38,8 @@ class StoreListPagerAdapter(private val storeListActivity: StoreListActivity, fm
         fragments[position] = null
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
-        return storeListActivity.resources.getString(TAB_TITLES[position])
+    override fun getPageTitle(position: Int): CharSequence {
+        return context.resources.getString(TAB_TITLES[position])
     }
 
     override fun getCount(): Int {

@@ -1,13 +1,12 @@
 package com.cheng.andkit.sample.ui.store
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,14 +18,14 @@ import com.cheng.andkit.sample.ui.fragment.base.BaseFragment
 import com.cheng.andkit.util.android.UIUtil
 
 
-class PlexureStoreListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
+class PlexureStoreListFragment : BaseFragment() {
 
     override val TAG: String = "PlexureStoreListFragment"
 
     private lateinit var storeListActivity: StoreListActivity
     private lateinit var adapter: PlexureStoreAdapter
-    private val storeListVM: StoreListViewModel by viewModels()
-    private var storeType = PlexureConstants.StoreType.All
+    private val storeListVM: StoreListViewModel by activityViewModels<StoreListViewModel>()
+    private var storeType = StoreType.All
     private lateinit var rootLayout: View
     private lateinit var recyclerView: RecyclerView
     private lateinit var tvEmpty: TextView
@@ -40,7 +39,7 @@ class PlexureStoreListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshLis
 
         arguments?.let {
             if (it.containsKey(KEY_STORE_TYPE)) {
-                storeType = PlexureConstants.StoreType.valueOf(it.getInt(KEY_STORE_TYPE))!!
+                storeType = StoreType.valueOf(it.getInt(KEY_STORE_TYPE))!!
             }
         }
     }
@@ -71,34 +70,34 @@ class PlexureStoreListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshLis
         val dividerItemDecoration = DividerItemDecoration(
             recyclerView.context, layoutManager.orientation)
         recyclerView.addItemDecoration(dividerItemDecoration)
-
-//        refreshEmptyView(true)
+        swipeLayout.setOnRefreshListener {
+            refresh()
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         storeListActivity = activity as StoreListActivity
-
-        adapter = PlexureStoreAdapter(storeListActivity, emptyList())
-        UIUtil.applyRoundCorner(storeListActivity, rootLayout, R.color.transparent_10_black)
+        adapter = PlexureStoreAdapter(storeListActivity, storeListVM)
         recyclerView.adapter = adapter
-        swipeLayout.setOnRefreshListener(this)
+        if (storeType == StoreType.All) {
+            storeListVM.stores.observe(viewLifecycleOwner) { stores ->
+                setStoreData(stores)
+            }
+            storeListVM.favoriteStores.observe(viewLifecycleOwner) {
+                adapter.notifyDataSetChanged()
+            }
+        } else {
+            storeListVM.favoriteStores.observe(viewLifecycleOwner) { favouriteStores ->
+                setStoreData(favouriteStores)
+            }
+        }
+        storeListVM.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            swipeLayout.isRefreshing = isLoading
+        }
 
-
-//        plexureStoreVM = ViewModelProviders.of(this).get(PlexureStoreViewModel::class.java)
-//        val storeListLiveData =
-//                if (storeType == PlexureConstants.StoreType.All) plexureStoreVM.getAllStores()
-//                else plexureStoreVM.getFavoriteStores()
-//        storeListLiveData.observe(this, Observer<List<PlexureStore>>{ stores ->
-//            if (stores != null) {
-//                setStoreData(stores)
-//            }
-//        })
-    }
-
-    override fun onRefresh() {
-        storeListActivity.fetchStores(PlexureConstants.DEFAULT_LATITUDE, PlexureConstants.DEFAULT_LONGITUDE)
+        UIUtil.applyRoundCorner(storeListActivity, rootLayout, R.color.transparent_10_black)
     }
 
     fun refresh() {
@@ -110,17 +109,15 @@ class PlexureStoreListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshLis
     }
 
     private fun setStoreData(items: List<PlexureStore>) {
-//        refreshEmptyView(items.isEmpty())
         adapter.items = items
-        adapter.notifyDataSetChanged()
     }
 
     companion object {
-        private val KEY_STORE_TYPE = "StoreType"
+        private const val KEY_STORE_TYPE = "StoreType"
 
-        // 0 -> default, all store
-        // 1 -> favorite store
-        fun newInstance(type: PlexureConstants.StoreType) : PlexureStoreListFragment {
+        // 0 -> default, all stores
+        // 1 -> favorite stores
+        fun newInstance(type: StoreType) : PlexureStoreListFragment {
             val fragment = PlexureStoreListFragment().apply {
                 arguments = Bundle().apply {
                     putInt(KEY_STORE_TYPE, type.value)

@@ -1,7 +1,5 @@
 package com.cheng.andkit.util
 
-import android.util.Base64
-import java.io.UnsupportedEncodingException
 import java.math.RoundingMode
 import java.text.DecimalFormat
 

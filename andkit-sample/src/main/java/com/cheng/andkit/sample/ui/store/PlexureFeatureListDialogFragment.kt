@@ -1,15 +1,13 @@
 package com.cheng.andkit.sample.ui.store
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.CheckedTextView
 import androidx.fragment.app.DialogFragment
 import com.cheng.andkit.sample.R
+import com.cheng.andkit.sample.domain.model.PlexureStoreFeature
 
 
 class PlexureFeatureListDialogFragment(
@@ -19,13 +17,13 @@ class PlexureFeatureListDialogFragment(
     companion object {
         val TAG: String = PlexureFeatureListDialogFragment::class.java.simpleName
         private val LIST_OF_FEATURES = listOf(
-            PlexureConstants.FEATURE_BF,
-            PlexureConstants.FEATURE_BP,
-            PlexureConstants.FEATURE_DRIVE_THROUGH,
-            PlexureConstants.FEATURE_MC_ADVENT,
-            PlexureConstants.FEATURE_PLAY_LAND,
-            PlexureConstants.FEATURE_TABLE,
-            PlexureConstants.FEATURE_WIFI
+            PlexureStoreFeature.FEATURE_BF,
+            PlexureStoreFeature.FEATURE_BP,
+            PlexureStoreFeature.FEATURE_DRIVE_THROUGH,
+            PlexureStoreFeature.FEATURE_MC_ADVENT,
+            PlexureStoreFeature.FEATURE_PLAY_LAND,
+            PlexureStoreFeature.FEATURE_TABLE,
+            PlexureStoreFeature.FEATURE_WIFI
         )
         private val LIST_COUNT = LIST_OF_FEATURES.size
     }
