@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.viewpager.widget.ViewPager
 import com.cheng.andkit.sample.R
 import com.cheng.andkit.sample.ui.activity.BaseActivity
+import com.cheng.andkit.sample.ui.store.featuredialog.PlexureFeatureListDialogFragment
 import com.cheng.andkit.sample.usecase.PlexureStoreSortMethod
 
 class StoreListActivity : BaseActivity() {
@@ -39,7 +40,6 @@ class StoreListActivity : BaseActivity() {
         sectionsPagerAdapter = StoreListPagerAdapter(this, supportFragmentManager)
         viewPager.adapter = sectionsPagerAdapter
         viewPager.addOnPageChangeListener(pageChangeListener)
-//        fetchStores(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -56,7 +56,7 @@ class StoreListActivity : BaseActivity() {
             R.id.sort_name -> storeListViewModel.sortMethod = PlexureStoreSortMethod.NAME
             R.id.action_filter -> {
                 val dialog = PlexureFeatureListDialogFragment(storeListViewModel)
-                dialog.show(supportFragmentManager, PlexureFeatureListDialogFragment.TAG)
+                dialog.show(supportFragmentManager, "PlexureFeatureListDialog")
             }
         }
         storeListFragment.refresh()

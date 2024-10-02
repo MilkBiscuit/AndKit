@@ -6,7 +6,7 @@ class FilterAndSortStoreUC {
 
     fun invoke(
         inputList: List<PlexureStore>,
-        selectedFeatures: Set<String>,
+        selectedFeatures: Collection<String>,
         sortMethod: PlexureStoreSortMethod,
     ): List<PlexureStore> {
         var outputList = inputList

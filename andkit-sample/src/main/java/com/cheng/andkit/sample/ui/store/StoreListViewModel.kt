@@ -14,15 +14,14 @@ import kotlinx.coroutines.launch
 
 class StoreListViewModel : ViewModel() {
     var sortMethod = PlexureStoreSortMethod.NEAREST
-    val selectedFeatureList: MutableSet<String> = mutableSetOf()
+    val selectedFeatures: MutableSet<String> = mutableSetOf()
 
     private val fetchStoreDataFromCloudUC = FetchStoreDataFromCloudUC()
     private val filterAndSortStoreUC = FilterAndSortStoreUC()
     private val localFileStoreDataUC = LocalFileStoreDataUC()
 
-    val stores: MutableLiveData<List<PlexureStore>> = MutableLiveData(
-        localFileStoreDataUC.readAllStores()
-    )
+    private var allStores = localFileStoreDataUC.readAllStores()
+    val stores: MutableLiveData<List<PlexureStore>> = MutableLiveData(allStores)
     val favoriteStores: MutableLiveData<List<PlexureStore>> = MutableLiveData(
         localFileStoreDataUC.readFavouriteStores()
     )
@@ -33,34 +32,41 @@ class StoreListViewModel : ViewModel() {
         Lumberjack.w("StoreListViewModel instance is $this")
     }
 
+    fun isFeatureSelected(feature: String): Boolean = selectedFeatures.contains(feature)
+
     fun refreshStoreData() {
         viewModelScope.launch {
             isLoading.value = true
             val remoteStoreList = fetchStoreDataFromCloudUC.invoke()
-            if (remoteStoreList.isEmpty()) {
-                return@launch
+            if (remoteStoreList.isNotEmpty()) {
+                allStores = remoteStoreList
+                localFileStoreDataUC.writeAllStores(remoteStoreList)
+                filterAndSortStoreData()
             }
-
-            localFileStoreDataUC.writeAllStores(remoteStoreList)
-            stores.value = filterAndSortStoreUC.invoke(
-                inputList = remoteStoreList,
-                selectedFeatures = selectedFeatureList,
-                sortMethod = sortMethod,
-            )
             isLoading.value = false
         }
+    }
+
+    fun filterAndSortStoreData() {
+        stores.value = filterAndSortStoreUC.invoke(
+            inputList = allStores,
+            selectedFeatures = selectedFeatures,
+            sortMethod = sortMethod,
+        )
     }
 
     fun toggleFavourite(storeId: String) {
         val currentFavouriteStores = favoriteStores.value!!
         val newFavouriteStores: List<PlexureStore>
-        val toggledStore = stores.value!!.find { it.id == storeId }!!
+        val toggledStore = stores.value!!.find { it.id == storeId }
+
         if (favoriteStoreIds.contains(storeId)) {
             favoriteStoreIds = favoriteStoreIds.minus(storeId)
-            newFavouriteStores = currentFavouriteStores.minus(toggledStore)
+
+            newFavouriteStores = currentFavouriteStores.filterNot { it.id == storeId }
         } else {
             favoriteStoreIds = favoriteStoreIds.plus(storeId)
-            newFavouriteStores = currentFavouriteStores.plus(toggledStore)
+            newFavouriteStores = currentFavouriteStores.plus(toggledStore!!)
         }
         localFileStoreDataUC.writeFavouriteStores(newFavouriteStores)
         favoriteStores.value = newFavouriteStores
